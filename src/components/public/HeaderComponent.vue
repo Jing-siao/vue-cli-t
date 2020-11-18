@@ -17,9 +17,9 @@
             </span>
           </button>
           <div id="logo">
-            <a href="./index.html">
+            <router-link to="/">
               <img src="../../assets/LEO-logo.png" alt="logo" />
-            </a>
+            </router-link>
           </div>
           <ul class="menu">
             <!-- VueSlideUpDown :active="active" -->
@@ -30,12 +30,12 @@
             </a>
           </ul>
           <div class="member">
-            <a href="./ligin.html">
+            <router-link :to="{ name: 'Login' }">
               <span>
                 <i class="fas fa-user-circle"></i>
                 <p>登入 / 註冊</p>
               </span>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -85,11 +85,8 @@ export default {
     active() {
       // $("button.hamburger").toggleClass("is-active");
       this.isActive["is-active"] = !this.isActive["is-active"];
-
-      // this.active = !this.active;
-    },
-    slideToggle() {
       $(".menu").slideToggle();
+      // this.active = !this.active;
     },
   },
   mounted() {},
