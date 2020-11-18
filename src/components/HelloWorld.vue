@@ -97,7 +97,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../assets/scss/main.scss";
+@import "../assets/public/main.scss";
 h3 {
   margin: 40px 0 0;
   color: $mainColor;
