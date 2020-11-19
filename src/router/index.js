@@ -29,6 +29,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  //不會hash 需前後端配置
+  // mode: 'history',
+  // routes: [{ path: '*', component: NotFoundComponent }]
   routes
 })
 

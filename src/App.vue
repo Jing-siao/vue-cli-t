@@ -2,11 +2,11 @@
   <div id="app">
     <HeaderComponent />
 
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>|
-      <!-- <router-link to="/Jing">Jing</router-link> -->
-    </div>
+    <!-- <div id="nav"> -->
+    <!-- <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>| -->
+    <!-- <router-link to="/Jing">Jing</router-link> -->
+    <!-- </div> -->
     <router-view />
   </div>
 </template>
@@ -33,6 +33,8 @@ export default {
 @import "./assets/public/reset.css";
 @import "./assets/public/bootstrap-grid.min.css";
 @import "./assets/public/hamburgers.css";
+// @import "./assets/public/main.scss";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

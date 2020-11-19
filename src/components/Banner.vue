@@ -115,40 +115,9 @@ export default {
       });
     },
   },
-
-  // mounted() {
-  //   //輪播
-  //   $(".slider").slick({
-  //     dots: true,
-  //     infinite: true,
-  //     arrows: true,
-  //     speed: 300,
-  //     autoplaySpeed: 3000,
-  //     autoplay: true,
-  //     slidesToShow: 1,
-  //     slidesToScroll: 1,
-  //     responsive: [
-  //       // {
-  //       //   breakpoint: 1024,
-  //       //   settings: {
-  //       //     slidesToShow: 3,
-  //       //     slidesToScroll: 1,
-  //       //   }
-  //       // },
-  //       {
-  //         breakpoint: 576,
-  //         settings: {
-  //           slidesToShow: 1,
-  //           slidesToScroll: 1,
-  //           arrows: false,
-  //         },
-  //       },
-  //     ],
-  //   });
-  // },
 };
 </script>
-<style lang="sass">
-@import '../assets/scss/main.scss'
-@import '../assets/scss/banner.scss'
+
+<style lang="scss">
+@import "../assets/scss/banner.scss";
 </style>

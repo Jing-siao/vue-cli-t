@@ -92,7 +92,7 @@ export default {
   mounted() {},
 };
 </script>
-<style lang="sass" scoped>
-@import '../../assets/public/main.scss'
-@import '../../assets/scss/header.scss'
+<style lang="scss" scoped>
+// @import "../../assets/public/main.scss";
+@import "../../assets/scss/header.scss";
 </style>

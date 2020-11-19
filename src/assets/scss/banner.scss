@@ -1,3 +1,5 @@
+@import"../public/main.scss";
+
 div.banner {
   // border: 1px solid rgb(219, 60, 60);
 
@@ -16,24 +18,25 @@ div.banner {
     }
 
     button.slick-next {
+
       right: 2%;
     }
 
     // .slick-dots {
-  //   position: absolute;
-  //   bottom: 20px;
-  //   display: block;
-  //   width: 100%;
-  //   padding: 10;
-  //   margin: 0;
-  //   list-style: none;
-  //   text-align: center;
-  // }
+    //   position: absolute;
+    //   bottom: 20px;
+    //   display: block;
+    //   width: 100%;
+    //   padding: 10;
+    //   margin: 0;
+    //   list-style: none;
+    //   text-align: center;
+    // }
 
-  // .slick-dots li.slick-active button:before {
-  //   font-size: 15px;
-  //   color: blue;
-  // }
+    // .slick-dots li.slick-active button:before {
+    //   font-size: 15px;
+    //   color: blue;
+    // }
 
     .pic {
       padding: 0;
