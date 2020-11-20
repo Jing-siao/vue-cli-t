@@ -7,6 +7,7 @@
       <router-link to="/about">About</router-link>| -->
     <!-- <router-link to="/Jing">Jing</router-link> -->
     <!-- </div> -->
+
     <router-view />
   </div>
 </template>

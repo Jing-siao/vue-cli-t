@@ -1,5 +1,5 @@
   <template>
-  <div class="main container" v-cloak>
+  <div class="loginMain container" v-cloak>
     <div class="login">
       <div class="wrap">
         <div class="logoWrap">

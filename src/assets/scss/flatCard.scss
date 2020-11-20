@@ -1,0 +1,59 @@
+@import"../public/main.scss";
+
+
+.announcement {
+  margin-top: 50px;
+
+  .wrap {
+    width: 100%;
+    background-color: $grey;
+    border-radius: 20px;
+    overflow: hidden;
+    // display: inline-block;
+
+
+    .news {
+      background-color: white;
+      padding: 10px;
+      margin: 30px;
+      position: relative;
+      display: flex;
+      justify-content: space-around;
+
+      div.imgWrap {
+        // border: 1px solid black;
+        display: inline-block;
+
+
+        img {
+          // border: 1px solid black;
+          margin: auto 0;
+          width: 100%;
+          height: auto;
+
+        }
+      }
+
+      div.info {
+        // border: 1px solid black;
+        text-align: left;
+      }
+
+      div.more {
+        // border: 1px solid black;
+        margin-top: 10px;
+        text-align: right;
+        display: block;
+
+
+        a {
+          color: lightseagreen;
+          // border: 1px solid black;
+          display: inline-block;
+
+        }
+      }
+
+    }
+  }
+}

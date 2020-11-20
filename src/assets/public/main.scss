@@ -9,10 +9,67 @@
 
 }
 
+@media (max-width: 360px) {
 
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 575px) {
+
+  html,
+  body {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+  html,
+  body {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  html,
+  body {
+    font-size: 16px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//------------------------
+body {
+  background-color: rgb(56, 56, 56);
+}
 
 h1 {
   font-size: 30px;
+  // font-size: 5vmin;
   color: white;
   font-weight: 600;
   margin-bottom: 50px;
@@ -21,9 +78,16 @@ h1 {
 
 }
 
+h3 {
+  // font-size: 24px;
+  font-size: 1.8rem;
+
+  margin: 15px 0;
+}
+
 h5 {
   color: black;
-  font-size: 20px;
+  font-size: 1.5rem;
   margin: 8px 0;
   text-align: start;
   overflow: hidden;
@@ -32,24 +96,20 @@ h5 {
 
 }
 
-h3 {
-  font-size: 24px;
-  margin: 15px 0;
-}
+
 
 p {
   color: $darkgrey;
   padding: 5px;
+  font-size: 1rem;
 }
 
 a {
   text-decoration: none;
-
+  font-size: 1rem;
 }
 
-body {
-  background-color: rgb(56, 56, 56);
-}
+
 
 input {
   padding: 5px;
