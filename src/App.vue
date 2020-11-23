@@ -9,10 +9,12 @@
     <!-- </div> -->
 
     <router-view />
+    <FooterComponent />
   </div>
 </template>
 <script>
 import HeaderComponent from "@/components/public/HeaderComponent.vue";
+import FooterComponent from "@/components/public/FooterComponent.vue";
 
 export default {
   name: "App",
@@ -23,9 +25,8 @@ export default {
   },
   components: {
     // HelloWorld,
-    // TitleComponent,
     HeaderComponent,
-    // Banner,
+    FooterComponent,
   },
 };
 </script>

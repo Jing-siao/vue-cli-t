@@ -1,25 +1,22 @@
 <template>
-  <div class="announcement">
-    <h1>最新消息</h1>
-    <div class="wrap">
-      <div class="news row" v-for="item in news" :key="item.title">
-        <div class="imgWrap col-md-5 col-lg-4 col-12">
-          <img :src="item.src" alt="" />
-        </div>
+  <div class="wrap">
+    <div class="news row" v-for="item in news" :key="item.title">
+      <div class="imgWrap col-md-5 col-lg-4 col-12">
+        <img :src="item.src" alt="" />
+      </div>
 
-        <div class="col-md-6 col-lg-7 info col-12">
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.content }}</p>
-          <p>
-            <i class="fas fa-check"></i>
-            {{ item.contentMore }}
-          </p>
-          <div class="more align-self-end">
-            <a :href="item.link">
-              <i class="fas fa-chevron-right"></i>
-              了解更多</a
-            >
-          </div>
+      <div class="col-md-6 col-lg-7 info col-12">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.content }}</p>
+        <p>
+          <i class="fas fa-check"></i>
+          {{ item.contentMore }}
+        </p>
+        <div class="more align-self-end">
+          <a :href="item.link">
+            <i class="fas fa-chevron-right"></i>
+            了解更多</a
+          >
         </div>
       </div>
     </div>

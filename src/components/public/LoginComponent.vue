@@ -1,7 +1,7 @@
   <template>
   <div class="loginMain container" v-cloak>
-    <div class="login">
-      <div class="wrap">
+    <div class="login row">
+      <div class="wrap col-12">
         <div class="logoWrap">
           <img src="../../assets/img/long-logo.png" alt="" />
         </div>

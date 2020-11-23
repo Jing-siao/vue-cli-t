@@ -1,0 +1,74 @@
+@import"../public/main.scss";
+
+
+
+
+
+.row {
+  display: flex;
+  // border: 1px solid black;
+  justify-content: space-around;
+
+  .card {
+    // border: 1px solid snow;
+    background-color: $grey;
+    border-radius: 20px;
+    display: inline-block;
+
+    .imgWrap {
+      padding: 0;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .wrap {
+      text-align: center;
+      margin-top: 20px;
+
+      p {
+        margin: 2px 0;
+        padding: 2px;
+        color: $darkgrey;
+
+        text-align: left;
+        // &:last-child {
+        //   // border: 1px solid black;
+        //   // margin-bottom: 10px;
+        // }
+
+        &:nth-child(2) {
+          // border: 1px solid black;
+          margin-top: 10px;
+        }
+      }
+    }
+
+  }
+}
+
+
+@media (min-width:768px) {
+  .card {
+    margin: 0 1.5%;
+    padding: 20px 15px;
+
+    // &:nth-child(2) {
+    //   margin: 0 2%;
+    // }
+  }
+}
+
+@media (max-width:767px) {
+  .card {
+    padding: 15px;
+    width: 45%;
+
+    &:nth-child(3),
+    &:nth-child(4) {
+      margin-top: 20px;
+
+    }
+  }
+}
