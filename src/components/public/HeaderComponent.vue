@@ -1,4 +1,5 @@
 <template>
+  <!-- 有下拉選單用slot  -->
   <header>
     <div class="container-fluid">
       <div class="row header" v-cloak>

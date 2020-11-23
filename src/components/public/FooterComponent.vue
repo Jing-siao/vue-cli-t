@@ -19,7 +19,7 @@
   </footer>
 </template>
 <script>
-import $ from "jquery";
+// import $ from "jquery";
 
 export default {
   name: "footerComponent",
@@ -56,23 +56,6 @@ export default {
       companyEn: "LEO International Bank.",
       year: "©" + new Date().getFullYear(),
     };
-  },
-  mounted() {
-    // rwd
-    // 一進來先判斷
-    if ($(window).width() <= 576) {
-      $("footer ul").hide();
-    } else {
-      $("footer ul").show();
-    }
-    // resize再判斷一次
-    $(window).resize(function () {
-      if ($(window).width() <= 576) {
-        $("footer ul").hide();
-      } else {
-        $("footer ul").show();
-      }
-    });
   },
 };
 </script>
