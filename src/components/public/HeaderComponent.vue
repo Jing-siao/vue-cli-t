@@ -23,11 +23,15 @@
           </div>
           <ul class="menu">
             <!-- VueSlideUpDown :active="active" -->
-            <a :href="item.link" v-for="(item, index) in menu" :key="index">
+            <router-link
+              :to="item.link"
+              v-for="(item, index) in menu"
+              :key="index"
+            >
               <li>
                 {{ item.title }}
               </li>
-            </a>
+            </router-link>
           </ul>
           <div class="member">
             <router-link :to="{ name: 'Login' }">
@@ -52,19 +56,19 @@ export default {
       menu: [
         {
           title: "活動辦法",
-          link: "javascript:;",
+          link: "activity",
         },
         {
           title: "兌換專區",
-          link: "javascript:;",
+          link: "bonus",
         },
         {
           title: "常見問題",
-          link: "javascript:;",
+          link: "question",
         },
         {
           title: "會員專區",
-          link: "javascript:;",
+          link: "member",
         },
         {
           title: "卡友專區",
