@@ -23,11 +23,11 @@
             </router-link>
           </div>
           <ul class="menu">
-            <!-- VueSlideUpDown :active="active" -->
             <router-link
               :to="item.link"
               v-for="(item, index) in menu"
-              :key="index"
+              :key="index.title"
+              @click.native="closeMenu"
             >
               <li>
                 {{ item.title }}
@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       index: 0,
+      // menuList: false,
       menu: [
         {
           title: "活動辦法",
@@ -83,7 +84,6 @@ export default {
       isActive: {
         "is-active": false,
       },
-      // active: true,
     };
   },
   methods: {
@@ -92,6 +92,10 @@ export default {
       this.isActive["is-active"] = !this.isActive["is-active"];
       $(".menu").slideToggle();
       // this.active = !this.active;
+    },
+    closeMenu() {
+      this.isActive["is-active"] = false;
+      $(".menu").hide();
     },
   },
   mounted() {},
