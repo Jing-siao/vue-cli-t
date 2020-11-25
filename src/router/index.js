@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Activity from '../views/Activity.vue'
 import Question from '../views/Question.vue'
 import Login from '../views/Login.vue'
+import Error from '../views/Error.vue'
 
 
 Vue.use(VueRouter)
@@ -46,12 +47,23 @@ const routes = [
     name: 'Login',
     component: Login
   },
+  {
+    path: '/404',
+    name: 'Error',
+    component: Error
+  },
+  {
+    path: '*',
+    redirect: '/404'
+  },
 ]
 
 const router = new VueRouter({
   //不會hash 需前後端配置
-  // mode: 'history',
   // routes: [{ path: '*', component: NotFoundComponent }]
+  // mode: "history",
+  // base: process.env.BASE_URL,
+
   routes
 })
 

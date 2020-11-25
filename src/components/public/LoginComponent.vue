@@ -79,6 +79,8 @@ export default {
       },
     };
   },
+  // 區域使用directive
+  directive: {},
   methods: {
     loginHandler() {
       //接token?

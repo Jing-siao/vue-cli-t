@@ -28,10 +28,6 @@ export default {
     return {
       // index: 0,
       current: null,
-      toggled: false,
-      // isActive: {
-      //   up: false,
-      // },
       questionList: [
         {
           title: "豐贈點商品兌換說明",
@@ -93,7 +89,6 @@ export default {
         this.current = null;
       } else {
         this.current = index;
-        this.activeItem = index;
       }
     },
   },
