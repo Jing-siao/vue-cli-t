@@ -15,7 +15,7 @@
         <FourCard />
       </div>
     </div>
-    <!-- <FooterComponent /> -->
+    <GoTOPBtn />
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
   </div>
 </template>
@@ -27,6 +27,7 @@ import Banner from "@/components/Banner.vue";
 import FlatCard from "../components/FlatCard.vue";
 import ThreeCard from "../components/ThreeCard.vue";
 import FourCard from "../components/FourCard.vue";
+import GoTOPBtn from "../components/public/GoTOPBtn.vue";
 
 export default {
   name: "Home",
@@ -42,6 +43,7 @@ export default {
     FlatCard,
     ThreeCard,
     FourCard,
+    GoTOPBtn,
     // FooterComponent,
     // HelloWorld,
   },

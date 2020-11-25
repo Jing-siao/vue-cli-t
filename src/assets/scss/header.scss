@@ -1,5 +1,33 @@
 @import"../public/main.scss";
 
+@mixin after {
+  &::after {
+    content: "";
+    background-color: $darkgrey;
+    height: 4px;
+    position: absolute;
+    bottom: 15%;
+    width: 100%;
+    left: 0;
+    border-radius: 5px;
+
+    animation-name: rotation;
+    animation-duration: .4s;
+  }
+
+  @keyframes rotation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+
+    100% {
+      left: 0%;
+      width: 100%;
+    }
+  }
+
+}
 
 header {
   background-color: lightgrey;
@@ -48,21 +76,17 @@ header {
       ul.menu {
         // border: 1px solid red;
 
-
         a {
-          // display: inline-block;
-          // border: 1px solid rgb(77, 216, 84);
-
+          display: inline-block;
 
           li {
             // background-color: rgb(150, 150, 150);
             color: $darkgrey;
             display: inline-block;
+            position: relative;
 
 
-            &:hover {
-              border-bottom: 3px solid $darkgrey;
-            }
+
 
 
           }
@@ -88,7 +112,13 @@ header {
             border-radius: 5px;
             display: inline-block;
             line-height: 30px;
+
             // vertical-align: top;
+            &:hover {
+              border: 2px solid transparent;
+              background-color: white;
+              transition: .4s;
+            }
 
             i {
               display: inline-block;
@@ -168,7 +198,19 @@ header {
           li {
             display: inline-block;
             padding: 0 15px;
+
+            &:hover {
+              @include after();
+              // border-bottom: 3px solid $darkgrey;
+            }
           }
+
+          &.router-link-exact-active {
+            li {
+              @include after();
+            }
+          }
+
         }
       }
 
@@ -249,7 +291,6 @@ header {
           display: block;
           text-align: center;
           padding: 0;
-          // margin: -15px;
 
           li {
             // display: block;
@@ -257,9 +298,19 @@ header {
             width: 100%;
             background-color: lightgrey;
 
+            &:hover {
+              background-color: $darkgrey;
+              color: white;
+              transition: .3s;
+            }
+          }
 
+          &.router-link-exact-active {
+            li {
+              background-color: $darkgrey;
+              color: white;
 
-
+            }
           }
         }
       }
