@@ -2,14 +2,9 @@
   <footer>
     <div id="footer" class="container" v-cloak>
       <ul class="row">
-        <a
-          v-for="item in footer"
-          :href="item.link"
-          class="col-md col-sm-5"
-          :key="item.title"
-        >
-          <li>{{ item.title }}</li>
-        </a>
+        <li v-for="item in footer" class="col-md col-sm-5" :key="item.title">
+          <router-link :to="item.link">{{ item.title }}</router-link>
+        </li>
       </ul>
 
       <p class="copyRight">
@@ -28,19 +23,19 @@ export default {
       footer: [
         {
           title: "活動辦法",
-          link: "javascript:;",
+          link: "activity",
         },
         {
           title: "兌換專區",
-          link: "javascript:;",
+          link: "bonus",
         },
         {
           title: "常見問題",
-          link: "javascript:;",
+          link: "question",
         },
         {
           title: "會員專區",
-          link: "javascript:;",
+          link: "member",
         },
         {
           title: "卡友專區",

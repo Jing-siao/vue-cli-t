@@ -19,18 +19,16 @@ footer {
     display: flex;
     justify-content: space-between;
 
-    a {
-
-
-      padding: 5px 0 !important;
-
+    li {
+      // border: 1px solid black;
+      padding: 0;
       text-align: center;
-      margin: 0 10px;
+      margin: 5px;
 
-      li {
+      a {
         // border: 1px solid black;
         display: inline-block;
-        padding: 2px 5px;
+        padding: 5px 0;
         width: 100%;
         color: $darkgrey;
 
@@ -61,10 +59,10 @@ footer {
     ul {
       display: none;
 
-      a {
+      li {
         margin: 5px 0;
 
-        li {
+        a {
           // border: 1px solid black;
           // display: inline-block;
           padding: 8px 0;
