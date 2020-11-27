@@ -92,10 +92,13 @@ header {
           &.memberList {
 
             div.list {
-              background-color: $grey;
-              width: 100vw;
-              border: 1px solid black;
-              display: none;
+              z-index: 1;
+
+              li {
+
+                padding: 0;
+
+              }
             }
           }
         }
@@ -222,15 +225,21 @@ header {
           }
 
           &.memberList {
+            i.fas {
+              display: none;
+            }
 
             div.list {
               position: absolute;
               top: 66px;
               left: 0;
               margin-left: -15px;
+              // width: calc(100vw - 17px);
+              width: 100vw;
+              display: none !important;
 
               ul {
-                border: 1px solid rgb(0, 47, 255);
+                // border: 1px solid rgb(0, 47, 255);
                 display: flex;
                 justify-content: space-between;
                 width: 50%;
@@ -331,7 +340,6 @@ header {
             // display: block;
             padding: 15px;
             width: 100%;
-            background-color: lightgrey;
 
             &:hover {
               background-color: $darkgrey;
@@ -350,18 +358,32 @@ header {
           &.memberList {
 
             div.list {
-              height: 177px;
-              // display: none;
+              // height: 177px;
+              display: none;
 
 
               ul {
-                border: 1px solid rgb(0, 47, 255);
+                // border: 1px solid rgb(0, 47, 255);
+                background-color: rgba(0, 0, 0, 0.2);
 
                 li {
                   // border: 1px solid black;
                   // color: white;
                   padding: 10px;
-                  // line-height: 40px;
+
+                  a {
+                    &:hover {
+                      background-color: rgba(0, 0, 0, 0.2);
+                      color: white;
+                      transition: .3s;
+                    }
+
+                    &.router-link-exact-active {
+                      background-color: rgba(0, 0, 0, 0.2);
+                      color: white;
+
+                    }
+                  }
                 }
 
               }

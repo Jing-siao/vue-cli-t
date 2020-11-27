@@ -24,30 +24,25 @@
           </div>
           <ul class="menu">
             <li v-for="(item, index) in menu" :key="index.title">
-              <router-link :to="item.link" @click.native="closeMenu">
+              <router-link :to="{ name: item.link }" @click.native="closeMenu">
                 {{ item.title }}
               </router-link>
             </li>
-            <li
-              class="memberList"
-              @mouseover="hover"
-              @mouseleave="hoverOut"
-              @click="showList"
-            >
+            <li class="memberList" @click="showList">
               <!-- @mouseover="hover"
               @mouseleave="hoverOut"
               @click="showList" -->
-              <router-link :to="memberList.link">
+              <router-link :to="{ name: memberList.link }">
                 {{ memberList.title }}
                 <i class="fas fa-angle-down"></i>
               </router-link>
               <div class="list" @click.stop="closeMenu">
                 <ul>
-                  <li>點數總覽</li>
-                  <li>個人資料</li>
-                  <li>變更登入密碼</li>
-                  <li>其他金融卡設定</li>
-                  <li>會員註銷</li>
+                  <li v-for="list in memberMenu" :key="list.title">
+                    <router-link :to="{ name: list.link }">
+                      {{ list.title }}</router-link
+                    >
+                  </li>
                 </ul>
               </div>
             </li>
@@ -70,10 +65,12 @@
 </template> 
 <script>
 import $ from "jquery";
-
+// import MemberSideBar from "../MemberSideBar.vue";
+import MemberMenu from "../../mixins/memberMenu.js";
 // import HeaderMemberSlot from "./HeaderMemberSlot.vue";
 export default {
   name: "headerComponent",
+  mixins: [MemberMenu],
   components: {
     // HeaderMemberSlot,
   },
@@ -86,34 +83,33 @@ export default {
       index: 0,
       // showList: false,
       // menuList: false,
-      // props: [HeaderMemberSlot],
+      // props: [MemberSideBar],
       menu: [
         {
           title: "活動辦法",
-          link: "activity",
+          link: "Activity",
         },
         {
           title: "兌換專區",
-          link: "bonus",
+          link: "Bonus",
         },
         {
           title: "常見問題",
-          link: "question",
+          link: "Question",
         },
         {
           title: "交通優惠",
-          link: "javascript:;",
+          link: "Error",
         },
         {
           title: "卡友專區",
-          link: "javascript:;",
+          link: "Error",
         },
       ],
       memberList: {
         title: "會員中心",
-        link: "member",
+        link: "Member-AllPoint",
       },
-
       isActive: {
         "is-active": false,
       },
@@ -138,13 +134,13 @@ export default {
       this.isActive["is-active"] = false;
       $(".menu").hide();
     },
-    hover() {
-      $(".list").stop().slideDown(1000);
-    },
+    // hover() {
+    //   $(".list").stop().slideDown(400);
+    // },
 
-    hoverOut() {
-      $(".list").stop().slideUp(400);
-    },
+    // hoverOut() {
+    //   $(".list").stop().slideUp(400);
+    // },
     showList() {
       $(".list").slideToggle(400);
     },
@@ -159,27 +155,23 @@ export default {
     //   }
   },
   mounted() {
-    // // rwd
-    // // 一進來先判斷
-    // if ($(window).width() <= 1140) {
-    //   // this.hover();
-    //   // this.hoverOut();
-    //   // $(".list").show();
-    //   $(".list").hide();
+    // function showList() {
+    //   // $(".list").stop().slideUp(400);
     //   $(".memberList").click(function () {
     //     $(".list").stop().slideToggle(400);
     //   });
+    // }
+    // // rwd
+    // // 一進來先判斷
+    // if ($(window).width() <= 1140) {
+    //   showList();
     // } else {
     //   $(".list").hide();
     // }
     // // resize再判斷一次
     // $(window).resize(function () {
     //   if ($(window).width() <= 1140) {
-    //     // $(".list").show();
-    //     $(".list").hide();
-    //     $(".memberList").click(function () {
-    //       $(".list").stop().slideToggle(400);
-    //     });
+    //     showList();
     //   } else {
     //     $(".list").hide();
     //   }
