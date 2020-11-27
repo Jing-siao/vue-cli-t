@@ -222,11 +222,18 @@ header {
               @include after();
             }
 
+
           }
 
           &.memberList {
             i.fas {
               display: none;
+            }
+
+            a {
+              &.router-link-active {
+                @include after();
+              }
             }
 
             div.list {

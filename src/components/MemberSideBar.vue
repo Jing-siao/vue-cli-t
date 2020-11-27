@@ -1,26 +1,24 @@
 <template>
   <div class="sidebar">
-    <div class="account">
-      <h4>會員專區</h4>
-      <ul>
-        <li v-for="list in memberAccountMenu" :key="list.title">
-          <router-link :to="{ name: list.link }">{{ list.title }}</router-link>
-        </li>
-      </ul>
-    </div>
     <div class="point">
-      <h4>點數專區</h4>
+      <h4>點數查詢</h4>
       <ul>
         <li v-for="list in memberPointMenu" :key="list.title">
-          <router-link :to="{ name: list.link }">{{ list.title }}</router-link>
+          <router-link :to="{ name: list.link }">
+            <i class="fas fa-angle-right"></i>
+            <p>{{ list.title }}</p>
+          </router-link>
         </li>
       </ul>
     </div>
-    <div class="exchange">
-      <h4>兌換專區</h4>
+    <div class="account">
+      <h4>會員設定</h4>
       <ul>
-        <li v-for="list in memberExchangeMenu" :key="list.title">
-          <router-link :to="{ name: list.link }">{{ list.title }}</router-link>
+        <li v-for="list in memberAccountMenu" :key="list.title">
+          <router-link :to="{ name: list.link }">
+            <i class="fas fa-angle-right"></i>
+            <p>{{ list.title }}</p>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -40,24 +38,37 @@ export default {
 @import "../assets/public/variables.scss";
 
 ul {
-  border: 1px solid rebeccapurple;
+  // border: 1px solid rebeccapurple;
 
   li {
     // border: 1px solid red;
     text-align: left;
-    margin: 8px 0;
+    margin: 5px 0;
     a {
-      border: 1px solid pink;
+      // border: 1px solid pink;
       display: inline-block;
-      padding: 8px;
+      padding: 5px 8px;
       width: 100%;
       color: $darkgrey;
+      i {
+        display: none;
+        line-height: 25px;
+      }
+      p {
+        display: inline-block;
+      }
+      &:hover > i {
+        display: inline-block;
+      }
+      &.router-link-exact-active > i {
+        display: inline-block;
+      }
     }
   }
 }
-.point {
-  margin: 10px 0;
-  border: 1px solid blue;
+.account {
+  margin-top: 10px;
+  // border: 1px solid blue;
 }
 @media (min-width: 1141px) {
   .sidebar {

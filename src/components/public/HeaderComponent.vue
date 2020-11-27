@@ -37,18 +37,8 @@
                 <i class="fas fa-angle-down"></i>
               </router-link>
               <div class="list" @click.stop="closeMenu">
-                <div class="account">
-                  <p>會員專區</p>
-                  <ul>
-                    <li v-for="list in memberAccountMenu" :key="list.title">
-                      <router-link :to="{ name: list.link }">
-                        {{ list.title }}</router-link
-                      >
-                    </li>
-                  </ul>
-                </div>
                 <div class="point">
-                  <p>點數專區</p>
+                  <p>點數查詢</p>
                   <ul>
                     <li v-for="list in memberPointMenu" :key="list.title">
                       <router-link :to="{ name: list.link }">
@@ -57,10 +47,10 @@
                     </li>
                   </ul>
                 </div>
-                <div class="exange">
-                  <p>兌換專區</p>
+                <div class="account">
+                  <p>會員設定</p>
                   <ul>
-                    <li v-for="list in memberExchangeMenu" :key="list.title">
+                    <li v-for="list in memberAccountMenu" :key="list.title">
                       <router-link :to="{ name: list.link }">
                         {{ list.title }}</router-link
                       >
@@ -131,7 +121,7 @@ export default {
       ],
       memberList: {
         title: "會員中心",
-        link: "Member-AllPoint",
+        link: "Member",
       },
       isActive: {
         "is-active": false,

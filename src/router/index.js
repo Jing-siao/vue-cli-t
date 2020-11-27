@@ -40,6 +40,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     //此方法可以省下一開始讀取時間 但就是換頁會多一次讀取
     component: () => import(/* webpackChunkName: "Member" */ '../views/Member.vue'),
+    redirect: "/member/allPoint",
     children: [
       {
         path: 'allPoint',

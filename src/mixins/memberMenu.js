@@ -32,8 +32,6 @@ export default {
           title: "點數儲值",
           link: "Member-DePosit",
         },
-      ],
-      memberExchangeMenu: [
         {
           title: "兌換紀錄",
           link: "Member-ExchangeRecord",
