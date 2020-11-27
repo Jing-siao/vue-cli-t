@@ -1,9 +1,7 @@
 <template>
-  <div class="member container">
+  <div class="member">
     <div class="main row">
-      <div class="sidebar">
-        <MemberSideBar />
-      </div>
+      <MemberSideBar />
       <div class="content">
         <router-view />
       </div>
@@ -21,13 +19,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../assets/public/main.scss";
 .member {
   // border: 1px solid black;
-  margin-top: 20px;
   min-height: calc(100vh - 229px);
-
+  background: $grey;
+  border-radius: 50px;
+  overflow: hidden;
+  width: 92%;
+  margin: 40px auto;
   .main {
-    border: 1px solid black;
+    // border: 1px solid black;
+    margin: 10px 0;
+    padding: 15px;
     .sidebar {
       border: 1px solid rebeccapurple;
     }
@@ -37,17 +41,11 @@ export default {
   }
 }
 @media (min-width: 1141px) {
-  .sidebar {
-    width: 15%;
-  }
   .content {
     width: 85%;
   }
 }
 @media (max-width: 1140px) {
-  .sidebar {
-    display: none;
-  }
   .content {
     width: 100%;
   }

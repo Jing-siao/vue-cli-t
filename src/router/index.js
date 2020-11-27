@@ -65,7 +65,22 @@ const routes = [
         path: 'destroyAccount',
         name: 'Member-DestroyAccount',
         component: () => import('../views/member/DestroyAccount.vue'),
-      }
+      },
+      {
+        path: 'dePosit',
+        name: 'Member-DePosit',
+        component: () => import('../views/member/DePosit.vue'),
+      },
+      {
+        path: 'searchPoint',
+        name: 'Member-SearchPoint',
+        component: () => import('../views/member/SearchPoint.vue'),
+      },
+      {
+        path: 'exchangeRecord',
+        name: 'Member-ExchangeRecord',
+        component: () => import('../views/member/ExchangeRecord.vue'),
+      },
     ]
 
   },

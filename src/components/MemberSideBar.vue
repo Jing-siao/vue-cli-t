@@ -1,12 +1,30 @@
 <template>
-  <!-- <div class="sidebar col-2"> -->
-  <!-- <h1>會員中心</h1> -->
-  <ul>
-    <li v-for="list in memberMenu" :key="list.title">
-      <router-link :to="{ name: list.link }">{{ list.title }}</router-link>
-    </li>
-  </ul>
-  <!-- </div> -->
+  <div class="sidebar">
+    <div class="account">
+      <h4>會員專區</h4>
+      <ul>
+        <li v-for="list in memberAccountMenu" :key="list.title">
+          <router-link :to="{ name: list.link }">{{ list.title }}</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="point">
+      <h4>點數專區</h4>
+      <ul>
+        <li v-for="list in memberPointMenu" :key="list.title">
+          <router-link :to="{ name: list.link }">{{ list.title }}</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="exchange">
+      <h4>兌換專區</h4>
+      <ul>
+        <li v-for="list in memberExchangeMenu" :key="list.title">
+          <router-link :to="{ name: list.link }">{{ list.title }}</router-link>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 <script>
 import MemberMenu from "../mixins/memberMenu.js";
@@ -22,19 +40,33 @@ export default {
 @import "../assets/public/variables.scss";
 
 ul {
-  // border: 1px solid rebeccapurple;
+  border: 1px solid rebeccapurple;
 
   li {
     // border: 1px solid red;
     text-align: left;
-    margin: 20px 0;
+    margin: 8px 0;
     a {
       border: 1px solid pink;
       display: inline-block;
-      padding: 10px;
+      padding: 8px;
       width: 100%;
-      color: $grey;
+      color: $darkgrey;
     }
+  }
+}
+.point {
+  margin: 10px 0;
+  border: 1px solid blue;
+}
+@media (min-width: 1141px) {
+  .sidebar {
+    width: 15%;
+  }
+}
+@media (max-width: 1140px) {
+  .sidebar {
+    display: none;
   }
 }
 </style>

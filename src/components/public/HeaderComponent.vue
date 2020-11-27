@@ -37,13 +37,36 @@
                 <i class="fas fa-angle-down"></i>
               </router-link>
               <div class="list" @click.stop="closeMenu">
-                <ul>
-                  <li v-for="list in memberMenu" :key="list.title">
-                    <router-link :to="{ name: list.link }">
-                      {{ list.title }}</router-link
-                    >
-                  </li>
-                </ul>
+                <div class="account">
+                  <p>會員專區</p>
+                  <ul>
+                    <li v-for="list in memberAccountMenu" :key="list.title">
+                      <router-link :to="{ name: list.link }">
+                        {{ list.title }}</router-link
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="point">
+                  <p>點數專區</p>
+                  <ul>
+                    <li v-for="list in memberPointMenu" :key="list.title">
+                      <router-link :to="{ name: list.link }">
+                        {{ list.title }}</router-link
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="exange">
+                  <p>兌換專區</p>
+                  <ul>
+                    <li v-for="list in memberExchangeMenu" :key="list.title">
+                      <router-link :to="{ name: list.link }">
+                        {{ list.title }}</router-link
+                      >
+                    </li>
+                  </ul>
+                </div>
               </div>
             </li>
             <!-- <HeaderMemberSlot title="會員中心">
