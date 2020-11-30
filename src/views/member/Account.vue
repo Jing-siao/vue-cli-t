@@ -1,6 +1,6 @@
 <template>
   <div class="memberAccount">
-    <form action="">
+    <form action="" class="col-12 col-md-8 col-lg-6">
       <table>
         <tr class="row">
           <td class="col-4 col-sm-3">

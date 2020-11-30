@@ -23,15 +23,19 @@
 
       h5 {
         padding: 12px 20px;
+        // border: 1px solid black;
 
 
       }
 
       div {
+        text-align: center;
+
         i {
           font-size: 1.2rem;
-          padding: 9px 0;
+          padding: 10px 0;
           transition: 0.3s;
+          // border: 1px solid black;
 
           &.up {
             transition: 0.3s;
