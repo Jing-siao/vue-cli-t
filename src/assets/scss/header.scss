@@ -363,6 +363,14 @@ header {
           }
 
           &.memberList {
+            i {
+              transition: 0.3s;
+
+              &.up {
+                transition: 0.3s;
+                transform: rotate(-180deg);
+              }
+            }
 
             div.list {
               // height: 177px;
@@ -390,9 +398,36 @@ header {
                       color: white;
 
                     }
+
+
                   }
                 }
 
+              }
+
+              .point,
+              .account {
+                p {
+                  // border: 1px solid black;
+                  padding: 12px;
+                  cursor: pointer;
+                  background-color: rgba(0, 0, 0, 0.2);
+
+                  i {
+                    transition: 0.3s;
+
+                    &.up {
+                      transition: 0.3s;
+                      transform: rotate(-180deg);
+                    }
+                  }
+
+
+                }
+
+                ul.memberMenu {
+                  display: none;
+                }
               }
             }
           }

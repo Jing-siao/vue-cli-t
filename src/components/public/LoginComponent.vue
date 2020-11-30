@@ -44,7 +44,7 @@
               placeholder="注意大小寫有分"
               v-model.trim="loginForm.verificationCode"
             />
-            <div class="refresh col-sm-10 col-8">
+            <div class="refresh col-sm-6 col-8">
               <img src="../../assets/img/passcode.png" alt="" />
               <i class="fas fa-sync">刷新驗證碼</i>
             </div>

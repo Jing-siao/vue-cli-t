@@ -28,7 +28,7 @@
                 {{ item.title }}
               </router-link>
             </li>
-            <li class="memberList" @click="showList">
+            <li class="memberList" @click.stop="showList">
               <!-- @mouseover="hover"
               @mouseleave="hoverOut"
               @click="showList" -->
@@ -36,21 +36,35 @@
                 {{ memberList.title }}
                 <i class="fas fa-angle-down"></i>
               </router-link>
-              <div class="list" @click.stop="closeMenu">
+              <div class="list">
                 <div class="point">
-                  <p>點數查詢</p>
-                  <ul>
-                    <li v-for="list in memberPointMenu" :key="list.title">
+                  <p id="toggleSearch" @click.stop="dropSearch">
+                    點數查詢
+                    <i class="fas fa-angle-down"></i>
+                  </p>
+
+                  <ul class="memberMenu searchMenu">
+                    <li
+                      v-for="list in memberPointMenu"
+                      :key="list.title"
+                      @click.stop="closeMenu"
+                    >
                       <router-link :to="{ name: list.link }">
                         {{ list.title }}</router-link
                       >
                     </li>
                   </ul>
                 </div>
-                <div class="account">
-                  <p>會員設定</p>
-                  <ul>
-                    <li v-for="list in memberAccountMenu" :key="list.title">
+                <div class="account" @click.stop="dropAccount">
+                  <p id="toggleAccount">
+                    會員設定 <i class="fas fa-angle-down"></i>
+                  </p>
+                  <ul class="memberMenu accountMenu">
+                    <li
+                      v-for="list in memberAccountMenu"
+                      :key="list.title"
+                      @click.stop="closeMenu"
+                    >
                       <router-link :to="{ name: list.link }">
                         {{ list.title }}</router-link
                       >
@@ -94,6 +108,8 @@ export default {
         height: 0,
       },
       index: 0,
+      current: null,
+      up: false,
       // showList: false,
       // menuList: false,
       // props: [MemberSideBar],
@@ -156,6 +172,15 @@ export default {
     // },
     showList() {
       $(".list").slideToggle(400);
+      $(".memberList>a>i").toggleClass("up");
+    },
+    dropSearch() {
+      $(".searchMenu").slideToggle(400);
+      $("#toggleSearch>i").toggleClass("up");
+    },
+    dropAccount() {
+      $(".accountMenu").slideToggle(400);
+      $("#toggleAccount>i").toggleClass("up");
     },
   },
   created() {

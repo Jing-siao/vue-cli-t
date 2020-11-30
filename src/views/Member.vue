@@ -33,7 +33,7 @@ export default {
     margin: 10px 0;
     padding: 15px;
     .sidebar {
-      border: 1px solid rebeccapurple;
+      // border: 1px solid rebeccapurple;
     }
     .content {
       border: 1px solid rebeccapurple;
@@ -43,6 +43,7 @@ export default {
 @media (min-width: 1141px) {
   .content {
     width: 85%;
+    padding-top: 35px;
   }
 }
 @media (max-width: 1140px) {
