@@ -32,9 +32,6 @@ export default {
     // border: 1px solid black;
     margin: 10px 0;
     padding: 15px;
-    .sidebar {
-      // border: 1px solid rebeccapurple;
-    }
     .content {
       border: 1px solid rebeccapurple;
     }

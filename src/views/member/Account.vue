@@ -46,7 +46,7 @@
           <td class="col-4 col-sm-3 title"><p>聯絡地址</p></td>
           <td class="col-4 col-sm-3">
             <p v-if="hideBtn" class="original">
-              {{ account.city }}{{ townIndex }}
+              {{ account.city }}
             </p>
             <select name="" id="" v-if="showBtn">
               請選擇
@@ -61,7 +61,7 @@
             ></city-select> -->
           </td>
           <td class="col-4 col-sm-3">
-            <p v-if="hideBtn">{{ account.dist }}{{ areaIdx }}</p>
+            <p v-if="hideBtn">{{ account.dist }}</p>
             <select name="" id="" v-if="showBtn">
               <option value="1">{{ account.dist }}</option>
               <option value="2">內湖區</option>
@@ -100,9 +100,6 @@
         </button>
       </div>
     </form>
-    <my-select v-model="townIndex" :source="towns"></my-select>
-    <my-select v-model="areaIndex" :source="areas"></my-select>
-    {{ zip }}
   </div>
 </template>
 <script>
@@ -110,14 +107,13 @@
 // import CitySelect from "@/component/memberContent/CitySelect.vue";
 
 export default {
-  components: { CitySelect },
+  // components: { CitySelect },
   name: "account",
 
   data() {
     return {
       showBtn: false,
       hideBtn: true,
-      contacts: [],
       editIndex: null,
       // showInput: false,
       account: {
@@ -134,25 +130,27 @@ export default {
     };
   },
   computed: {
-    cityList() {
-      let cities = {
-        sort: [],
-        map: {},
-      };
-      this.menu.forEach((item, index) => {
-        let { name, areas, zip } = item;
-        if (!cities.map[name]) {
-          cities.sort.push(name);
-          cities.map[name] = {
-            sort: [],
-            map: {},
-          };
-        }
-        cities.map[name].sort.push(areas);
-        cities.map[name].map[areas] = { index, zip };
-      });
-      return cities;
-    },
+    //----------------------------------------
+    // cityList() {
+    //   let cities = {
+    //     sort: [],
+    //     map: {},
+    //   };
+    //   this.menu.forEach((item, index) => {
+    //     let { name, areas, zip } = item;
+    //     if (!cities.map[name]) {
+    //       cities.sort.push(name);
+    //       cities.map[name] = {
+    //         sort: [],
+    //         map: {},
+    //       };
+    //     }
+    //     cities.map[name].sort.push(areas);
+    //     cities.map[name].map[areas] = { index, zip };
+    //   });
+    //   return cities;
+    // },
+    //---------------------------
   },
   watch: {},
   methods: {

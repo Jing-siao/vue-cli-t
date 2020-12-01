@@ -53,7 +53,7 @@ module.exports = {
   // // PWA 外掛相關配置
   // // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
   // pwa: {},
-  // // webpack-dev-server 相關配置
+  // webpack-dev-server 相關配置
   // devServer: {
   //   open: process.platform === 'darwin',
   //   host: '0.0.0.0',
