@@ -2,13 +2,13 @@
 
 
 .memberAccount {
-  border: 1px solid black;
+  // border: 1px solid black;
 
   form {
     display: flex;
     flex-direction: column;
     // display: inline-block;
-    border: 1px solid black;
+    // border: 1px solid black;
 
     table {
       // border: 1px solid rgb(251, 255, 0);
@@ -22,34 +22,47 @@
         width: 100%;
 
         td {
-          border: 1px solid rgb(243, 210, 241);
+          // border: 1px solid rgb(243, 210, 241);
           padding: 5px 2px;
-          // height: 40px;
-          display: inline-block;
+          display: flex;
+          align-items: center;
+          overflow-x: auto;
+          white-space: nowrap;
+          height: 3.2rem;
+
+          &.title::after {
+            content: "";
+            height: 70%;
+            position: absolute;
+            right: 0;
+            top: auto;
+            // background-color: $darkgrey;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+          }
 
           // &:first-child {
           //   border-right: 1px solid;
           // }
           p {
             padding: 6px 0;
-            // font-size: 1.09rem;
-            border: 1px solid green;
-            // font-size: 16px;
+
+            // border: 1px solid green;
+            &.original {
+              padding-left: 5px;
+            }
           }
 
           input {
-            width: 90%;
+            width: 100%;
             padding: 5px;
             margin: 0;
-            // font-size: 16px;
             // font-size: 1rem;
           }
 
           select {
             border: 1px solid $darkgrey;
             font-size: 1rem;
-            padding: 5px;
-            // font-size: 16px;
+            padding: 4px;
           }
 
           // #postalCode {
@@ -57,17 +70,9 @@
           // }
         }
 
-        &.address {
-          td:last-child {
-            // border: 1px solid green;
-          }
-        }
       }
     }
 
-    div {
-      border: 1px solid black;
-    }
   }
 }
 

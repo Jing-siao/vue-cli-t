@@ -24,7 +24,7 @@ export default {
   // border: 1px solid black;
   min-height: calc(100vh - 229px);
   background: $grey;
-  border-radius: 50px;
+  border-radius: 1.5rem;
   overflow: hidden;
   width: 92%;
   margin: 40px auto;
