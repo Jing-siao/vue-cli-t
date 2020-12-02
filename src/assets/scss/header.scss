@@ -226,10 +226,6 @@ header {
           }
 
           &.memberList {
-            i.fas {
-              display: none;
-            }
-
             a {
               &.router-link-active {
                 @include after();
@@ -363,8 +359,19 @@ header {
           }
 
           &.memberList {
+            p.straightNav {
+              // border: 1px solid black;
+              padding: 15px;
+
+              &:hover {
+                background-color: $darkgrey;
+                color: white;
+                transition: 0.3s;
+              }
+            }
+
             i {
-              transition: 0.3s;
+              transition: rotate 0.3s;
 
               &.up {
                 transition: 0.3s;
@@ -398,7 +405,6 @@ header {
                       color: white;
 
                     }
-
 
                   }
                 }

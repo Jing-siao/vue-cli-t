@@ -45,10 +45,10 @@ ul {
     text-align: left;
     margin: 5px 0;
     a {
-      // border: 1px solid pink;
+      // border: 1px solid rgb(92, 37, 194);
       display: inline-block;
       padding: 5px 8px;
-      width: 100%;
+      // width: 100%;
       color: $darkgrey;
       i {
         display: none;

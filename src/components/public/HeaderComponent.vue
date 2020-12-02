@@ -28,14 +28,17 @@
                 {{ item.title }}
               </router-link>
             </li>
-            <li class="memberList" @click.stop="showList">
+            <li class="memberList">
               <!-- @mouseover="hover"
               @mouseleave="hoverOut"
               @click="showList" -->
-              <router-link :to="{ name: memberList.link }">
+              <router-link :to="{ name: memberList.link }" v-if="horizontalNav">
+                {{ memberList.title }}
+              </router-link>
+              <p class="straightNav" @click.stop="showList" v-if="straightNav">
                 {{ memberList.title }}
                 <i class="fas fa-angle-down"></i>
-              </router-link>
+              </p>
               <div class="list">
                 <div class="point">
                   <p id="toggleSearch" @click.stop="dropSearch">
@@ -73,9 +76,6 @@
                 </div>
               </div>
             </li>
-            <!-- <HeaderMemberSlot title="會員中心">
-              <i class="fas fa-angle-down"></i
-            ></HeaderMemberSlot> -->
           </ul>
           <div class="loginBtn">
             <router-link :to="{ name: 'Login' }" @click.native="closeMenu">
@@ -105,11 +105,14 @@ export default {
     return {
       window: {
         width: 0,
-        height: 0,
+        // height: 0,
       },
       index: 0,
       current: null,
       up: false,
+      horizontalNav: true,
+      straightNav: false,
+
       // showList: false,
       // menuList: false,
       // props: [MemberSideBar],
@@ -157,7 +160,6 @@ export default {
       // $("button.hamburger").toggleClass("is-active");
       this.isActive["is-active"] = !this.isActive["is-active"];
       $(".menu").slideToggle();
-      // this.active = !this.active;
     },
     closeMenu() {
       this.isActive["is-active"] = false;
@@ -172,7 +174,7 @@ export default {
     // },
     showList() {
       $(".list").slideToggle(400);
-      $(".memberList>a>i").toggleClass("up");
+      $(".memberList>p>i").toggleClass("up");
     },
     dropSearch() {
       $(".searchMenu").slideToggle(400);
@@ -182,39 +184,27 @@ export default {
       $(".accountMenu").slideToggle(400);
       $("#toggleAccount>i").toggleClass("up");
     },
+    handleResize() {
+      this.window.width = window.innerWidth;
+      if (this.window.width < 1140) {
+        this.straightNav = true;
+        this.horizontalNav = false;
+      } else {
+        this.straightNav = false;
+        this.horizontalNav = true;
+      }
+      // this.window.height = window.innerHeight;
+    },
   },
   created() {
-    //   // window.addEventListener();
-    //   if (this.window.width <= 1140) {
-    //     this.slideList();
-    //   } else {
-    //     this.hover();
-    //     this.hoverOut();
-    //   }
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
   },
-  mounted() {
-    // function showList() {
-    //   // $(".list").stop().slideUp(400);
-    //   $(".memberList").click(function () {
-    //     $(".list").stop().slideToggle(400);
-    //   });
-    // }
-    // // rwd
-    // // 一進來先判斷
-    // if ($(window).width() <= 1140) {
-    //   showList();
-    // } else {
-    //   $(".list").hide();
-    // }
-    // // resize再判斷一次
-    // $(window).resize(function () {
-    //   if ($(window).width() <= 1140) {
-    //     showList();
-    //   } else {
-    //     $(".list").hide();
-    //   }
-    // });
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
   },
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>

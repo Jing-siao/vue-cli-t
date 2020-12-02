@@ -1,0 +1,120 @@
+@import"../public/main.scss";
+
+.memberName {
+  // border-bottom: 2px solid $darkgrey;
+  display: flex;
+  padding-bottom: 10px;
+
+  p {
+    line-height: 1.5rem;
+
+    &.name {
+
+      color: black;
+
+      i {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+.memberInfo {
+  // border: 1px solid blue;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+
+  .info {
+    display: inline-block;
+    background-color: white;
+    padding: 10px;
+    width: 30%;
+    border-radius: 0.6rem;
+
+    p {
+      margin-top: 5px;
+    }
+  }
+}
+
+.point {
+  background-color: white;
+  margin: 20px 0;
+  border-radius: 0.6rem;
+  padding: 5px;
+
+  .valid {
+    // border-right: 2px solid $grey;
+
+    p {
+      display: inline-block;
+
+    }
+
+  }
+
+  .allExpireDate {
+    // border: 1px solid blue;
+    display: flex;
+
+    p {
+      flex-grow: 1;
+    }
+
+    .expireDate {
+      flex-grow: 1;
+    }
+  }
+}
+
+@media(min-width:768px) {
+  .valid {
+    border-right: 2px solid $grey;
+
+    p {
+      display: inline-block;
+
+    }
+
+  }
+}
+
+@media(max-width:767px) {
+  .valid {
+    margin-bottom: 5px;
+    border-bottom: 2px solid $grey;
+
+    p {
+      display: inline-block;
+
+    }
+
+  }
+}
+
+@media(max-width:576px) {
+  .memberInfo {
+    // border: 1px solid blue;
+    margin: 0;
+    display: block;
+
+    .info {
+      width: 100%;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+
+      h5 {
+        // border: 1px solid black;
+        padding: 5px 0;
+
+      }
+
+      p {
+        margin-top: 0;
+      }
+
+    }
+  }
+}
