@@ -44,46 +44,29 @@
         </tr>
         <tr class="row address">
           <td class="col-4 col-sm-3 title"><p>聯絡地址</p></td>
-          <td class="col-4 col-sm-3">
+          <td class="col-3 col-sm-3">
             <p v-if="hideBtn" class="original">
-              {{ account.city }}
+              {{ userCity }}
             </p>
-            <select name="" id="" v-if="showBtn">
-              請選擇
-              <option value="1">{{ account.city }}</option>
-              <option value="2">新北市</option>
-              <option value="3">台北市</option>
-            </select>
-            <!-- <city-select
-              v-model="townIndex"
-              :options="towns"
+            <CitySelect
+              v-model="cityIdx"
+              :options="cities"
               v-if="showBtn"
-            ></city-select> -->
+            ></CitySelect>
           </td>
-          <td class="col-4 col-sm-3">
-            <p v-if="hideBtn">{{ account.dist }}</p>
-            <select name="" id="" v-if="showBtn">
-              <option value="1">{{ account.dist }}</option>
-              <option value="2">內湖區</option>
-              <option value="3">內湖區</option>
-            </select>
-            <!-- <city-select
+          <td class="col-3 col-sm-3">
+            <p v-if="hideBtn">{{ userArea }}</p>
+            <CitySelect
               v-model="areaIdx"
               :options="areas"
               v-if="showBtn"
-            ></city-select> -->
+            ></CitySelect>
           </td>
-          <td class="col-4 col-sm-3">
-            <p v-if="hideBtn"></p>
-            <!-- <input
-              type="text"
-              v-if="showBtn"
-              id="postalCode"
-              placeholder="請填郵遞區號"
-            /> -->
+          <td class="col-2 col-sm-3">
+            <p>{{ zip }}</p>
           </td>
-          <td class="col-8 col-sm-9">
-            <p v-if="hideBtn" class="original">{{ account.address }}</p>
+          <td class="col-12 col-sm-9">
+            <p v-if="hideBtn" class="original address">{{ account.address }}</p>
             <input type="text" v-if="showBtn" v-model.trim="account.address" />
           </td>
         </tr>
@@ -103,11 +86,11 @@
   </div>
 </template>
 <script>
-// import cities from "@/data/cities.json";
-// import CitySelect from "@/component/memberContent/CitySelect.vue";
+import cities from "@/data/cities.json";
+import CitySelect from "@/components/memberContent/CitySelect.vue";
 
 export default {
-  // components: { CitySelect },
+  components: { CitySelect },
   name: "account",
 
   data() {
@@ -115,44 +98,48 @@ export default {
       showBtn: false,
       hideBtn: true,
       editIndex: null,
-      // showInput: false,
+      cityIdx: 0,
+      areaIdx: 0,
       account: {
         name: "國眾電腦",
         idNumber: "A123456789",
         birthday: "2020-11-30",
         email: "123456@gmail.com",
         phoneNumber: "0912345678",
-        city: "台北市",
-        dist: "內湖區",
+        city: "",
+        area: "",
         address: "這邊是地址這邊是地址這邊是地址",
       },
-      city: ["台北市"],
+      // city: ["台北市"],
     };
   },
   computed: {
-    //----------------------------------------
-    // cityList() {
-    //   let cities = {
-    //     sort: [],
-    //     map: {},
-    //   };
-    //   this.menu.forEach((item, index) => {
-    //     let { name, areas, zip } = item;
-    //     if (!cities.map[name]) {
-    //       cities.sort.push(name);
-    //       cities.map[name] = {
-    //         sort: [],
-    //         map: {},
-    //       };
-    //     }
-    //     cities.map[name].sort.push(areas);
-    //     cities.map[name].map[areas] = { index, zip };
-    //   });
-    //   return cities;
-    // },
-    //---------------------------
+    cities() {
+      // const cities = this.cityJson.push();
+      return cities;
+    },
+    areas() {
+      if (this.cities) {
+        return this.cities[this.cityIdx].areas;
+      } else {
+        return null;
+      }
+    },
+    zip() {
+      return this.areas[this.areaIdx].zip;
+    },
+    userCity() {
+      return this.cities[this.cityIdx].name;
+    },
+    userArea() {
+      return this.areas[this.areaIdx].name;
+    },
   },
-  watch: {},
+  watch: {
+    cityIdx() {
+      this.areaIdx = 0;
+    },
+  },
   methods: {
     showHandler() {
       this.showBtn = true;
@@ -161,10 +148,14 @@ export default {
     submitlHandler() {
       this.showBtn = false;
       this.hideBtn = true;
+      //改成新的
     },
     cancelHandler() {
       this.showBtn = false;
       this.hideBtn = true;
+      //改成舊的
+      this.cityIdx = 0;
+      this.areaIdx = 0;
     },
   },
 };

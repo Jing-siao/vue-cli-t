@@ -18,7 +18,7 @@
             </span>
           </button>
           <div id="logo">
-            <router-link to="/">
+            <router-link to="/" @click.native="closeMenu">
               <img src="../../assets/LEO-logo.png" alt="logo" />
             </router-link>
           </div>
@@ -78,7 +78,7 @@
             ></HeaderMemberSlot> -->
           </ul>
           <div class="loginBtn">
-            <router-link :to="{ name: 'Login' }">
+            <router-link :to="{ name: 'Login' }" @click.native="closeMenu">
               <span>
                 <i class="fas fa-user-circle"></i>
                 <p>登入 / 註冊</p>

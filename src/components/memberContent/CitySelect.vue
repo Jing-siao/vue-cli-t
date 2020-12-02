@@ -1,6 +1,6 @@
 <template>
   <select v-model="index">
-    <option disabled value="">請選擇</option>
+    <option :value="null" disabled>請選擇</option>
     <option v-for="(item, i) in options" :value="i" :key="i">
       {{ item.name }}
     </option>
@@ -12,9 +12,7 @@ export default {
   name: "citySelect",
   props: ["options", "value"],
   data() {
-    return {
-      selected: 0,
-    };
+    return {};
   },
   computed: {
     index: {
