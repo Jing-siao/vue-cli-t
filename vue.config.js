@@ -19,6 +19,7 @@ module.exports = {
   publicPath: './',
   // 輸出檔案目錄
   outputDir: 'dist',
+  // assetsPublicPath: '/',
   // eslint-loader 是否在儲存的時候檢查
   // lintOnSave: true,
   // // use the full build with in-browser compiler?

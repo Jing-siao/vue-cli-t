@@ -35,6 +35,7 @@ const routes = [
   {
     path: '/member',
     name: 'Member',
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -102,9 +103,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  //不會hash 需前後端配置
   // routes: [{ path: '*', component: NotFoundComponent }]
   // mode: "history",
+  // 如果要使用 history mode，要請後端把所有頁面的route交由前端處理，並都指向同一個檔案 index.html page
   // base: process.env.BASE_URL,
 
   routes
