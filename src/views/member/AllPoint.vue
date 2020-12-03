@@ -62,7 +62,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/scss/allPoint.scss";
-.allPoint {
-  // border: 1px solid black;
-}
+// .allPoint {
+//   border: 1px solid black;
+// }
 </style>
