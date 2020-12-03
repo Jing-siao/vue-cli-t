@@ -320,11 +320,14 @@ header {
         position: absolute;
         margin-left: -15px;
         top: 79px;
+        left: 0;
         width: calc(100% + 30px);
+
+
         z-index: 10;
         padding: 0;
         height: calc(100vh - 80px);
-        // height: 100%;
+        // height: 100vh;
         overflow-y: scroll;
         background-color: lightgrey;
 

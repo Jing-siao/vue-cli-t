@@ -29,12 +29,14 @@
           overflow-x: auto;
           white-space: nowrap;
           height: 3.2rem;
+          // overflow-y: hidden;
 
           &.title::after {
             content: "";
-            height: 70%;
+            height: 50%;
             position: absolute;
             right: 0;
+            font-size: 0;
             top: auto;
             // background-color: $darkgrey;
             border: 1px solid rgba(0, 0, 0, 0.2);

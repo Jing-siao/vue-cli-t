@@ -72,13 +72,14 @@
         </tr>
       </table>
       <div>
-        <button class="first" @click="showHandler" v-if="hideBtn">
+        <!-- 先加prevent 之後要記得改-->
+        <button class="first" @click.prevent="showHandler" v-if="hideBtn">
           修改資料
         </button>
-        <button class="first" v-if="showBtn" @click="submitlHandler">
+        <button class="first" v-if="showBtn" @click.prevent="submitlHandler">
           確認修改
         </button>
-        <button class="cancel" v-if="showBtn" @click="cancelHandler">
+        <button class="cancel" v-if="showBtn" @click.prevent="cancelHandler">
           取消
         </button>
       </div>
