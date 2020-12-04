@@ -40,48 +40,49 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     //此方法可以省下一開始讀取時間 但就是換頁會多一次讀取
-    component: () => import(/* webpackChunkName: "Member" */ '../views/Member.vue'),
+    //打包在同一支js
+    component: () => import(/* webpackChunkName: "Member" */'../views/Member.vue'),
     redirect: "/member/allPoint",
     children: [
       {
         path: 'allPoint',
         name: 'Member-AllPoint',
-        component: () => import('../views/member/AllPoint.vue'),
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/AllPoint.vue'),
       },
       {
         path: 'account',
         name: 'Member-Account',
-        component: () => import('../views/member/Account.vue'),
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/Account.vue'),
       },
       {
         path: 'changePassword',
         name: 'Member-changePassword',
-        component: () => import('../views/member/ChangePassword.vue'),
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/ChangePassword.vue'),
       },
       {
         path: 'otherSet',
         name: 'Member-otherSet',
-        component: () => import('../views/member/OtherSet.vue'),
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/OtherSet.vue'),
       },
       {
         path: 'destroyAccount',
         name: 'Member-DestroyAccount',
-        component: () => import('../views/member/DestroyAccount.vue'),
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/DestroyAccount.vue'),
       },
       {
         path: 'dePosit',
         name: 'Member-DePosit',
-        component: () => import('../views/member/DePosit.vue'),
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/DePosit.vue'),
       },
       {
         path: 'searchPoint',
         name: 'Member-SearchPoint',
-        component: () => import('../views/member/SearchPoint.vue'),
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/SearchPoint.vue'),
       },
       {
         path: 'exchangeRecord',
         name: 'Member-ExchangeRecord',
-        component: () => import('../views/member/ExchangeRecord.vue'),
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/ExchangeRecord.vue'),
       },
     ]
 
@@ -105,6 +106,8 @@ const routes = [
 const router = new VueRouter({
   // routes: [{ path: '*', component: NotFoundComponent }]
   // mode: "history",
+  // base: "",
+
   // 如果要使用 history mode，要請後端把所有頁面的route交由前端處理，並都指向同一個檔案 index.html page
   // base: process.env.BASE_URL,
 
