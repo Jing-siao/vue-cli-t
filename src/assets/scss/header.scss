@@ -29,14 +29,26 @@
 
 }
 
+@mixin headerFixed {
+  position: fixed;
+  transition: transform 200ms linear;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+
+  &.fixed {
+    transform: translateY(-100%);
+  }
+}
+
 header {
   background-color: lightgrey;
   width: 100%;
   padding: 6px 0;
   height: 85px;
   z-index: 10;
-  // display: inline-block;
+  //----要滾動加這段-------
+  @include headerFixed();
 
+  //-----------------
   div.header {
     // border: 1px solid blue;
     margin: 0 auto;

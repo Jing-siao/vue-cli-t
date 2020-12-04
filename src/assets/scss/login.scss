@@ -1,8 +1,7 @@
 @import"../public/main.scss";
 
 .loginMain {
-  // border: 1px solid black;
-  min-height: calc(100vh - 203px);
+  // border: 1px solid white;
   // display: inline-block;
   margin: auto;
   min-width: 95%;
@@ -92,7 +91,7 @@
 
 @media (min-width:577px) {
   .loginMain {
-    min-height: calc(100vh - 203px);
+    min-height: calc(100vh - 209px);
 
     .login {
       margin-top: 18vh;

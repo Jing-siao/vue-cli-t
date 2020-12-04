@@ -19,19 +19,25 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../assets/public/main.scss";
+@import "../assets/public/variables.scss";
+// @import "../assets/public/main.scss";
 .member {
   // border: 1px solid black;
-  min-height: calc(100vh - 229px);
-  background: $grey;
+  // min-height: calc(100vh - 124px);
+  // background: $grey;
   border-radius: 1.5rem;
   overflow: hidden;
   width: 92%;
-  margin: 40px auto;
+  margin: auto;
+  @include hederFixed();
+
   .main {
-    // border: 1px solid black;
+    border: 1px solid black;
+    background: $grey;
     margin: 10px 0;
     padding: 15px;
+    border-radius: 1.5rem;
+    min-height: calc(100vh - 124px);
     .content {
       border: 1px solid rebeccapurple;
     }

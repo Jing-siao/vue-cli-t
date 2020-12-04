@@ -6,6 +6,7 @@
   </div>
 </template>
 <script>
+// import $ from "jquery";
 import HeaderComponent from "@/components/public/HeaderComponent.vue";
 import FooterComponent from "@/components/public/FooterComponent.vue";
 

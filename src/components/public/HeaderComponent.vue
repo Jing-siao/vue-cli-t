@@ -1,6 +1,7 @@
 <template>
   <!-- 有下拉選單用slot  -->
-  <header>
+  <header :class="{ fixed: scrolled }" @scroll="handleScroll">
+    <!-- :class="{ fixed: scrolled }" @scroll="handleScroll" -->
     <div class="container-fluid">
       <div class="row header" v-cloak>
         <div class="col">
@@ -92,27 +93,29 @@
 </template> 
 <script>
 import $ from "jquery";
-// import MemberSideBar from "../MemberSideBar.vue";
-import MemberMenu from "../../mixins/memberMenu.js";
-// import HeaderMemberSlot from "./HeaderMemberSlot.vue";
+import MemberMenu from "@/mixins/memberMenu.js";
+import HeaderScroll from "@/mixins/HeaderScroll.vue";
+
 export default {
   name: "headerComponent",
-  mixins: [MemberMenu],
+  mixins: [MemberMenu, HeaderScroll],
   components: {
     // HeaderMemberSlot,
   },
   data() {
     return {
-      window: {
-        width: 0,
-        // height: 0,
-      },
       index: 0,
       current: null,
       up: false,
       horizontalNav: true,
       straightNav: false,
+      // limitPosition: 300,
+      // scrolled: false,
+      // lastPosition: 0,
 
+      window: {
+        width: 0,
+      },
       // showList: false,
       // menuList: false,
       // props: [MemberSideBar],
@@ -157,7 +160,6 @@ export default {
 
   methods: {
     active() {
-      // $("button.hamburger").toggleClass("is-active");
       this.isActive["is-active"] = !this.isActive["is-active"];
       $(".menu").slideToggle();
     },
@@ -195,14 +197,30 @@ export default {
       }
       // this.window.height = window.innerHeight;
     },
+    // handleScroll() {
+    //   if (
+    //     this.lastPosition < window.scrollY &&
+    //     this.limitPosition < window.scrollY
+    //   ) {
+    //     this.scrolled = true;
+    //   }
+
+    //   if (this.lastPosition > window.scrollY) {
+    //     this.scrolled = false;
+    //   }
+
+    //   this.lastPosition = window.scrollY;
+    // },
   },
   created() {
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
+    // window.addEventListener("scroll", this.handleScroll);
   },
 
   beforeDestroy() {
     window.removeEventListener("resize", this.handleResize);
+    // window.removeEventListener("scroll", this.handleScroll);
   },
   mounted() {},
 };

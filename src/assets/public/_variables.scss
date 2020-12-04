@@ -2,3 +2,6 @@
 $grey:#ccc;
 $mainColor:#aaa;
 $darkgrey:rgb(104, 104, 104);
+
+@mixin hederFixed {
+  padding-top: 85px;}

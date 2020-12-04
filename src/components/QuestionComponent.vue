@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="questionComponent">
     <div
       class="questionList"
       v-for="(question, index) in questionList"

@@ -1,7 +1,7 @@
 <template>
   <div class="question">
-    <h1>Q&amp;A 常見問題</h1>
     <div class="main container">
+      <h1>Q&amp;A 常見問題</h1>
       <QuestionComponent />
     </div>
   </div>
@@ -22,11 +22,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/public/variables.scss";
 .question {
-  margin-top: 50px;
-  min-height: calc(100vh - 236px);
+  @include hederFixed();
+  min-height: calc(100vh - 124px);
   .main {
-    margin-top: 50px;
+    margin-top: 40px;
   }
 }
 </style>
