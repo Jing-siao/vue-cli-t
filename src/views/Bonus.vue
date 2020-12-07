@@ -1,15 +1,16 @@
 <template>
   <div class="bonus">
-    <h1>兌換專區</h1>
     <div class="main container">
+      <h1>兌換專區</h1>
       <!-- <QuestionComponent /> -->
     </div>
   </div>
 </template>
 <style lang="scss">
+@import "../assets/public/variables.scss";
 .bonus {
-  margin-top: 50px;
-  min-height: calc(100vh - 236px);
+  @include hederFixed();
+  min-height: calc(100vh - 124px);
   .main {
     margin-top: 50px;
   }

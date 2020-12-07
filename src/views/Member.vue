@@ -32,12 +32,12 @@ export default {
   @include hederFixed();
 
   .main {
-    border: 1px solid black;
+    border: 1px solid white;
     background: $grey;
-    margin: 10px 0;
+    margin: 40px 0 20px 0;
     padding: 15px;
     border-radius: 1.5rem;
-    min-height: calc(100vh - 124px);
+    min-height: calc(100vh - 269px);
     .content {
       border: 1px solid rebeccapurple;
     }
