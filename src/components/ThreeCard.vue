@@ -1,6 +1,7 @@
 <template>
   <div class="row">
-    <div
+    <a
+      href="#"
       class="col-md card"
       v-for="item in card"
       :item="item"
@@ -16,7 +17,7 @@
         <p>{{ item.title }}</p>
         <h5>{{ item.giftTitle }}</h5>
       </div>
-    </div>
+    </a>
   </div>
 </template>
 <script>

@@ -1,22 +1,24 @@
 <template>
   <div class="home">
-    <Banner />
-    <div class="indexMain container" v-cloak>
-      <div class="announcement">
-        <h1>{{ announcement }}</h1>
-        <FlatCard />
+    <div class="main">
+      <Banner />
+      <div class="indexMain container" v-cloak>
+        <div class="announcement">
+          <h1>{{ announcement }}</h1>
+          <FlatCard />
+        </div>
+        <div class="gift">
+          <h1>{{ gift }}</h1>
+          <ThreeCard />
+        </div>
+        <div class="point">
+          <h1>{{ point }}</h1>
+          <FourCard />
+        </div>
       </div>
-      <div class="gift">
-        <h1>{{ gift }}</h1>
-        <ThreeCard />
-      </div>
-      <div class="point">
-        <h1>{{ point }}</h1>
-        <FourCard />
-      </div>
+      <GoTOPBtn />
+      <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     </div>
-    <GoTOPBtn />
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
   </div>
 </template>
 
@@ -50,12 +52,27 @@ export default {
 };
 </script>
 <style lang="scss">
-.indexMain {
-  margin-top: 80px;
-  .announcement,
-  .gift,
-  .point {
-    margin-top: 50px;
+@import "../assets/public/variables.scss";
+.home {
+  @include hederFixed();
+
+  .indexMain {
+    margin-top: 80px;
+    .announcement,
+    .gift,
+    .point {
+      margin-top: 50px;
+    }
+  }
+}
+@media (min-width: 577px) {
+  .main {
+    min-height: calc(100vh - 259px);
+  }
+}
+@media (max-width: 576px) {
+  .main {
+    min-height: calc(100vh - 223px);
   }
 }
 </style>

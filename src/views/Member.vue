@@ -37,7 +37,6 @@ export default {
     margin: 40px 0 20px 0;
     padding: 15px;
     border-radius: 1.5rem;
-    min-height: calc(100vh - 269px);
     .content {
       border: 1px solid rebeccapurple;
     }
@@ -54,9 +53,14 @@ export default {
     width: 100%;
   }
 }
+@media (min-width: 577px) {
+  .main {
+    min-height: calc(100vh - 269px);
+  }
+}
 @media (max-width: 576px) {
   .main {
-    min-height: calc(100vh - 193px);
+    min-height: calc(100vh - 233px);
   }
 }
 </style>
