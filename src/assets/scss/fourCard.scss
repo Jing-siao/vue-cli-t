@@ -5,13 +5,14 @@
 
 
 .row {
-  display: flex;
-  // border: 1px solid rgb(209, 95, 95);
-  justify-content: space-around;
+  // display: flex;
+  border: 1px solid rgb(209, 95, 95);
+  justify-content: space-between;
   margin-bottom: 20px;
+  padding: 0 15px;
 
   .card {
-    // border: 1px solid snow;
+    border: 1px solid rgb(34, 33, 33);
     background-color: $grey;
     border-radius: 1rem;
     display: inline-block;
@@ -52,9 +53,11 @@
 
 @media (min-width:992px) {
   .card {
-    margin: 0 1.5%;
+    // margin: 0 1.5%;
+    // margin: 0 15px;
+    width: 23%;
     padding: 15px 12px;
-
+    margin-bottom: 20px;
     // &:nth-child(2) {
     //   margin: 0 2%;
     // }

@@ -2,7 +2,7 @@
   <div class="row">
     <a
       :href="item.link"
-      class="col-lg card"
+      class="card"
       v-for="item in point"
       :item="item"
       :key="item.title"
@@ -51,6 +51,30 @@ export default {
         },
         {
           title: "誠品生活即享券500元",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "118",
+        },
+        {
+          title: "誠品生活即享券600元",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "118",
+        },
+        {
+          title: "誠品生活即享700元",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "118",
+        },
+        {
+          title: "誠品生活即享800元",
           src: "http://fakeimg.pl/600x300/aaa/ccc/",
           link: "javascript:;",
           total: "988",

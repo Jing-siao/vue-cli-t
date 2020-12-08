@@ -7,8 +7,8 @@
         <SelectOrder />
         <div class="bonusCard">
           <FourCard />
-          <FourCard />
-          <FourCard />
+          <!-- <FourCard /> -->
+          <!-- <FourCard /> -->
         </div>
       </div>
       <Pagination />
