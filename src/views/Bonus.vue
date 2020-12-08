@@ -13,6 +13,7 @@
       </div>
       <Pagination />
     </div>
+    <GoTOPBtn />
   </div>
 </template>
 <script>
@@ -20,6 +21,7 @@ import FilterBonus from "@/components/FilterBonus.vue";
 import SelectOrder from "@/components/SelectOrder.vue";
 import FourCard from "../components/FourCard.vue";
 import Pagination from "@/components/public/Pagination.vue";
+import GoTOPBtn from "../components/public/GoTOPBtn.vue";
 
 export default {
   name: "bonus",
@@ -28,6 +30,7 @@ export default {
     SelectOrder,
     FourCard,
     Pagination,
+    GoTOPBtn,
   },
 };
 </script>
@@ -38,6 +41,11 @@ export default {
   @include hederFixed();
   .main {
     margin-top: 50px;
+  }
+}
+@media (min-width: 577px) {
+  .main {
+    min-height: calc(100vh - 259px);
     .mainBonus {
       padding: 30px 15px 5px;
       background-color: $darkgrey;
@@ -48,14 +56,12 @@ export default {
     }
   }
 }
-@media (min-width: 577px) {
-  .main {
-    min-height: calc(100vh - 259px);
-  }
-}
 @media (max-width: 576px) {
   .main {
     min-height: calc(100vh - 223px);
+    .bonusCard {
+      margin-top: 15px;
+    }
   }
 }
 </style>

@@ -25,27 +25,56 @@
 .pagination {
   // border: 1px solid blue;
   margin-top: 10px;
-  padding: 8px;
+  padding: 8px 0;
   text-align: center;
   a {
     color: $grey;
     // border: 1px solid blue;
-    padding: 5px 9px;
-    border-radius: 50%;
-    margin: 0 5px;
-    display: inline-block;
 
+    display: inline-block;
     &:hover {
       background-color: $grey;
       color: $body;
     }
-    &:first-child,
-    &:last-child {
-      padding: 5px 8px;
-      margin: 0 10px;
-    }
+
     i {
       vertical-align: middle;
+    }
+  }
+}
+@media (min-width: 401px) {
+  .pagination {
+    a {
+      padding: 5px 9px;
+      border-radius: 50%;
+      margin: 0 5px;
+      &:first-child {
+        padding: 5px 8px;
+        margin: 0 10px 0 0;
+      }
+      &:last-child {
+        padding: 5px 8px;
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+}
+@media (max-width: 400px) {
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    a {
+      padding: 4px 8px;
+      border-radius: 50%;
+      margin: 0 2px;
+      &:first-child {
+        padding: 5px 7px;
+        margin: 0 5px 0 0;
+      }
+      &:last-child {
+        padding: 5px 7px;
+        margin: 0 0 0 5px;
+      }
     }
   }
 }

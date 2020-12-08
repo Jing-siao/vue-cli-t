@@ -17,7 +17,6 @@
         </div>
       </div>
       <GoTOPBtn />
-      <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     </div>
   </div>
 </template>
