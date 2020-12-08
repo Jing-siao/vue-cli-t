@@ -2,14 +2,16 @@
   <div class="bonus">
     <div class="main container">
       <h1>兌換專區</h1>
-
       <FilterBonus />
-
-      <SelectOrder />
-      <div class="bonusCard">
-        <FourCard />
-        <FourCard />
+      <div class="mainBonus col-12">
+        <SelectOrder />
+        <div class="bonusCard">
+          <FourCard />
+          <FourCard />
+          <FourCard />
+        </div>
       </div>
+      <Pagination />
     </div>
   </div>
 </template>
@@ -17,12 +19,15 @@
 import FilterBonus from "@/components/FilterBonus.vue";
 import SelectOrder from "@/components/SelectOrder.vue";
 import FourCard from "../components/FourCard.vue";
+import Pagination from "@/components/public/Pagination.vue";
+
 export default {
   name: "bonus",
   components: {
     FilterBonus,
     SelectOrder,
     FourCard,
+    Pagination,
   },
 };
 </script>
@@ -33,9 +38,13 @@ export default {
   @include hederFixed();
   .main {
     margin-top: 50px;
-
-    .bonusCard {
-      margin-top: 50px;
+    .mainBonus {
+      padding: 30px 15px 5px;
+      background-color: $darkgrey;
+      border-radius: 0 0 0.8rem 0.8rem;
+      .bonusCard {
+        margin-top: 18px;
+      }
     }
   }
 }

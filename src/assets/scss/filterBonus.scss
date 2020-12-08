@@ -1,27 +1,84 @@
 @import"../public/main.scss";
 
+
+
 .FilterBonus {
-  // border: 1px solid white;
+
+  // border: 1px solid rgb(235, 105, 105);
 
 
-  ul.row {
-    margin: 0;
-    // border: 1px solid rgb(247, 68, 68);
-    // display: inline-block;
+  ul {
+    display: flex;
 
     li {
       color: $grey;
-      padding: 8px;
 
       text-align: center;
-      border: 1px solid $grey;
+
       cursor: pointer;
 
-      &:hover {
-        background-color: $grey;
-        color: black;
+
+
+    }
+  }
+}
+
+
+@media(min-width:577px) {
+  ul {
+    margin: 0;
+    border: 1px solid rgb(212, 205, 141);
+
+
+    li {
+      border: 2px solid $darkgrey;
+      border-radius: 0.4rem 0.4rem 0 0;
+      border-bottom: none;
+      border-right: none;
+      flex-grow: 1;
+      padding: 8px;
+
+      &:last-child {
+        border-right: 2px solid $darkgrey;
       }
 
+      &:hover {
+        background-color: $darkgrey;
+        color: white;
+      }
+    }
+  }
+}
+
+@media(max-width:576px) {
+  .FilterBonus {
+    margin: 0 -15px 10px;
+
+    ul {
+
+      border: 1px solid rgb(212, 205, 141);
+      overflow-x: hidden;
+      overflow-x: scroll;
+      white-space: nowrap;
+      padding-bottom: 10px;
+
+      li {
+        border: 1px solid $darkgrey;
+        border-radius: 0.4rem;
+        // display: inline-block;
+        margin: 0 5px;
+        padding: 8px 10px;
+
+        &:first-child {
+          margin-left: 15px;
+
+        }
+
+        &:last-child {
+          margin-right: 15px;
+
+        }
+      }
     }
   }
 }

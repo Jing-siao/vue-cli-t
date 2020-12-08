@@ -1,16 +1,52 @@
 <template>
   <div class="FilterBonus">
-    <ul class="row col">
-      <li class="col">全部</li>
-      <li class="col">推薦贈品</li>
-      <li class="col">美食區</li>
-      <li class="col">百貨區</li>
-      <li class="col">咖啡區</li>
-      <li class="col">藝文區</li>
-      <li class="col">旅遊區</li>
+    <ul>
+      <li v-for="list in bonusList" :key="list.title">
+        <i :class="list.iconClass"></i>
+        {{ list.title }}
+      </li>
     </ul>
   </div>
 </template>
+<script>
+export default {
+  name: "filterBonus",
+  data() {
+    return {
+      bonusList: [
+        {
+          title: "全部",
+          iconClass: "fas fa-tag",
+        },
+        {
+          title: "推薦",
+          iconClass: "fas fa-thumbs-up",
+        },
+        {
+          title: "美食",
+          iconClass: "fas fa-utensils",
+        },
+        {
+          title: "百貨",
+          iconClass: "fas fa-shopping-bag",
+        },
+        {
+          title: "咖啡",
+          iconClass: "fas fa-coffee",
+        },
+        {
+          title: "藝文",
+          iconClass: "fas fa-ticket-alt",
+        },
+        {
+          title: "旅遊",
+          iconClass: "fas fa-plane",
+        },
+      ],
+    };
+  },
+};
+</script>
 <style lang="scss" scoped>
 @import "../assets/scss/filterBonus.scss";
 </style>

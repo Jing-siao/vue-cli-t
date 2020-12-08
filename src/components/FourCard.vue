@@ -2,7 +2,7 @@
   <div class="row">
     <a
       :href="item.link"
-      class="col-md card"
+      class="col-lg card"
       v-for="item in point"
       :item="item"
       :key="item.title"

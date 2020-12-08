@@ -3,5 +3,8 @@ $grey:#ccc;
 $mainColor:#aaa;
 $darkgrey:rgb(104, 104, 104);
 
+$body:rgb(56, 56, 56);
+
 @mixin hederFixed {
-  padding-top: 85px;}
+  padding-top: 85px;
+}
