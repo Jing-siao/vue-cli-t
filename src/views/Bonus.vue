@@ -7,8 +7,8 @@
         <SelectOrder />
         <div class="bonusCard">
           <FourCard />
-          <!-- <FourCard /> -->
-          <!-- <FourCard /> -->
+          <FourCard />
+          <FourCard />
         </div>
       </div>
       <Pagination />
@@ -59,9 +59,11 @@ export default {
 @media (max-width: 576px) {
   .main {
     min-height: calc(100vh - 223px);
+    .mainBonus {
+      padding: 15px 0 5px;
     .bonusCard {
       margin-top: 15px;
-    }
+    }}
   }
 }
 </style>

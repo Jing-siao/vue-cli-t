@@ -28,7 +28,7 @@
           <td class="col-4 col-sm-3 title"><p>Email</p></td>
           <td class="col-8 col-sm-9">
             <p v-if="hideBtn" class="original">{{ account.email }}</p>
-            <input type="text" v-if="showBtn" v-model.trim="account.email" />
+            <input type="text" v-if="showBtn" v-model.trim="newEmail" />
           </td>
         </tr>
         <tr class="row">
@@ -38,7 +38,7 @@
             <input
               type="text"
               v-if="showBtn"
-              v-model.trim="account.phoneNumber"
+              v-model.trim="newPhoneNumber"
             />
           </td>
         </tr>
@@ -46,7 +46,8 @@
           <td class="col-4 col-sm-3 title"><p>聯絡地址</p></td>
           <td class="col-3 col-sm-3">
             <p v-if="hideBtn" class="original">
-              {{ userCity }}
+              {{ account.city }}
+              <!-- {{userCity}} -->
             </p>
             <CitySelect
               v-model="cityIdx"
@@ -55,7 +56,7 @@
             ></CitySelect>
           </td>
           <td class="col-3 col-sm-3">
-            <p v-if="hideBtn">{{ userArea }}</p>
+            <p v-if="hideBtn">{{ account.area }}</p>
             <CitySelect
               v-model="areaIdx"
               :options="areas"
@@ -63,11 +64,14 @@
             ></CitySelect>
           </td>
           <td class="col-2 col-sm-3">
-            <p>{{ zip }}</p>
+             <!-- <p>{{ userZip }}</p> -->
+          
+            <p v-if="hideBtn">{{ account.zip }}</p>
+            <p v-if="showBtn" >{{ userZip }}</p>
           </td>
           <td class="col-12 col-sm-9">
             <p v-if="hideBtn" class="original address">{{ account.address }}</p>
-            <input type="text" v-if="showBtn" v-model.trim="account.address" />
+            <input type="text" v-if="showBtn" v-model.trim="newAddress" />
           </td>
         </tr>
       </table>
@@ -99,18 +103,24 @@ export default {
       showBtn: false,
       hideBtn: true,
       editIndex: null,
-      cityIdx: 0,
-      areaIdx: 0,
       account: {
         name: "國眾電腦",
         idNumber: "A123456789",
         birthday: "2020-11-30",
         email: "123456@gmail.com",
         phoneNumber: "0912345678",
-        city: "",
-        area: "",
+        city: "基隆市",
+        area: "仁愛區",
+        zip: "200",
         address: "這邊是地址這邊是地址這邊是地址",
       },
+      cityIdx: 0,
+      areaIdx: 0,
+      newCity: '',
+      newEmail: '',
+      newPhoneNumber: '',
+      newZip: '',
+      newAddress: '',
       // city: ["台北市"],
     };
   },
@@ -126,7 +136,7 @@ export default {
         return null;
       }
     },
-    zip() {
+    userZip() {
       return this.areas[this.areaIdx].zip;
     },
     userCity() {
@@ -145,16 +155,34 @@ export default {
     showHandler() {
       this.showBtn = true;
       this.hideBtn = false;
+      this.newEmail=this.account.email;
+      this.newPhoneNumber=this.account.phoneNumber;
+      this.newAddress=this.account.address;
+      this.newCity=this.account.city;
+      // this.userZip=this.account.zip;
     },
     submitlHandler() {
       this.showBtn = false;
       this.hideBtn = true;
       //改成新的
+      this.account.city=this.userCity;
+      this.account.area=this.userArea;
+      this.account.zip=this.userZip;
+      this.account.email = this.newEmail;
+      this.account.phoneNumber = this.newPhoneNumber;
+      this.account.address = this.newAddress;
+      this.newEmail = '';
+      this.newPhoneNumber ='';
+      this.newAddress ='';
+      
     },
     cancelHandler() {
       this.showBtn = false;
       this.hideBtn = true;
       //改成舊的
+      this.newEmail = '';
+      this.newPhoneNumber ='';
+      this.newAddress ='';
       this.cityIdx = 0;
       this.areaIdx = 0;
     },
