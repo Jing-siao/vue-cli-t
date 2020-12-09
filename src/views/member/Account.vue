@@ -119,12 +119,13 @@ export default {
       newCity: '',
       newEmail: '',
       newPhoneNumber: '',
-      newZip: '',
+      oldZip: '',
       newAddress: '',
       // city: ["台北市"],
     };
   },
   computed: {
+    
     cities() {
       // const cities = this.cityJson.push();
       return cities;
@@ -136,9 +137,10 @@ export default {
         return null;
       }
     },
+   
     userZip() {
-      return this.areas[this.areaIdx].zip;
-    },
+          return this.areas[this.areaIdx].zip;
+        },
     userCity() {
       return this.cities[this.cityIdx].name;
     },
@@ -159,22 +161,26 @@ export default {
       this.newPhoneNumber=this.account.phoneNumber;
       this.newAddress=this.account.address;
       this.newCity=this.account.city;
-      // this.userZip=this.account.zip;
+      // this.newZip=this.account.zip;
+      
     },
     submitlHandler() {
       this.showBtn = false;
       this.hideBtn = true;
       //改成新的
       this.account.city=this.userCity;
+      // this.account.city=this.newCity;
       this.account.area=this.userArea;
       this.account.zip=this.userZip;
       this.account.email = this.newEmail;
       this.account.phoneNumber = this.newPhoneNumber;
       this.account.address = this.newAddress;
+      // this.account.zip=this.newZip;
       this.newEmail = '';
       this.newPhoneNumber ='';
       this.newAddress ='';
-      
+      this.newZip='';
+      this.newCity='';
     },
     cancelHandler() {
       this.showBtn = false;
@@ -183,8 +189,17 @@ export default {
       this.newEmail = '';
       this.newPhoneNumber ='';
       this.newAddress ='';
-      this.cityIdx = 0;
-      this.areaIdx = 0;
+      this.newZip='';
+      this.userCity=this.account.city;
+
+      // this.cityIdx = 0;
+      // this.areaIdx = 0;
+      // this.account.city=this.userCity;
+      // this.account.area=this.userArea;
+      // this.account.zip=this.userZip;
+      // this.userCity=this.account.city;
+      // this.userArea=this.account.area;
+      // this.userZip=this.account.zip;
     },
   },
 };
