@@ -116,12 +116,12 @@ export default {
       },
       cityIdx: 0,
       areaIdx: 0,
-      newCity: '',
+      oldCityIdx: '',
+      oldAreaIdx: '',
       newEmail: '',
       newPhoneNumber: '',
-      oldZip: '',
       newAddress: '',
-      // city: ["台北市"],
+
     };
   },
   computed: {
@@ -148,11 +148,11 @@ export default {
       return this.areas[this.areaIdx].name;
     },
   },
-  watch: {
-    cityIdx() {
-      this.areaIdx = 0;
-    },
-  },
+  // watch: {
+  //   cityIdx() {
+  //     this.areaIdx = 0;
+  //   },
+  // },
   methods: {
     showHandler() {
       this.showBtn = true;
@@ -160,8 +160,8 @@ export default {
       this.newEmail=this.account.email;
       this.newPhoneNumber=this.account.phoneNumber;
       this.newAddress=this.account.address;
-      this.newCity=this.account.city;
-      // this.newZip=this.account.zip;
+      this.oldCityIdx=this.cityIdx;
+      this.oldAreaIdx=this.areaIdx;
       
     },
     submitlHandler() {
@@ -169,18 +169,17 @@ export default {
       this.hideBtn = true;
       //改成新的
       this.account.city=this.userCity;
-      // this.account.city=this.newCity;
       this.account.area=this.userArea;
       this.account.zip=this.userZip;
       this.account.email = this.newEmail;
       this.account.phoneNumber = this.newPhoneNumber;
       this.account.address = this.newAddress;
-      // this.account.zip=this.newZip;
       this.newEmail = '';
       this.newPhoneNumber ='';
       this.newAddress ='';
-      this.newZip='';
-      this.newCity='';
+      this.oldCityIdx='';
+      this.oldAreaIdx='';
+      
     },
     cancelHandler() {
       this.showBtn = false;
@@ -190,16 +189,11 @@ export default {
       this.newPhoneNumber ='';
       this.newAddress ='';
       this.newZip='';
-      this.userCity=this.account.city;
+      this.cityIdx=this.oldCityIdx;
+      this.areaIdx=this.oldAreaIdx;
+      this.oldCityIdx='';
+      this.oldAreaIdx='';
 
-      // this.cityIdx = 0;
-      // this.areaIdx = 0;
-      // this.account.city=this.userCity;
-      // this.account.area=this.userArea;
-      // this.account.zip=this.userZip;
-      // this.userCity=this.account.city;
-      // this.userArea=this.account.area;
-      // this.userZip=this.account.zip;
     },
   },
 };
