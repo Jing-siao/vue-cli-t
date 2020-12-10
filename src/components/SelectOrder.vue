@@ -7,10 +7,10 @@
     </div>
     <select name="" id="">
       <!-- v-show="showSelect" -->
-      <option value="">全部</option>
-      <option value="">依熱門</option>
-      <option value="">依點數(少到多)</option>
-      <option value="">依點數(多到少)</option>
+      <option value="all">全部</option>
+      <option value="hot">依熱門</option>
+      <option value="less">依點數(少到多)</option>
+      <option value="more">依點數(多到少)</option>
     </select>
   </div>
 </template>

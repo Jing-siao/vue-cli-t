@@ -28,18 +28,14 @@
           <td class="col-4 col-sm-3 title"><p>Email</p></td>
           <td class="col-8 col-sm-9">
             <p v-if="hideBtn" class="original">{{ account.email }}</p>
-            <input type="text" v-if="showBtn" v-model.trim="newEmail" />
+            <input type="text" v-else v-model.trim="newEmail" />
           </td>
         </tr>
         <tr class="row">
           <td class="col-4 col-sm-3 title"><p>手機號碼</p></td>
           <td class="col-8 col-sm-9">
             <p v-if="hideBtn" class="original">{{ account.phoneNumber }}</p>
-            <input
-              type="text"
-              v-if="showBtn"
-              v-model.trim="newPhoneNumber"
-            />
+            <input type="text" v-else v-model.trim="newPhoneNumber" />
           </td>
         </tr>
         <tr class="row address">
@@ -49,29 +45,21 @@
               {{ account.city }}
               <!-- {{userCity}} -->
             </p>
-            <CitySelect
-              v-model="cityIdx"
-              :options="cities"
-              v-if="showBtn"
-            ></CitySelect>
+            <CitySelect v-model="cityIdx" :options="cities" v-else></CitySelect>
           </td>
           <td class="col-3 col-sm-3">
             <p v-if="hideBtn">{{ account.area }}</p>
-            <CitySelect
-              v-model="areaIdx"
-              :options="areas"
-              v-if="showBtn"
-            ></CitySelect>
+            <CitySelect v-model="areaIdx" :options="areas" v-else></CitySelect>
           </td>
           <td class="col-2 col-sm-3">
-             <!-- <p>{{ userZip }}</p> -->
-          
+            <!-- <p>{{ userZip }}</p> -->
+
             <p v-if="hideBtn">{{ account.zip }}</p>
-            <p v-if="showBtn" >{{ userZip }}</p>
+            <p v-else>{{ userZip }}</p>
           </td>
           <td class="col-12 col-sm-9">
             <p v-if="hideBtn" class="original address">{{ account.address }}</p>
-            <input type="text" v-if="showBtn" v-model.trim="newAddress" />
+            <input type="text" v-else v-model.trim="newAddress" />
           </td>
         </tr>
       </table>
@@ -80,12 +68,12 @@
         <button class="first" @click.prevent="showHandler" v-if="hideBtn">
           修改資料
         </button>
-        <button class="first" v-if="showBtn" @click.prevent="submitlHandler">
-          確認修改
-        </button>
-        <button class="cancel" v-if="showBtn" @click.prevent="cancelHandler">
-          取消
-        </button>
+        <template v-else>
+          <button class="first" @click.prevent="submitlHandler">
+            確認修改
+          </button>
+          <button class="cancel" @click.prevent="cancelHandler">取消</button>
+        </template>
       </div>
     </form>
   </div>
@@ -100,7 +88,6 @@ export default {
 
   data() {
     return {
-      showBtn: false,
       hideBtn: true,
       editIndex: null,
       account: {
@@ -116,16 +103,14 @@ export default {
       },
       cityIdx: 0,
       areaIdx: 0,
-      oldCityIdx: '',
-      oldAreaIdx: '',
-      newEmail: '',
-      newPhoneNumber: '',
-      newAddress: '',
-
+      oldCityIdx: "",
+      oldAreaIdx: "",
+      newEmail: "",
+      newPhoneNumber: "",
+      newAddress: "",
     };
   },
   computed: {
-    
     cities() {
       // const cities = this.cityJson.push();
       return cities;
@@ -137,10 +122,10 @@ export default {
         return null;
       }
     },
-   
+
     userZip() {
-          return this.areas[this.areaIdx].zip;
-        },
+      return this.areas[this.areaIdx].zip;
+    },
     userCity() {
       return this.cities[this.cityIdx].name;
     },
@@ -157,43 +142,40 @@ export default {
     showHandler() {
       this.showBtn = true;
       this.hideBtn = false;
-      this.newEmail=this.account.email;
-      this.newPhoneNumber=this.account.phoneNumber;
-      this.newAddress=this.account.address;
-      this.oldCityIdx=this.cityIdx;
-      this.oldAreaIdx=this.areaIdx;
-      
+      this.newEmail = this.account.email;
+      this.newPhoneNumber = this.account.phoneNumber;
+      this.newAddress = this.account.address;
+      this.oldCityIdx = this.cityIdx;
+      this.oldAreaIdx = this.areaIdx;
     },
     submitlHandler() {
       this.showBtn = false;
       this.hideBtn = true;
       //改成新的
-      this.account.city=this.userCity;
-      this.account.area=this.userArea;
-      this.account.zip=this.userZip;
+      this.account.city = this.userCity;
+      this.account.area = this.userArea;
+      this.account.zip = this.userZip;
       this.account.email = this.newEmail;
       this.account.phoneNumber = this.newPhoneNumber;
       this.account.address = this.newAddress;
-      this.newEmail = '';
-      this.newPhoneNumber ='';
-      this.newAddress ='';
-      this.oldCityIdx='';
-      this.oldAreaIdx='';
-      
+      this.newEmail = "";
+      this.newPhoneNumber = "";
+      this.newAddress = "";
+      this.oldCityIdx = "";
+      this.oldAreaIdx = "";
     },
     cancelHandler() {
       this.showBtn = false;
       this.hideBtn = true;
       //改成舊的
-      this.newEmail = '';
-      this.newPhoneNumber ='';
-      this.newAddress ='';
-      this.newZip='';
-      this.cityIdx=this.oldCityIdx;
-      this.areaIdx=this.oldAreaIdx;
-      this.oldCityIdx='';
-      this.oldAreaIdx='';
-
+      this.newEmail = "";
+      this.newPhoneNumber = "";
+      this.newAddress = "";
+      this.newZip = "";
+      this.cityIdx = this.oldCityIdx;
+      this.areaIdx = this.oldAreaIdx;
+      this.oldCityIdx = "";
+      this.oldAreaIdx = "";
     },
   },
 };

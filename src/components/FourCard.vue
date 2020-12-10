@@ -4,7 +4,7 @@
       :href="item.link"
       class="card"
       v-for="item in point"
-      :item="item"
+      :type="item.type"
       :key="item.title"
     >
       <div class="imgWrap col-sm-12">
@@ -26,7 +26,7 @@ export default {
     return {
       point: [
         {
-          type:"coffee",
+          type: "coffee",
           title: "cama cafe 中杯紅茶拿鐵兌換券",
           src: "http://fakeimg.pl/600x300/aaa/ccc/",
           link: "javascript:;",
@@ -35,7 +35,7 @@ export default {
           point: "118",
         },
         {
-          type:"coffee",
+          type: "coffee",
           title: "麥當勞McCafe特選熱那堤(中)即享券",
           src: "http://fakeimg.pl/600x300/aaa/ccc/",
           link: "javascript:;",
@@ -44,7 +44,7 @@ export default {
           point: "118",
         },
         {
-          type:"food",
+          type: "food",
           title: "陶板屋和風創作料理套餐即享券(價值$625)",
           src: "http://fakeimg.pl/600x300/aaa/ccc/",
           link: "javascript:;",
@@ -53,7 +53,7 @@ export default {
           point: "118",
         },
         {
-          type:"art",
+          type: "art",
           title: "誠品生活即享券500元",
           src: "http://fakeimg.pl/600x300/aaa/ccc/",
           link: "javascript:;",

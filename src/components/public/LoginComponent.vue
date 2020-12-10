@@ -86,6 +86,22 @@ export default {
       //接token?
       //登入成功要直接導向首頁
       //不成功跳aleart帳密錯誤
+      const token = "asds32adsavrAS3Fadf5567"; // token本身就是加密過的字串，隨意
+      let userIdNumber = this.loginForm.userIdNumber;
+      let userNumber = this.loginForm.userNumber;
+      let userPassword = this.loginForm.userPassword;
+      let verificationCode = this.loginForm.verificationCode;
+      // 帳號密碼需驗證不能為空
+      if (
+        userIdNumber !== "" &&
+        userNumber !== "" &&
+        userPassword !== "" &&
+        verificationCode !== ""
+      ) {
+        this.loginForm.token = token;
+      } else {
+        alert("請輸入所有欄位");
+      }
     },
   },
   watch: {
