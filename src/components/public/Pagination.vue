@@ -6,11 +6,7 @@
     <a href="#">
       <i class="fas fa-angle-left"></i>
     </a>
-    <a href="#">1</a>
-    <a class="active" href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
+    <a href="#" v-for="page in 5" :key="page">{{ page }}</a>
     <a href="#">
       <i class="fas fa-angle-right"></i>
     </a>

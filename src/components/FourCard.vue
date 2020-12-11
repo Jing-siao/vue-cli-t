@@ -12,9 +12,11 @@
       </div>
       <div class="wrap">
         <h5>{{ item.title }}</h5>
-        <p>剩餘數量:{{ item.total }}</p>
-        <p>兌換上限:{{ item.limit }}</p>
-        <p>point:{{ item.point }}點</p>
+        <div class="info">
+          <p>剩餘數量:{{ item.total }}</p>
+          <p>兌換上限:{{ item.limit }}</p>
+          <p>point:{{ item.point }}點</p>
+        </div>
       </div>
     </a>
   </div>
@@ -22,6 +24,7 @@
 <script>
 export default {
   name: "fourCard",
+  props: ["type"],
   data() {
     return {
       point: [
@@ -32,7 +35,7 @@ export default {
           link: "javascript:;",
           total: "988",
           limit: "無上限",
-          point: "118",
+          point: "110",
         },
         {
           type: "coffee",
@@ -41,7 +44,7 @@ export default {
           link: "javascript:;",
           total: "988",
           limit: "無上限",
-          point: "118",
+          point: "210",
         },
         {
           type: "food",
@@ -59,7 +62,7 @@ export default {
           link: "javascript:;",
           total: "988",
           limit: "無上限",
-          point: "118",
+          point: "115",
         },
         // {
         //   title: "誠品生活即享券600元",

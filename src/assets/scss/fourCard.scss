@@ -24,23 +24,27 @@
     }
 
     .wrap {
-      text-align: center;
-      margin-top: 20px;
 
-      p {
-        margin: 2px 0;
-        padding: 2px;
-        color: $darkgrey;
+      margin-top: 15px;
 
-        text-align: left;
-        // &:last-child {
-        //   // border: 1px solid black;
-        //   // margin-bottom: 10px;
-        // }
 
-        &:nth-child(2) {
-          // border: 1px solid black;
-          margin-top: 10px;
+
+      h5 {
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .info {
+
+        vertical-align: bottom;
+        margin-top: 10px;
+
+        p {
+          margin: 2px 0;
+          padding: 2px 0;
+
         }
       }
     }
