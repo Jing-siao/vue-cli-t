@@ -5,10 +5,15 @@
       <FilterBonus />
       <div class="mainBonus col-12">
         <SelectOrder />
-        <div class="bonusCard">
-          <FourCard />
-          <FourCard />
-          <FourCard />
+        <div class="bonusCard row">
+          <FourCard
+            v-for="item in point"
+            :key="item.title"
+            :data="item"
+            v-on:cardType="filterData"
+          />
+          <!-- <FourCard />
+          <FourCard /> -->
         </div>
       </div>
       <Pagination />
@@ -32,9 +37,95 @@ export default {
     Pagination,
     GoTOPBtn,
   },
+  data() {
+    return {
+      data: [],
+      // filter: "",
+      type: "all",
+      point: [
+        {
+          type: "coffee",
+          title: "cama cafe 中杯紅茶拿鐵兌換券",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "110",
+        },
+        {
+          type: "coffee",
+          title: "麥當勞McCafe特選熱那堤(中)即享券",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "210",
+        },
+        {
+          type: "food",
+          title: "陶板屋和風創作料理套餐即享券(價值$625)",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "118",
+        },
+        {
+          type: "art",
+          title: "誠品生活即享券500元",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "115",
+        },
+        {
+          title: "誠品生活即享券600元",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "118",
+        },
+        {
+          title: "誠品生活即享700元",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "118",
+        },
+        {
+          title: "誠品生活即享800元",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "118",
+        },
+      ],
+    };
+  },
+  computed: {
+    filterData() {
+      console.log(this.point[0].type);
+      // this.type = this.point[0].type;
+      // return this.point.foreach(this.visbility.match(this.point.type));
+      return this.point;
+    },
+  },
+  methods: {
+    // getData() {
+    //   let cnt = 0;
+    //   this.data.forEach((el) => {
+    //     el.index = cnt;
+    //     cnt++;
+    //   });
+    // },
+  },
 };
 </script>
-<style lang="scss">
+<style lang="scss" >
 @import "../assets/public/variables.scss";
 
 .bonus {
@@ -61,9 +152,10 @@ export default {
     min-height: calc(100vh - 223px);
     .mainBonus {
       padding: 15px 0 5px;
-    .bonusCard {
-      margin-top: 15px;
-    }}
+      .bonusCard {
+        margin-top: 15px;
+      }
+    }
   }
 }
 </style>

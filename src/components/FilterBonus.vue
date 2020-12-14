@@ -5,7 +5,7 @@
         v-for="list in bonusList"
         :key="list.title"
         :class="{ active: visibility == list.visibility }"
-        @click="visibility = list.visibility"
+        @click="(visibility = list.visibility), visibilityShow"
       >
         <i :class="list.iconClass"></i>
         {{ list.title }}
@@ -16,6 +16,7 @@
 <script>
 export default {
   name: "filterBonus",
+  props: ["type"],
   data() {
     return {
       visibility: "all",
@@ -57,6 +58,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    visibilityShow() {
+      this.$emit("cardType", this.visibility);
+    },
   },
 };
 </script>
