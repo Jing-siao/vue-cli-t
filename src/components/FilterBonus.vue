@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "filterBonus",
-  props: ["type"],
+  // props: ["type"],
   data() {
     return {
       visibility: "all",
@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     visibilityShow() {
-      this.$emit("cardType", this.visibility);
+      this.$emit("type", this.visibility);
     },
   },
 };

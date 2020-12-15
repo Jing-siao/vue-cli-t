@@ -17,6 +17,10 @@
 
       cursor: pointer;
 
+      &.active {
+        background-color: $darkgrey;
+        color: white;
+      }
 
 
     }
@@ -37,10 +41,7 @@
       flex-grow: 1;
       padding: 8px;
 
-      &.active {
-        background-color: $darkgrey;
-        color: white;
-      }
+
 
       &:last-child {
         border-right: 2px solid $darkgrey;
@@ -74,6 +75,7 @@
         margin: 0 5px;
         padding: 8px 10px;
         display: inline-block;
+
 
 
         &:first-child {

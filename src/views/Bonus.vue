@@ -2,18 +2,12 @@
   <div class="bonus">
     <div class="main container">
       <h1>兌換專區</h1>
-      <FilterBonus />
-      <div class="mainBonus col-12">
+      <FilterBonus @type="getType" />
+      <div class="mainBonus col">
         <SelectOrder />
         <div class="bonusCard row">
-          <FourCard
-            v-for="item in point"
-            :key="item.title"
-            :data="item"
-            v-on:cardType="filterData"
-          />
-          <!-- <FourCard />
-          <FourCard /> -->
+          <FourCard v-for="item in filterData" :key="item.title" :data="item" />
+          <!-- v-on:cardType="filterData" -->
         </div>
       </div>
       <Pagination />
@@ -37,10 +31,10 @@ export default {
     Pagination,
     GoTOPBtn,
   },
+  // props: ["type"],
   data() {
     return {
       data: [],
-      // filter: "",
       type: "all",
       point: [
         {
@@ -80,6 +74,7 @@ export default {
           point: "115",
         },
         {
+          type: "art",
           title: "誠品生活即享券600元",
           src: "http://fakeimg.pl/600x300/aaa/ccc/",
           link: "javascript:;",
@@ -88,6 +83,7 @@ export default {
           point: "118",
         },
         {
+          type: "art",
           title: "誠品生活即享700元",
           src: "http://fakeimg.pl/600x300/aaa/ccc/",
           link: "javascript:;",
@@ -96,6 +92,7 @@ export default {
           point: "118",
         },
         {
+          type: "art",
           title: "誠品生活即享800元",
           src: "http://fakeimg.pl/600x300/aaa/ccc/",
           link: "javascript:;",
@@ -108,20 +105,19 @@ export default {
   },
   computed: {
     filterData() {
-      console.log(this.point[0].type);
-      // this.type = this.point[0].type;
-      // return this.point.foreach(this.visbility.match(this.point.type));
-      return this.point;
+      if (this.type == "all") {
+        return this.point;
+      } else {
+        return this.point.filter((item) => {
+          return item.type == this.type;
+        });
+      }
     },
   },
   methods: {
-    // getData() {
-    //   let cnt = 0;
-    //   this.data.forEach((el) => {
-    //     el.index = cnt;
-    //     cnt++;
-    //   });
-    // },
+    getType(val) {
+      this.type = val;
+    },
   },
 };
 </script>
@@ -143,6 +139,7 @@ export default {
       border-radius: 0 0 0.8rem 0.8rem;
       .bonusCard {
         margin-top: 18px;
+        padding: 0 15px;
       }
     }
   }
@@ -154,6 +151,7 @@ export default {
       padding: 15px 0 5px;
       .bonusCard {
         margin-top: 15px;
+        padding: 0 15px;
       }
     }
   }

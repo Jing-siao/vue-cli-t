@@ -1,57 +1,48 @@
 @import"../public/main.scss";
 
-
-
-
-
-.row {
-  border: 1px solid rgb(230, 124, 124);
-  margin-bottom: 20px;
-  padding: 0 15px;
+.card {
+  // border: 1px solid rgb(34, 33, 33);
+  background-color: $grey;
+  border-radius: 1rem;
   display: inline-block;
 
-  .card {
-    // border: 1px solid rgb(34, 33, 33);
-    background-color: $grey;
-    border-radius: 1rem;
-    display: inline-block;
+  .imgWrap {
+    padding: 0;
 
-    .imgWrap {
-      padding: 0;
-
-      img {
-        width: 100%;
-      }
+    img {
+      width: 100%;
     }
-
-    .wrap {
-
-      margin-top: 15px;
-
-
-
-      h5 {
-
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .info {
-
-        vertical-align: bottom;
-        margin-top: 10px;
-
-        p {
-          margin: 2px 0;
-          padding: 2px 0;
-
-        }
-      }
-    }
-
   }
+
+  .wrap {
+
+    margin-top: 15px;
+
+
+
+    h5 {
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .info {
+
+      vertical-align: bottom;
+      margin-top: 10px;
+
+      p {
+        margin: 2px 0;
+        padding: 2px 0;
+
+      }
+    }
+  }
+
 }
+
+
 
 
 @media (min-width:992px) {
@@ -78,31 +69,39 @@
 }
 
 @media (max-width:991px) {
-  .row {
-    margin-bottom: 8px;
 
+
+  .card {
+    padding: 12px;
+    width: 48%;
+    margin: 8px 0%;
     justify-content: space-between;
 
-    .card {
-      padding: 12px;
-      width: 48%;
-      margin: 8px 0;
+    &:nth-child(1),
+    &:nth-child(2) {
+      margin-top: 0;
 
-      &:nth-child(1),
-      &:nth-child(2) {
-        margin-top: 0;
+    }
 
-      }
+    &:nth-child(2n) {
+      margin-left: 4%;
+
     }
   }
 }
+
+
 
 @media (max-width:576px) {
 
 
   .card {
     padding: 10px;
-    width: 45%;
+    width: 48%;
 
+    &:nth-child(2n) {
+      margin-left: 4%;
+
+    }
   }
 }

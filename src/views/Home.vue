@@ -11,9 +11,15 @@
           <h1>{{ gift }}</h1>
           <ThreeCard />
         </div>
-        <div class="point">
+        <div class="point col">
           <h1>{{ point }}</h1>
-          <FourCard />
+          <div class="row pointRow">
+            <FourCard
+              v-for="item in hotPointList"
+              :key="item.title"
+              :data="item"
+            />
+          </div>
         </div>
       </div>
       <GoTOPBtn />
@@ -32,13 +38,6 @@ import GoTOPBtn from "../components/public/GoTOPBtn.vue";
 
 export default {
   name: "Home",
-  data() {
-    return {
-      announcement: "最新消息",
-      gift: "好禮三重送",
-      point: "熱門兌換",
-    };
-  },
   components: {
     Banner,
     FlatCard,
@@ -47,6 +46,52 @@ export default {
     GoTOPBtn,
     // FooterComponent,
     // HelloWorld,
+  },
+  data() {
+    return {
+      data: [],
+      announcement: "最新消息",
+      gift: "好禮三重送",
+      point: "熱門兌換",
+      hotPointList: [
+        {
+          type: "coffee",
+          title: "cama cafe 中杯紅茶拿鐵兌換券",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "110",
+        },
+        {
+          type: "coffee",
+          title: "麥當勞McCafe特選熱那堤(中)即享券",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "210",
+        },
+        {
+          type: "food",
+          title: "陶板屋和風創作料理套餐即享券(價值$625)",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "118",
+        },
+        {
+          type: "art",
+          title: "誠品生活即享券500元",
+          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          link: "javascript:;",
+          total: "988",
+          limit: "無上限",
+          point: "115",
+        },
+      ],
+    };
   },
 };
 </script>
@@ -61,6 +106,9 @@ export default {
     .gift,
     .point {
       margin-top: 50px;
+      .pointRow {
+        padding: 0;
+      }
     }
   }
 }
