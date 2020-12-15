@@ -23,77 +23,9 @@ export default {
   name: "fourCard",
   props: ["data"],
   data() {
-    return {
-      // point: [
-      //   {
-      //     type: "coffee",
-      //     title: "cama cafe 中杯紅茶拿鐵兌換券",
-      //     src: "http://fakeimg.pl/600x300/aaa/ccc/",
-      //     link: "javascript:;",
-      //     total: "988",
-      //     limit: "無上限",
-      //     point: "110",
-      //   },
-      //   {
-      //     type: "coffee",
-      //     title: "麥當勞McCafe特選熱那堤(中)即享券",
-      //     src: "http://fakeimg.pl/600x300/aaa/ccc/",
-      //     link: "javascript:;",
-      //     total: "988",
-      //     limit: "無上限",
-      //     point: "210",
-      //   },
-      //   {
-      //     type: "food",
-      //     title: "陶板屋和風創作料理套餐即享券(價值$625)",
-      //     src: "http://fakeimg.pl/600x300/aaa/ccc/",
-      //     link: "javascript:;",
-      //     total: "988",
-      //     limit: "無上限",
-      //     point: "118",
-      //   },
-      //   {
-      //     type: "art",
-      //     title: "誠品生活即享券500元",
-      //     src: "http://fakeimg.pl/600x300/aaa/ccc/",
-      //     link: "javascript:;",
-      //     total: "988",
-      //     limit: "無上限",
-      //     point: "115",
-      //   },
-      //   // {
-      //   //   title: "誠品生活即享券600元",
-      //   //   src: "http://fakeimg.pl/600x300/aaa/ccc/",
-      //   //   link: "javascript:;",
-      //   //   total: "988",
-      //   //   limit: "無上限",
-      //   //   point: "118",
-      //   // },
-      //   // {
-      //   //   title: "誠品生活即享700元",
-      //   //   src: "http://fakeimg.pl/600x300/aaa/ccc/",
-      //   //   link: "javascript:;",
-      //   //   total: "988",
-      //   //   limit: "無上限",
-      //   //   point: "118",
-      //   // },
-      //   // {
-      //   //   title: "誠品生活即享800元",
-      //   //   src: "http://fakeimg.pl/600x300/aaa/ccc/",
-      //   //   link: "javascript:;",
-      //   //   total: "988",
-      //   //   limit: "無上限",
-      //   //   point: "118",
-      //   // },
-      // ],
-    };
+    return {};
   },
-  // computed: {
-  //   filterData() {
-  //     if (!this.filter || this.filter == -1) return this.data;
-  //     return this.data.filter(() => this.point.type.match(this.filter));
-  //   },
-  // },
+  computed: {},
 };
 </script>
 <style lang="scss" scoped>
