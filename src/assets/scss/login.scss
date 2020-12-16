@@ -45,12 +45,20 @@
         label {
           display: block;
           width: 100%;
+          position: relative;
 
           p {
             display: inline-block;
             // border: 1px solid black;
             // text-align: end;
             padding: 0;
+          }
+
+          i.fa-times-circle,
+          .fa-check-circle {
+            // border: 1px solid black;
+            position: absolute;
+
           }
 
           .refresh {
@@ -109,6 +117,15 @@
             margin-left: 10px;
           }
 
+          i {
+
+            &.fa-times-circle,
+            &.fa-check-circle {
+              top: 16%;
+              right: 19%;
+            }
+          }
+
           .refresh {
             // border: 1px solid black;
             display: inline-block;
@@ -155,6 +172,15 @@
 
             input {
               margin-top: 5px;
+            }
+
+            i {
+
+              &.fa-times-circle,
+              &.fa-check-circle {
+                top: 53%;
+                right: 20%;
+              }
             }
           }
         }

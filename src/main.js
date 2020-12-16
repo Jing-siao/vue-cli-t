@@ -1,7 +1,7 @@
 import "babel-polyfill";
 import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from 'axios'//Ajax套件
+import VueAxios from 'vue-axios'//將Ajax套件轉為vue的套件
 import App from './App.vue'
 // import "./registerServiceWorker";
 import router from './router'

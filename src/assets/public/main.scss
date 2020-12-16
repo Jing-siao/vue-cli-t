@@ -124,7 +124,16 @@ input {
 
     box-shadow: 0 0 0 2px $darkgrey;
 
+    &.invalid {
+      box-shadow: 0 0 0 2px red;
+    }
+
+    &.valid {
+      box-shadow: 0 0 0 2px green;
+    }
   }
+
+
 }
 
 button {
@@ -167,6 +176,17 @@ button.cancel {
   &:hover {
     color: red;
   }
+}
+
+i.fa-times-circle {
+  color: rgb(243, 47, 47);
+  font-size: 1.1rem;
+}
+
+i.fa-check-circle {
+  color: rgb(4, 163, 4);
+  font-size: 1.1rem;
+
 }
 
 //--------------------------------------------

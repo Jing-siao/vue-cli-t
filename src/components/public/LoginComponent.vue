@@ -14,7 +14,11 @@
               class="col-sm-6 col-8"
               placeholder="例:A123456789"
               v-model.trim="loginForm.userIdNumber"
+              v-focus
+              v-IdNumberValidation
             />
+            <i class="fas fa-times-circle" v-if="invalid"></i>
+            <i class="fas fa-check-circle" v-if="valid"></i>
           </label>
           <!-- </div> -->
 
@@ -71,16 +75,55 @@ export default {
   name: "login",
   data() {
     return {
+      userIdNumber: "",
       loginForm: {
         userIdNumber: "",
         userNumber: "",
         userPassword: "",
         verificationCode: "",
       },
+
+      invalid: false,
+      valid: false,
     };
   },
   // 區域使用directive
-  directive: {},
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus();
+      },
+    },
+    IdNumberValidation: {
+      bind(el, binding, vnode) {
+        console.log("binding", el, binding, vnode);
+        // el.className = binding.userIdvalue.className;
+      },
+      update(el) {
+        // // 尋找當前的 model 名稱 不確定v-model為何
+        // let currentModel = vnode.data.directives.find(function (item) {
+        //   return item.name === "model";
+        // }).expression;
+
+        // // 從當前 Model 取值
+        // console.log("currentModel", userIdvalue, currentModel);
+        // let userIdvalue = vnode.context[currentModel];
+        var userIdvalue = el.value;
+        // console.log(userIdvalue);
+        let userIdRe = /^[A-Za-z][12]\d{8}$/;
+        //測試使否有符合身分證的格式
+        // console.log(userIdvalue, userIdRe.test(userIdvalue));
+        if (!userIdRe.test(userIdvalue)) {
+          el.className = "col-sm-6 col-8 invalid";
+
+          // this.invalid = true;
+        } else {
+          el.className = "col-sm-6 col-8 valid";
+          // this.valid = true;
+        }
+      },
+    },
+  },
   methods: {
     loginHandler() {
       //接token?
@@ -107,6 +150,17 @@ export default {
   watch: {
     //要先用watch接驗證碼嗎?先驗證再傳帳密?
     //要打api放這
+    "loginForm.userIdNumber"() {
+      let userIdRe = /^[A-Za-z][12]\d{8}$/;
+      if (!userIdRe.test(this.loginForm.userIdNumber)) {
+        this.invalid = true;
+        this.valid = false;
+      } else {
+        this.valid = true;
+        this.invalid = false;
+      }
+    },
+    // deep: true,
   },
 };
 </script>

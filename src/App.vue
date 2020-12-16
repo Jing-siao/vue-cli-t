@@ -22,6 +22,14 @@ export default {
     HeaderComponent,
     FooterComponent,
   },
+  created() {
+    // //測試有沒有抓到api
+    // this.$http.get("https://randomuser.me/api/").then((response) => {
+    //   console.log(response.data);
+    // });
+    //增加環境變數 測試有沒有載到
+    console.log(process.env.VUE_APP_API);
+  },
 };
 </script>
 
