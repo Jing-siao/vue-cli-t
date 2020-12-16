@@ -2,7 +2,7 @@
   <div class="bonus">
     <div class="main container">
       <h1>兌換專區</h1>
-      <FilterBonus @type="getType" />
+      <FilterBonus @type="getType"> </FilterBonus>
       <div class="mainBonus col">
         <SelectOrder />
         <div class="bonusCard row">
@@ -31,7 +31,7 @@ export default {
     Pagination,
     GoTOPBtn,
   },
-  // props: ["type"],
+
   data() {
     return {
       data: [],
@@ -117,6 +117,7 @@ export default {
   methods: {
     getType(val) {
       this.type = val;
+      console.log(val);
     },
   },
 };

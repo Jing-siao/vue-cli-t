@@ -2,10 +2,10 @@
   <div class="FilterBonus">
     <ul>
       <li
-        v-for="list in bonusList"
+        v-for="(list, index) in bonusList"
         :key="list.title"
         :class="{ active: visibility == list.visibility }"
-        @click="(visibility = list.visibility), visibilityShow"
+        @click="visibilityShow(index)"
       >
         <i :class="list.iconClass"></i>
         {{ list.title }}
@@ -60,8 +60,12 @@ export default {
     };
   },
   methods: {
-    visibilityShow() {
-      this.$emit("type", this.visibility);
+    visibilityShow(index) {
+      this.$emit("type", this.bonusList[index].visibility);
+      this.visibility = this.bonusList[index].visibility;
+      return {
+        active: this.visibility,
+      };
     },
   },
 };

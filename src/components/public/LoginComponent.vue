@@ -109,6 +109,7 @@ export default {
         // console.log("currentModel", userIdvalue, currentModel);
         // let userIdvalue = vnode.context[currentModel];
         var userIdvalue = el.value;
+        console.log(el.nextSibling);
         // console.log(userIdvalue);
         let userIdRe = /^[A-Za-z][12]\d{8}$/;
         //測試使否有符合身分證的格式
