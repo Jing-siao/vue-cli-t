@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+import pointCard from "@/data/pointCard.json";
 import FilterBonus from "@/components/FilterBonus.vue";
 import SelectOrder from "@/components/SelectOrder.vue";
 import FourCard from "../components/FourCard.vue";
@@ -36,79 +37,17 @@ export default {
     return {
       data: [],
       type: "all",
-      point: [
-        {
-          type: "coffee",
-          title: "cama cafe 中杯紅茶拿鐵兌換券",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "110",
-        },
-        {
-          type: "coffee",
-          title: "麥當勞McCafe特選熱那堤(中)即享券",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "210",
-        },
-        {
-          type: "food",
-          title: "陶板屋和風創作料理套餐即享券(價值$625)",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "118",
-        },
-        {
-          type: "art",
-          title: "誠品生活即享券500元",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "115",
-        },
-        {
-          type: "art",
-          title: "誠品生活即享券600元",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "118",
-        },
-        {
-          type: "art",
-          title: "誠品生活即享700元",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "118",
-        },
-        {
-          type: "art",
-          title: "誠品生活即享800元",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "118",
-        },
-      ],
     };
   },
   computed: {
+    pointCard() {
+      return pointCard;
+    },
     filterData() {
       if (this.type == "all") {
-        return this.point;
+        return this.pointCard;
       } else {
-        return this.point.filter((item) => {
+        return this.pointCard.filter((item) => {
           return item.type == this.type;
         });
       }
@@ -117,7 +56,7 @@ export default {
   methods: {
     getType(val) {
       this.type = val;
-      console.log(val);
+      // console.log(val);
     },
   },
 };
