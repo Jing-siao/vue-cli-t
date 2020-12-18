@@ -48,9 +48,9 @@
               placeholder="注意大小寫有分"
               v-model.trim="loginForm.verificationCode"
             />
-            <div class="refresh col-sm-6 col-8">
-              <img src="../../assets/img/passcode.png" alt="" />
-              <i class="fas fa-sync">刷新驗證碼</i>
+            <div class="refresh col-sm-7 col-8">
+              <img :src="base64Data" alt="" />
+              <i class="fas fa-sync" @click="refresh">刷新驗證碼</i>
             </div>
           </label>
           <div class="button">
@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       userIdNumber: "",
+      base64Data: "",
       loginForm: {
         userIdNumber: "",
         userNumber: "",
@@ -109,7 +110,8 @@ export default {
         // console.log("currentModel", userIdvalue, currentModel);
         // let userIdvalue = vnode.context[currentModel];
         var userIdvalue = el.value;
-        console.log(el.nextSibling);
+        //以下待改要寫一起
+        // console.log(el.nextSibling);
         // console.log(userIdvalue);
         let userIdRe = /^[A-Za-z][12]\d{8}$/;
         //測試使否有符合身分證的格式
@@ -147,6 +149,14 @@ export default {
         alert("請輸入所有欄位");
       }
     },
+    refresh() {
+      this.axios
+        .get(`${process.env.VUE_APP_API}/auth/captcha`)
+        .then((response) => {
+          // console.log(response.data.base64Data);
+          this.base64Data = response.data.base64Data;
+        });
+    },
   },
   watch: {
     //要先用watch接驗證碼嗎?先驗證再傳帳密?
@@ -162,6 +172,14 @@ export default {
       }
     },
     // deep: true,
+  },
+  created() {
+    this.axios
+      .get(`${process.env.VUE_APP_API}/auth/captcha`)
+      .then((response) => {
+        // console.log(response.data.base64Data);
+        this.base64Data = response.data.base64Data;
+      });
   },
 };
 </script>

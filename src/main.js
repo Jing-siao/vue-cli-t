@@ -7,8 +7,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-Vue.prototype.axios = axios
 Vue.config.productionTip = false
+Vue.prototype.axios = axios
 Vue.use(VueAxios, axios)
 // 全局使用directive
 // Vue.directive("color", function (el, binding, vnode) {

@@ -59,6 +59,12 @@ export default {
       // console.log(val);
     },
   },
+  created() {
+    this.axios.get(`${process.env.VUE_APP_API}/gift/all`).then((response) => {
+      console.log(response.data);
+      // this.base64Data = response.data.base64Data;
+    });
+  },
 };
 </script>
 <style lang="scss" >

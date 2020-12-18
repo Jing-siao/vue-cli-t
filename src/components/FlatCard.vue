@@ -36,22 +36,22 @@ export default {
           contentMore: "10/26~10/31滿額贈現金禮券",
           link: "javascript:;",
         },
-        {
-          src: "http://fakeimg.pl/600x300/bbb/ccc/",
-          title: "京站禮券現金200元等你拿",
-          content:
-            "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
-          contentMore: "11/26~11/30滿額贈現金禮券",
-          link: "javascript:;",
-        },
-        {
-          src: "http://fakeimg.pl/600x300/bbb/ccc/",
-          title: "京站禮券現金300元等你拿",
-          content:
-            "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
-          contentMore: "12/26~12/31滿額贈現金禮券",
-          link: "javascript:;",
-        },
+        // {
+        //   src: "http://fakeimg.pl/600x300/bbb/ccc/",
+        //   title: "京站禮券現金200元等你拿",
+        //   content:
+        //     "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
+        //   contentMore: "11/26~11/30滿額贈現金禮券",
+        //   link: "javascript:;",
+        // },
+        // {
+        //   src: "http://fakeimg.pl/600x300/bbb/ccc/",
+        //   title: "京站禮券現金300元等你拿",
+        //   content:
+        //     "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
+        //   contentMore: "12/26~12/31滿額贈現金禮券",
+        //   link: "javascript:;",
+        // },
       ],
       card: [
         {
@@ -74,6 +74,17 @@ export default {
         },
       ],
     };
+  },
+  created() {
+    this.axios.get(`${process.env.VUE_APP_API}/news`).then((response) => {
+      console.log(response.data.detail);
+      console.log(response.data.detail[0].title1);
+      this.news.title = response.data.detail[0].title1;
+      this.$set(this.news, "item", {
+        title: response.data.detail[0].title1,
+      });
+      console.log(this.news.title);
+    });
   },
 };
 </script>

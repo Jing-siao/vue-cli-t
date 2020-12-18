@@ -140,6 +140,11 @@
               // border: 1px solid black;
               vertical-align: bottom;
               padding: 5px;
+              cursor: pointer;
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
         }
