@@ -83,9 +83,12 @@ h3 {
 
 h4 {
   font-size: 1.4rem;
-  color: black;
-  text-align: left;
-  padding: 5px;
+  // color: black;
+  // text-align: left;
+  // padding: 5px;
+  margin-bottom: 10px;
+  letter-spacing: 0.07rem;
+  line-height: 1.6rem;
 }
 
 h5 {
@@ -102,6 +105,7 @@ p {
   color: $darkgrey;
   padding: 5px;
   font-size: 1rem;
+
 }
 
 a {

@@ -13,9 +13,7 @@ import FooterComponent from "@/components/public/FooterComponent.vue";
 export default {
   name: "App",
   data() {
-    return {
-      // title: "Hello Jing",
-    };
+    return {};
   },
   components: {
     // HelloWorld,
@@ -30,7 +28,7 @@ export default {
     //     console.log(response.data);
     //   });
     //增加環境變數 測試有沒有載到
-    console.log(process.env.VUE_APP_API);
+    // console.log(process.env.VUE_APP_API);
   },
 };
 </script>

@@ -6,11 +6,12 @@
       </div>
 
       <div class="col-md-6 col-lg-7 info col-12">
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.content }}</p>
+        <h4>{{ item.title1 }}</h4>
+        <p>{{ item.date }}</p>
+        <p class="ellipsis" v-html="domDecoder(item.content)" v-ellipsis></p>
         <p>
-          <i class="fas fa-check"></i>
-          {{ item.contentMore }}
+          <!-- <i class="fas fa-check"></i> -->
+          {{ item.note }}
         </p>
         <div class="more align-self-end">
           <a :href="item.link">
@@ -29,13 +30,13 @@ export default {
   data() {
     return {
       news: [
-        {
-          src: "http://fakeimg.pl/600x300/bbb/ccc/",
-          title: "京站禮券現金100元等你拿",
-          content: "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
-          contentMore: "10/26~10/31滿額贈現金禮券",
-          link: "javascript:;",
-        },
+        // {
+        //   src: "http://fakeimg.pl/600x300/bbb/ccc/",
+        //   title: "京站禮券現金100元等你拿",
+        //   content: "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
+        //   contentMore: "10/26~10/31滿額贈現金禮券",
+        //   link: "javascript:;",
+        // },
         // {
         //   src: "http://fakeimg.pl/600x300/bbb/ccc/",
         //   title: "京站禮券現金200元等你拿",
@@ -53,38 +54,40 @@ export default {
         //   link: "javascript:;",
         // },
       ],
-      card: [
-        {
-          title: "好禮一",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          giftTitle: "Dyson 手持無線吸塵器",
-        },
-        {
-          title: "好禮二",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          giftTitle: "小米手環 5",
-        },
-        {
-          title: "好禮三",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          giftTitle: "夏普 6公升衣物乾燥除濕機DW-H6HT-W",
-        },
-      ],
     };
   },
   created() {
-    this.axios.get(`${process.env.VUE_APP_API}/news`).then((response) => {
-      console.log(response.data.detail);
-      console.log(response.data.detail[0].title1);
-      this.news.title = response.data.detail[0].title1;
-      this.$set(this.news, "item", {
-        title: response.data.detail[0].title1,
+    this.axios
+      .get(`${process.env.VUE_APP_API}/news`)
+      .then((response) => {
+        console.log(response.data.detail);
+        this.news = response.data.detail;
+        // console.log("設定前", this.news[0].title);
+        // this.news[0].title = response.data.detail[0].title1;
+      })
+      .catch((err) => {
+        //有錯誤時
+        console.log(err);
       });
-      console.log(this.news.title);
-    });
+  },
+  methods: {
+    domDecoder(str) {
+      let parser = new DOMParser();
+      let dom = parser.parseFromString(
+        `<!doctype html><body>${str}`,
+        "text/html"
+      );
+      return dom.body.textContent;
+    },
+  },
+  directives: {
+    ellipsis: {
+      inserted(el) {
+        if (el.innerText.length > 75) {
+          el.innerText = el.innerText.substr(0, 75) + "...";
+        }
+      },
+    },
   },
 };
 </script>
