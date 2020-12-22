@@ -5,7 +5,7 @@
         <div class="logoWrap">
           <img src="../../assets/img/long-logo.png" alt="" />
         </div>
-        <form class="account" @submit.prevent="loginHandler">
+        <form class="account" @submit.prevent.enter="loginHandler">
           <!-- <div> -->
           <label for="">
             <p class="col-sm-2 col-8">身分證字號</p>
@@ -15,11 +15,11 @@
               placeholder="例:A123456789"
               v-model.trim="user.custid"
               v-focus
-              v-IdNumberValidation
             />
-            <!-- <i class="fas fa-times-circle" v-if="invalid"></i>
-            <i class="fas fa-check-circle" v-if="valid"></i> -->
-            <i class="hide"></i>
+            <!-- v-IdNumberValidation -->
+            <i class="fas fa-times-circle" v-if="invalid"></i>
+            <i class="fas fa-check-circle" v-if="valid"></i>
+            <!-- <i class="hide"></i> -->
           </label>
           <!-- </div> -->
 
@@ -47,10 +47,10 @@
               type="text"
               class="col-sm-6 col-8"
               placeholder="注意大小寫有分"
-              v-model.trim="user.verificationCode"
+              v-model.trim="verificationCode"
             />
             <div class="refresh col-sm-7 col-8">
-              <img :src="base64Data" alt="" />
+              <img :src="identify.base64Data" alt="" />
               <i class="fas fa-sync" @click="refresh">刷新驗證碼</i>
             </div>
           </label>
@@ -74,13 +74,16 @@ export default {
   name: "login",
   data() {
     return {
-      base64Data: "",
+      identify: {
+        base64Data: "",
+        key: "",
+      },
       user: {
         custid: "",
         loginid: "",
         password: "",
-        verificationCode: "",
       },
+      verificationCode: "",
 
       invalid: false,
       valid: false,
@@ -94,9 +97,9 @@ export default {
       },
     },
     IdNumberValidation: {
+      //看binding裡面有甚麼 先註解 日後用
       bind(el, binding, vnode) {
         console.log("binding", el, binding, vnode);
-        // el.className = binding.userIdvalue.className;
       },
       update(el) {
         // // 尋找當前的 model 名稱 不確定v-model為何
@@ -108,18 +111,21 @@ export default {
         // console.log("currentModel", userIdvalue, currentModel);
         // let userIdvalue = vnode.context[currentModel];
         var userIdvalue = el.value;
+        userIdvalue = userIdvalue.toUpperCase();
         //以下待改要寫一起
         // console.log(userIdvalue);
         let userIdRe = /^[A-Za-z][12]\d{8}$/;
+
         //測試使否有符合身分證的格式
         // console.log(userIdvalue, userIdRe.test(userIdvalue));
+
         if (!userIdRe.test(userIdvalue)) {
           el.className = "col-sm-6 col-8 invalid";
 
-          el.nextSibling.className = "fas fa-times-circle";
+          // el.nextSibling.className = "fas fa-times-circle";
         } else {
           el.className = "col-sm-6 col-8 valid";
-          el.nextSibling.className = "fas fa-check-circle";
+          // el.nextSibling.className = "fas fa-check-circle";
         }
       },
     },
@@ -130,10 +136,13 @@ export default {
       //登入成功要直接導向首頁
       //不成功跳aleart帳密錯誤
       // const token = "asds32adsavrAS3Fadf5567"; // token本身就是加密過的字串，隨意
+      // console.log(this.user.custid.toUpperCase());
       let custid = this.user.custid;
       let loginid = this.user.loginid;
       let password = this.user.password;
-      let verificationCode = this.user.verificationCode;
+      let verificationCode = this.verificationCode;
+      let key = this.identify.key;
+      // custid = custid.toUpperCase();
       // 帳號密碼需驗證不能為空
       if (
         custid !== "" &&
@@ -141,59 +150,92 @@ export default {
         password !== "" &&
         verificationCode !== ""
       ) {
-        const api = `${process.env.VUE_APP_API}/auth/login`;
-        // let vm = this;
-        this.axios.post(api, this.user).then((response) => {
-          console.log(response.data);
-        });
+        //先驗證圖片是否成功
+        const keyApi = `${process.env.VUE_APP_API}/auth/captcha/${key}?code=${verificationCode}`;
+        this.axios
+          .put(keyApi, this.identify)
+          .then((response) => {
+            console.log(response.data.message);
+            //先驗成功 打登入api
+            if (response.data.message == "驗證成功") {
+              const loginApi = `${process.env.VUE_APP_API}/auth/login`;
+              this.axios
+                .post(loginApi, this.user)
+                .then((response) => {
+                  //登入成功跳轉首頁
+                  if (response.data.accessToken) {
+                    console.log(response.data);
+                    //這之後再打開push
+                    // this.$router.push("/");
+                    //接到token 登入按鈕要變登出
+                  }
+                })
+                .catch(() => {
+                  // console.error(error);
+                  alert("使用者代號或密碼錯誤");
+                  this.empty();
+                  this.refresh();
+                });
+            }
+          })
+          .catch(() => {
+            // console.error(error);
+            alert("驗證碼不正確");
+            this.empty();
+            this.refresh();
+          });
         // this.user.token = token;
+
+        if (custid.length !== 10) {
+          alert("身分證字號長度不正確");
+        }
       } else {
         alert("請輸入所有欄位");
       }
-      // this.axios
-      //   .post(
-      //     `${process.env.VUE_APP_API}/auth/login`,
-      //     { custid: custid, loginid: loginid, password: password }
-      //     // data
-      //   )
-      //   .then((res) => {
-      //     // console.log(res.data);
-      //     console.log(res.custid);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
     },
     refresh() {
       this.axios
         .get(`${process.env.VUE_APP_API}/auth/captcha`)
         .then((response) => {
           // console.log(response.data.base64Data);
-          this.base64Data = response.data.base64Data;
+          this.identify.base64Data = response.data.base64Data;
+          this.identify.key = response.data.key;
         });
+    },
+    empty() {
+      this.user.custid = "";
+      this.user.loginid = "";
+      this.user.password = "";
+      this.verificationCode = "";
     },
   },
   watch: {
     //要先用watch接驗證碼嗎?先驗證再傳帳密?
     //要打api放這
-    // "user.custid"() {
-    //   let userIdRe = /^[A-Za-z][12]\d{8}$/;
-    //   if (!userIdRe.test(this.user.custid)) {
-    //     this.invalid = true;
-    //     this.valid = false;
-    //   } else {
-    //     this.valid = true;
-    //     this.invalid = false;
-    //   }
-    // },
-    // deep: true,
+    "user.custid": {
+      handler(val) {
+        this.user.custid = val.toUpperCase();
+        let userIdRe = /^[A-Za-z][12]\d{8}$/;
+
+        if (!userIdRe.test(this.user.custid)) {
+          this.invalid = true;
+          this.valid = false;
+        } else {
+          this.valid = true;
+          this.invalid = false;
+        }
+      },
+
+      deep: true,
+    },
   },
   created() {
     this.axios
       .get(`${process.env.VUE_APP_API}/auth/captcha`)
       .then((response) => {
         // console.log(response.data.base64Data);
-        this.base64Data = response.data.base64Data;
+        this.identify.base64Data = response.data.base64Data;
+        this.identify.key = response.data.key;
       });
   },
 };

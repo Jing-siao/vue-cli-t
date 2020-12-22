@@ -10,6 +10,7 @@ import store from './store'
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
 Vue.use(VueAxios, axios)
+// axios.defaults.withCredentials = true;
 // 全局使用directive
 // Vue.directive("color", function (el, binding, vnode) {
 //   el.style.color = binding.value;
