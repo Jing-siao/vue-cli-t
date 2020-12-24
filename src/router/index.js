@@ -43,14 +43,15 @@ const routes = [
     //打包在同一支js
     component: () => import(/* webpackChunkName: "Member" */'../views/Member.vue'),
     redirect: "/member/allPoint",
-    meta: {
-      requiresAuth: true
-    },
+
     children: [
       {
         path: 'allPoint',
         name: 'Member-AllPoint',
         component: () => import(/* webpackChunkName: "Member" */'../views/member/AllPoint.vue'),
+        meta: {
+          requiresAuth: true
+        },
       },
       {
         path: 'account',

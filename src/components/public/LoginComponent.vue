@@ -165,16 +165,40 @@ export default {
                   //登入成功跳轉首頁
                   if (response.data.accessToken) {
                     console.log(response.data);
-                    //這之後再打開push
+                    //先存token和date到sessionStorage再跳轉頁面
+                    localStorage.setItem(
+                      "accessToken",
+                      response.data.accessToken
+                    );
+                    localStorage.setItem("expDate", response.data.expDate);
+                    // doing something with the request
+                    let jwtToken = localStorage.getItem("accessToken");
+                    this.axios.interceptors.request.use(
+                      (config) => {
+                        if (jwtToken) {
+                          config.headers["Authorization"] =
+                            "Bearer " + jwtToken;
+                          config.headers["X-REQUEST-TYPE"] = "axios";
+                        }
+                        return config;
+                      },
+                      (request) => {
+                        // do something with request meta data, configuration, etc
+                        // dont forget to return request object, otherwise your app will get no answer
+                        return request;
+                      }
+                    );
+                    //之後再打開push
                     // this.$router.push("/");
                     //接到token 登入按鈕要變登出
                   }
                 })
-                .catch(() => {
-                  // console.error(error);
+                .catch((error) => {
+                  console.error(error);
                   alert("使用者代號或密碼錯誤");
                   this.empty();
                   this.refresh();
+                  localStorage.clear();
                 });
             }
           })
@@ -183,6 +207,7 @@ export default {
             alert("驗證碼不正確");
             this.empty();
             this.refresh();
+            localStorage.clear();
           });
         // this.user.token = token;
 

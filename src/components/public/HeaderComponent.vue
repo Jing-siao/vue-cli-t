@@ -85,6 +85,12 @@
                 <p>登入 / 註冊</p>
               </span>
             </router-link>
+            <router-link :to="{ name: 'Login' }" @click.native="logOut">
+              <span>
+                <i class="fas fa-sign-out-alt"></i>
+                <p>登出</p>
+              </span>
+            </router-link>
           </div>
         </div>
       </div>
@@ -167,13 +173,7 @@ export default {
       this.isActive["is-active"] = false;
       $(".menu").hide();
     },
-    // hover() {
-    //   $(".list").stop().slideDown(400);
-    // },
 
-    // hoverOut() {
-    //   $(".list").stop().slideUp(400);
-    // },
     showList() {
       $(".list").slideToggle(400);
       $(".memberList>p>i").toggleClass("up");
@@ -195,22 +195,14 @@ export default {
         this.straightNav = false;
         this.horizontalNav = true;
       }
-      // this.window.height = window.innerHeight;
     },
-    // handleScroll() {
-    //   if (
-    //     this.lastPosition < window.scrollY &&
-    //     this.limitPosition < window.scrollY
-    //   ) {
-    //     this.scrolled = true;
-    //   }
 
-    //   if (this.lastPosition > window.scrollY) {
-    //     this.scrolled = false;
-    //   }
-
-    //   this.lastPosition = window.scrollY;
-    // },
+    logOut() {
+      this.closeMenu();
+      // localStorage.clear();
+      localStorage.clear("accessToken");
+      localStorage.clear("expDate");
+    },
   },
   created() {
     window.addEventListener("resize", this.handleResize);

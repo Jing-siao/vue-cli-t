@@ -9,10 +9,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // token: "", // 存放jwt token
+    isLogin: false // 是否登入
   },
   mutations: {
   },
   actions: {
+    // this.$store.state.isLogin = true;
   },
   modules: {
   }
