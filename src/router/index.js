@@ -145,9 +145,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // 看看 to 和 from 兩個 arguments 會吐回什麼訊息
   // console.log(to, from, next)
-  let jwtToken = localStorage.getItem("accessToken");
-
   //如果有requireAuth就不能進去那頁面
+  let jwtToken = sessionStorage.getItem("accessToken");
   if (to.meta.requiresAuth) {
     // console.log('這裡需要驗證')
     if (jwtToken) {
@@ -156,10 +155,15 @@ router.beforeEach((to, from, next) => {
       // console.log(store.state.isLogin)
     } else {
       //不是的話就導入登入頁
+      alert('請先登入')
       next({
         path: '/login',
       });
     }
+
+  } else if (jwtToken) {
+    store.dispatch("updateLogin", true);
+    next();
 
   } else {
     //沒有requireAuth就可以直接放行

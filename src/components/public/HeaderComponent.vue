@@ -208,8 +208,8 @@ export default {
     logOut() {
       this.closeMenu();
       // localStorage.clear();
-      localStorage.clear("accessToken");
-      localStorage.clear("expDate");
+      sessionStorage.clear("accessToken");
+      sessionStorage.clear("expDate");
       this.$store.dispatch("updateLogin", false);
     },
   },

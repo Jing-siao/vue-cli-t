@@ -26,7 +26,7 @@ new Vue({
 
 axios.interceptors.request.use(
   config => {
-    let jwtToken = localStorage.getItem("accessToken");
+    let jwtToken = sessionStorage.getItem("accessToken");
     if (jwtToken) {
       // 判斷是否存在token，如果存在的話，則每個http header都加上token
       config.headers.Authorization = `Bearer ${jwtToken}`;

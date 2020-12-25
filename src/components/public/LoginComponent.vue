@@ -167,11 +167,11 @@ export default {
                     // console.log(response.data);
 
                     //先存token和date到sessionStorage再跳轉頁面
-                    localStorage.setItem(
+                    sessionStorage.setItem(
                       "accessToken",
                       response.data.accessToken
                     );
-                    localStorage.setItem("expDate", response.data.expDate);
+                    sessionStorage.setItem("expDate", response.data.expDate);
                     //在app的main.js接Token並在http header都加上token
                     //呼叫store裡action的updateLogin方法 並傳入true參數會帶到status
                     this.$store.dispatch("updateLogin", true);
@@ -187,7 +187,7 @@ export default {
                     alert("使用者代號或密碼錯誤");
                     this.empty();
                     this.refresh();
-                    localStorage.clear();
+                    sessionStorage.clear();
                   }
                 });
             }
@@ -200,7 +200,7 @@ export default {
 
               this.empty();
               this.refresh();
-              localStorage.clear();
+              sessionStorage.clear();
             }
           });
         // this.user.token = token;
