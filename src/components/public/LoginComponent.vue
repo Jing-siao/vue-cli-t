@@ -155,7 +155,7 @@ export default {
         this.axios
           .put(keyApi, this.identify)
           .then((response) => {
-            console.log(response.data.message);
+            // console.log(response.data.message);
             //先驗成功 打登入api
             if (response.data.message == "驗證成功") {
               const loginApi = `${process.env.VUE_APP_API}/auth/login`;
@@ -164,50 +164,44 @@ export default {
                 .then((response) => {
                   //登入成功跳轉首頁
                   if (response.data.accessToken) {
-                    console.log(response.data);
+                    // console.log(response.data);
+
                     //先存token和date到sessionStorage再跳轉頁面
                     localStorage.setItem(
                       "accessToken",
                       response.data.accessToken
                     );
                     localStorage.setItem("expDate", response.data.expDate);
-                    // doing something with the request
-                    let jwtToken = localStorage.getItem("accessToken");
-                    this.axios.interceptors.request.use(
-                      (config) => {
-                        if (jwtToken) {
-                          config.headers["Authorization"] =
-                            "Bearer " + jwtToken;
-                          config.headers["X-REQUEST-TYPE"] = "axios";
-                        }
-                        return config;
-                      },
-                      (request) => {
-                        // do something with request meta data, configuration, etc
-                        // dont forget to return request object, otherwise your app will get no answer
-                        return request;
-                      }
-                    );
+                    //在app的main.js接Token並在http header都加上token
+                    //呼叫store裡action的updateLogin方法 並傳入true參數會帶到status
+                    this.$store.dispatch("updateLogin", true);
                     //之後再打開push
-                    // this.$router.push("/");
+                    this.$router.push("/");
                     //接到token 登入按鈕要變登出
                   }
                 })
                 .catch((error) => {
                   console.error(error);
-                  alert("使用者代號或密碼錯誤");
-                  this.empty();
-                  this.refresh();
-                  localStorage.clear();
+                  let status = error.response.status;
+                  if (status !== 200) {
+                    alert("使用者代號或密碼錯誤");
+                    this.empty();
+                    this.refresh();
+                    localStorage.clear();
+                  }
                 });
             }
           })
-          .catch(() => {
+          .catch((error) => {
             // console.error(error);
-            alert("驗證碼不正確");
-            this.empty();
-            this.refresh();
-            localStorage.clear();
+            let status = error.response.status;
+            if (status == 401) {
+              alert("驗證碼不正確");
+
+              this.empty();
+              this.refresh();
+              localStorage.clear();
+            }
           });
         // this.user.token = token;
 

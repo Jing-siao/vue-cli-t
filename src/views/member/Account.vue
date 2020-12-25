@@ -178,6 +178,19 @@ export default {
       this.oldAreaIdx = "";
     },
   },
+  created() {
+    this.axios
+      .get(`${process.env.VUE_APP_API}/cust`)
+      .then((response) => {
+        console.log(response.data);
+        this.account.name = response.data.name;
+        this.account.idNumber = response.data.custid;
+      })
+      .catch((err) => {
+        //有錯誤時
+        console.log(err.message);
+      });
+  },
 };
 </script>
 <style lang="scss" scoped>

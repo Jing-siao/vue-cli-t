@@ -79,16 +79,24 @@
             </li>
           </ul>
           <div class="loginBtn">
-            <router-link :to="{ name: 'Login' }" @click.native="closeMenu">
-              <span>
-                <i class="fas fa-user-circle"></i>
-                <p>登入 / 註冊</p>
-              </span>
-            </router-link>
-            <router-link :to="{ name: 'Login' }" @click.native="logOut">
+            <router-link
+              :to="{ name: 'Login' }"
+              @click.native="logOut"
+              v-if="isLogin"
+            >
               <span>
                 <i class="fas fa-sign-out-alt"></i>
                 <p>登出</p>
+              </span>
+            </router-link>
+            <router-link
+              :to="{ name: 'Login' }"
+              @click.native="closeMenu"
+              v-else
+            >
+              <span>
+                <i class="fas fa-user-circle"></i>
+                <p>登入 / 註冊</p>
               </span>
             </router-link>
           </div>
@@ -202,6 +210,7 @@ export default {
       // localStorage.clear();
       localStorage.clear("accessToken");
       localStorage.clear("expDate");
+      this.$store.dispatch("updateLogin", false);
     },
   },
   created() {
@@ -214,7 +223,11 @@ export default {
     window.removeEventListener("resize", this.handleResize);
     // window.removeEventListener("scroll", this.handleScroll);
   },
-  mounted() {},
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

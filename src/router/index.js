@@ -1,5 +1,7 @@
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
 import Home from '../views/Home.vue'
 import Activity from '../views/Activity.vue'
 import Question from '../views/Question.vue'
@@ -7,7 +9,7 @@ import Login from '../views/Login.vue'
 import Error from '../views/Error.vue'
 
 
-Vue.use(VueRouter)
+Vue.use(VueRouter, store)
 
 const routes = [
   {
@@ -42,6 +44,7 @@ const routes = [
     //此方法可以省下一開始讀取時間 但就是換頁會多一次讀取
     //打包在同一支js
     component: () => import(/* webpackChunkName: "Member" */'../views/Member.vue'),
+
     redirect: "/member/allPoint",
 
     children: [
@@ -57,36 +60,57 @@ const routes = [
         path: 'account',
         name: 'Member-Account',
         component: () => import(/* webpackChunkName: "Member" */'../views/member/Account.vue'),
+        meta: {
+          requiresAuth: true
+        },
       },
       {
         path: 'changePassword',
         name: 'Member-changePassword',
         component: () => import(/* webpackChunkName: "Member" */'../views/member/ChangePassword.vue'),
+        meta: {
+          requiresAuth: true
+        },
       },
       {
         path: 'otherSet',
         name: 'Member-otherSet',
         component: () => import(/* webpackChunkName: "Member" */'../views/member/OtherSet.vue'),
+        meta: {
+          requiresAuth: true
+        },
       },
       {
         path: 'destroyAccount',
         name: 'Member-DestroyAccount',
         component: () => import(/* webpackChunkName: "Member" */'../views/member/DestroyAccount.vue'),
+        meta: {
+          requiresAuth: true
+        },
       },
       {
         path: 'dePosit',
         name: 'Member-DePosit',
         component: () => import(/* webpackChunkName: "Member" */'../views/member/DePosit.vue'),
+        meta: {
+          requiresAuth: true
+        },
       },
       {
         path: 'searchPoint',
         name: 'Member-SearchPoint',
         component: () => import(/* webpackChunkName: "Member" */'../views/member/SearchPoint.vue'),
+        meta: {
+          requiresAuth: true
+        },
       },
       {
         path: 'exchangeRecord',
         name: 'Member-ExchangeRecord',
         component: () => import(/* webpackChunkName: "Member" */'../views/member/ExchangeRecord.vue'),
+        meta: {
+          requiresAuth: true
+        },
       },
     ]
 
@@ -118,30 +142,30 @@ const router = new VueRouter({
   routes,
 
 })
-// router.beforeEach(async (to, from, next) => {
-//   // 看看 to 和 from 兩個 arguments 會吐回什麼訊息
-//   console.log('to: ', to)
-//   console.log('from: ', from)
+router.beforeEach((to, from, next) => {
+  // 看看 to 和 from 兩個 arguments 會吐回什麼訊息
+  // console.log(to, from, next)
+  let jwtToken = localStorage.getItem("accessToken");
 
-//   // 目的路由在meta上是否有設置requireAuth: true
-//   if (to.meta.requireAuth) {
-//     // 獲取Cookies當中的login資訊並取得token
-//     const info = Cookies.get('login')
-//     const token = JSON.parse(info).token
-//     console.log(token)
-//     if (info) {
-//       // 如果token不為空，且確實有這個欄位則讓路由變更
-//       if (token.length > 0 || token === undefined) {
-//         next()
-//       } else {
-//         // 未通過則導回login頁面
-//         next({ name: 'Login' })
-//       }
-//     } else {
-//       next({ name: 'Login' })
-//     }
-//   } else {
-//     next()
-//   }
-// })
+  //如果有requireAuth就不能進去那頁面
+  if (to.meta.requiresAuth) {
+    // console.log('這裡需要驗證')
+    if (jwtToken) {
+      store.dispatch("updateLogin", true);
+      next();
+      // console.log(store.state.isLogin)
+    } else {
+      //不是的話就導入登入頁
+      next({
+        path: '/login',
+      });
+    }
+
+  } else {
+    //沒有requireAuth就可以直接放行
+    next();
+  }
+})
+
+
 export default router
