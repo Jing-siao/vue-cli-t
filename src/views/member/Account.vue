@@ -184,7 +184,18 @@ export default {
       .then((response) => {
         console.log(response.data);
         this.account.name = response.data.name;
-        this.account.idNumber = response.data.custid;
+        // 去身分證識別化 整個資料顯示50%若除不盡則多顯示1位
+        let str = response.data.custid;
+        // 顯示幾個
+        const showLen = Math.round(str.length / 2);
+        // 要隱藏幾個
+        const markLen = str.length - showLen;
+        // 從哪開始隱
+        const showStart = Math.round((str.length - showLen) / 2);
+        this.account.idNumber = str.replace(
+          str.substr(showStart, markLen),
+          "*".repeat(markLen)
+        );
       })
       .catch((err) => {
         //有錯誤時

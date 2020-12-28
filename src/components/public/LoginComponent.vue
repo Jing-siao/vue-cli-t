@@ -1,17 +1,29 @@
   <template>
   <div class="loginMain container" v-cloak>
     <div class="login row">
+      <div class="loginMethod row">
+        <p :class="{ active: isActive == 'common' }" @click="commonLogin">
+          一般會員登入
+        </p>
+        <p :class="{ active: isActive == 'other' }" @click="otherLogin">
+          其他登入方式
+        </p>
+      </div>
       <div class="wrap col-12">
         <div class="logoWrap">
           <img src="../../assets/img/long-logo.png" alt="" />
         </div>
-        <form class="account" @submit.prevent.enter="loginHandler">
+        <form
+          class="account"
+          v-if="commonForm"
+          @submit.prevent.enter="loginHandler"
+        >
           <!-- <div> -->
           <label for="">
-            <p class="col-sm-2 col-8">身分證字號</p>
+            <p class="col-sm-2 col-10">身分證字號</p>
             <input
               type="text"
-              class="col-sm-6 col-8"
+              class="col-sm-6 col-10"
               placeholder="例:A123456789"
               v-model.trim="user.custid"
               v-focus
@@ -24,45 +36,53 @@
           <!-- </div> -->
 
           <label for="">
-            <p class="col-sm-2 col-8">使用者代號</p>
+            <p class="col-sm-2 col-10">使用者代號</p>
             <input
               type="text"
-              class="col-sm-6 col-8"
+              class="col-sm-6 col-10"
               placeholder="請輸入8-12碼"
               v-model.trim="user.loginid"
             />
           </label>
           <label for="">
-            <p class="col-sm-2 col-8">密碼</p>
+            <p class="col-sm-2 col-10">密碼</p>
             <input
               type="password"
-              class="col-sm-6 col-8"
+              class="col-sm-6 col-10"
               placeholder="請輸入8-12碼"
               v-model.trim="user.password"
             />
           </label>
           <label for="">
-            <p class="col-sm-2 col-8">驗證碼</p>
+            <p class="col-sm-2 col-10">驗證碼</p>
             <input
               type="text"
-              class="col-sm-6 col-8"
+              class="col-sm-6 col-10"
               placeholder="注意大小寫有分"
               v-model.trim="verificationCode"
             />
-            <div class="refresh col-sm-7 col-8">
+            <div class="refresh col-sm-7 col-10">
               <img :src="identify.base64Data" alt="" />
               <i class="fas fa-sync" @click="refresh">刷新驗證碼</i>
             </div>
           </label>
           <div class="button">
-            <button class="col-4">
-              <a href="javascript:;">立即註冊</a>
-            </button>
-            <button type="submit" class="col-4">登入</button>
+            <router-link to="/Signup">
+              <button class="col-5 col-sm-4 first">立即註冊</button>
+            </router-link>
+            <button type="submit" class="col-5 col-sm-4 first">登入</button>
           </div>
           <div class="forgetPassword">
             <a href="javascript:;">忘記密碼?</a>
           </div>
+        </form>
+        <form v-else>
+          <router-link to="/Signup">
+            <button class="col-5 col-sm-4 first">網路銀行</button>
+          </router-link>
+          <router-link to="/SignupCardReader">
+            <button class="col-5 col-sm-4 first">網路ATM</button>
+          </router-link>
         </form>
       </div>
     </div>
@@ -87,6 +107,8 @@ export default {
 
       invalid: false,
       valid: false,
+      commonForm: true,
+      isActive: "common",
     };
   },
   // 區域使用directive
@@ -226,6 +248,14 @@ export default {
       this.user.loginid = "";
       this.user.password = "";
       this.verificationCode = "";
+    },
+    commonLogin() {
+      this.commonForm = true;
+      this.isActive = "common";
+    },
+    otherLogin() {
+      this.commonForm = false;
+      this.isActive = "other";
     },
   },
   watch: {

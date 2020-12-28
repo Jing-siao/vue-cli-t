@@ -6,6 +6,8 @@ import Home from '../views/Home.vue'
 import Activity from '../views/Activity.vue'
 import Question from '../views/Question.vue'
 import Login from '../views/Login.vue'
+import Signup from '../views/Signup.vue'
+import SignupCardReader from '../views/SignupCardReader.vue'
 import Error from '../views/Error.vue'
 
 
@@ -119,6 +121,16 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
+  },
+  {
+    path: '/signupCardReader',
+    name: 'SignupCardReader',
+    component: SignupCardReader
   },
   {
     path: '/404',
