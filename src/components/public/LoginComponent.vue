@@ -13,77 +13,74 @@
         <div class="logoWrap">
           <img src="../../assets/img/long-logo.png" alt="" />
         </div>
-        <form
-          class="account"
-          v-if="commonForm"
-          @submit.prevent.enter="loginHandler"
-        >
-          <!-- <div> -->
-          <label for="">
-            <p class="col-sm-2 col-10">身分證字號</p>
-            <input
-              type="text"
-              class="col-sm-6 col-10"
-              placeholder="例:A123456789"
-              v-model.trim="user.custid"
-              v-focus
-            />
-            <!-- v-IdNumberValidation -->
-            <i class="fas fa-times-circle" v-if="invalid"></i>
-            <i class="fas fa-check-circle" v-if="valid"></i>
-            <!-- <i class="hide"></i> -->
-          </label>
-          <!-- </div> -->
+        <div v-if="commonForm">
+          <form class="account" @submit.prevent.enter="loginHandler">
+            <!-- <div> -->
+            <label for="custid">
+              <p class="col-sm-2 col-10">身分證字號</p>
+              <input
+                type="text"
+                class="col-sm-6 col-10"
+                placeholder="例:A123456789"
+                v-model.trim="user.custid"
+                v-focus
+              />
+              <!-- v-IdNumberValidation -->
+              <i class="fas fa-times-circle" v-if="invalid"></i>
+              <i class="fas fa-check-circle" v-if="valid"></i>
+              <!-- <i class="hide"></i> -->
+            </label>
+            <!-- </div> -->
 
-          <label for="">
-            <p class="col-sm-2 col-10">使用者代號</p>
-            <input
-              type="text"
-              class="col-sm-6 col-10"
-              placeholder="請輸入8-12碼"
-              v-model.trim="user.loginid"
-            />
-          </label>
-          <label for="">
-            <p class="col-sm-2 col-10">密碼</p>
-            <input
-              type="password"
-              class="col-sm-6 col-10"
-              placeholder="請輸入8-12碼"
-              v-model.trim="user.password"
-            />
-          </label>
-          <label for="">
-            <p class="col-sm-2 col-10">驗證碼</p>
-            <input
-              type="text"
-              class="col-sm-6 col-10"
-              placeholder="注意大小寫有分"
-              v-model.trim="verificationCode"
-            />
-            <div class="refresh col-sm-7 col-10">
-              <img :src="identify.base64Data" alt="" />
-              <i class="fas fa-sync" @click="refresh">刷新驗證碼</i>
-            </div>
-          </label>
-          <div class="button">
-            <router-link to="/Signup">
-              <button class="col-5 col-sm-4 first">立即註冊</button>
-            </router-link>
-            <button type="submit" class="col-5 col-sm-4 first">登入</button>
-          </div>
+            <label for="loginid">
+              <p class="col-sm-2 col-10">使用者代號</p>
+              <input
+                type="text"
+                class="col-sm-6 col-10"
+                placeholder="請輸入8-12碼"
+                v-model.trim="user.loginid"
+              />
+            </label>
+            <label for="password">
+              <p class="col-sm-2 col-10">密碼</p>
+              <input
+                type="password"
+                class="col-sm-6 col-10"
+                placeholder="請輸入8-12碼"
+                v-model.trim="user.password"
+              />
+            </label>
+            <label for="verificationCode">
+              <p class="col-sm-2 col-10">驗證碼</p>
+              <input
+                type="text"
+                class="col-sm-6 col-10"
+                placeholder="注意大小寫有分"
+                v-model.trim="verificationCode"
+              />
+              <div class="refresh col-sm-7 col-10">
+                <img :src="identify.base64Data" alt="" />
+                <i class="fas fa-sync" @click="refresh">刷新驗證碼</i>
+              </div>
+            </label>
+
+            <button type="submit" class="col-10 col-sm-8 first">登入</button>
+          </form>
+          <router-link to="/Signup">
+            <button class="col-5 col-sm-4 first">立即註冊</button>
+          </router-link>
           <div class="forgetPassword">
-            <a href="javascript:;">忘記密碼?</a>
+            <router-link to="/bonus">忘記密碼?</router-link>
           </div>
-        </form>
-        <form v-else>
+        </div>
+        <div v-else>
           <router-link to="/Signup">
             <button class="col-5 col-sm-4 first">網路銀行</button>
           </router-link>
           <router-link to="/SignupCardReader">
             <button class="col-5 col-sm-4 first">網路ATM</button>
           </router-link>
-        </form>
+        </div>
       </div>
     </div>
   </div>

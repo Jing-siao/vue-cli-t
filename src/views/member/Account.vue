@@ -1,6 +1,6 @@
 <template>
   <div class="memberAccount">
-    <form action="" class="col-12 col-md-8 col-lg-6">
+    <form class="col-12 col-md-8 col-lg-6">
       <table>
         <tr class="row">
           <td class="col-4 col-sm-3 title">
@@ -93,7 +93,7 @@ export default {
       account: {
         name: "國眾電腦",
         idNumber: "A123456789",
-        birthday: "2020-11-30",
+        birthday: "2020/11/30",
         email: "123456@gmail.com",
         phoneNumber: "0912345678",
         city: "基隆市",
@@ -108,6 +108,9 @@ export default {
       newEmail: "",
       newPhoneNumber: "",
       newAddress: "",
+      newAccount: {
+        email: "",
+      },
     };
   },
   computed: {
@@ -158,6 +161,24 @@ export default {
       this.account.email = this.newEmail;
       this.account.phoneNumber = this.newPhoneNumber;
       this.account.address = this.newAddress;
+
+      const custApi = `${process.env.VUE_APP_API}/cust`;
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+      console.log(JSON.stringify(this.account));
+
+      this.axios
+        .put(custApi, JSON.stringify(this.account), config)
+        .then((response) => {
+          console.log(JSON.stringify(this.account));
+          console.log(response.data);
+          // response.data.email = this.account.email;
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+
       this.newEmail = "";
       this.newPhoneNumber = "";
       this.newAddress = "";
@@ -182,7 +203,7 @@ export default {
     this.axios
       .get(`${process.env.VUE_APP_API}/cust`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.account.name = response.data.name;
         // 去身分證識別化 整個資料顯示50%若除不盡則多顯示1位
         let str = response.data.custid;
@@ -196,6 +217,8 @@ export default {
           str.substr(showStart, markLen),
           "*".repeat(markLen)
         );
+        this.account.address = response.data.addr1;
+        this.account.phoneNumber = response.data.mobile;
       })
       .catch((err) => {
         //有錯誤時
