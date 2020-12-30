@@ -15,27 +15,33 @@
             <p>身份證字號</p>
           </td>
           <td class="col-8 col-sm-9">
-            <p class="original">{{ account.idNumber }}</p>
+            <p class="original">{{ account.custid }}</p>
           </td>
         </tr>
         <tr class="row">
           <td class="col-4 col-sm-3 title"><p>出生日期</p></td>
           <td class="col-8 col-sm-9">
-            <p class="original">{{ account.birthday }}</p>
+            <p class="original">{{ account.brthDt }}</p>
           </td>
         </tr>
         <tr class="row">
           <td class="col-4 col-sm-3 title"><p>Email</p></td>
-          <td class="col-8 col-sm-9">
+          <td class="col-8 col-sm-6">
             <p v-if="hideBtn" class="original">{{ account.email }}</p>
-            <input type="text" v-else v-model.trim="newEmail" />
+            <input type="text" v-else v-model.trim.lazy="newEmail" />
+          </td>
+          <td class="warning col-4 col-sm-3" v-if="emailWarning">
+            <p class="warning">email格式錯誤</p>
           </td>
         </tr>
         <tr class="row">
           <td class="col-4 col-sm-3 title"><p>手機號碼</p></td>
-          <td class="col-8 col-sm-9">
-            <p v-if="hideBtn" class="original">{{ account.phoneNumber }}</p>
-            <input type="text" v-else v-model.trim="newPhoneNumber" />
+          <td class="col-8 col-sm-6">
+            <p v-if="hideBtn" class="original">{{ account.mobile }}</p>
+            <input type="text" v-else v-model.trim.lazy="newMobile" />
+          </td>
+          <td class="warning col-4 col-sm-3" v-if="mobileWarning">
+            <p class="warning">手機格式錯誤</p>
           </td>
         </tr>
         <tr class="row address">
@@ -58,8 +64,8 @@
             <p v-else>{{ userZip }}</p>
           </td>
           <td class="col-12 col-sm-9">
-            <p v-if="hideBtn" class="original address">{{ account.address }}</p>
-            <input type="text" v-else v-model.trim="newAddress" />
+            <p v-if="hideBtn" class="original address">{{ account.addr1 }}</p>
+            <input type="text" v-else v-model.trim="newAddr1" />
           </td>
         </tr>
       </table>
@@ -91,26 +97,28 @@ export default {
       hideBtn: true,
       editIndex: null,
       account: {
-        name: "國眾電腦",
-        idNumber: "A123456789",
-        birthday: "2020/11/30",
+        name: "余文樂",
+        custid: "A123456789",
+        loginid: "lok666",
+        gender: "1",
+        brthDt: "2020/11/30",
         email: "123456@gmail.com",
-        phoneNumber: "0912345678",
-        city: "基隆市",
-        area: "仁愛區",
-        zip: "200",
-        address: "這邊是地址這邊是地址這邊是地址",
+        mobile: "0912345678",
+        city: "台北市",
+        area: "內湖區",
+        zip: "114",
+        addr1: "這裡是聯絡地址",
+        addr2: "這裡是戶籍地址",
       },
       cityIdx: 0,
       areaIdx: 0,
       oldCityIdx: "",
       oldAreaIdx: "",
       newEmail: "",
-      newPhoneNumber: "",
-      newAddress: "",
-      newAccount: {
-        email: "",
-      },
+      newMobile: "",
+      newAddr1: "",
+      emailWarning: false,
+      mobileWarning: false,
     };
   },
   computed: {
@@ -136,94 +144,129 @@ export default {
       return this.areas[this.areaIdx].name;
     },
   },
-  // watch: {
-  //   cityIdx() {
-  //     this.areaIdx = 0;
-  //   },
-  // },
+
   methods: {
+    clearUserInfo() {
+      this.newEmail = "";
+      this.newMobile = "";
+      this.newAddr1 = "";
+      this.oldCityIdx = "";
+      this.oldAreaIdx = "";
+      this.newZip = "";
+    },
     showHandler() {
-      this.showBtn = true;
       this.hideBtn = false;
       this.newEmail = this.account.email;
-      this.newPhoneNumber = this.account.phoneNumber;
-      this.newAddress = this.account.address;
+      this.newMobile = this.account.mobile;
+      this.newAddr1 = this.account.addr1;
       this.oldCityIdx = this.cityIdx;
       this.oldAreaIdx = this.areaIdx;
+      this.getUserInfo();
     },
     submitlHandler() {
-      this.showBtn = false;
       this.hideBtn = true;
       //改成新的
       this.account.city = this.userCity;
       this.account.area = this.userArea;
       this.account.zip = this.userZip;
       this.account.email = this.newEmail;
-      this.account.phoneNumber = this.newPhoneNumber;
-      this.account.address = this.newAddress;
+      this.account.mobile = this.newMobile;
+      var emailRule = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+      var mobileRule = /^09[0-9]{8}$/;
+      if (!mobileRule.test(this.newMobile)) {
+        this.mobileWarning = true;
+        this.showHandler();
+      } else {
+        this.mobileWarning = false;
+        if (!emailRule.test(this.newEmail)) {
+          this.emailWarning = true;
+          this.showHandler();
+        } else {
+          this.emailWarning = false;
+          if (this.newAddr1 && this.newEmail && this.newMobile) {
+            var allAddr1 = `${this.userZip}|${this.userCity}|${this.userArea}|${this.newAddr1}`;
+            this.account.addr1 = allAddr1;
+            const custApi = `${process.env.VUE_APP_API}/cust`;
+            this.axios
+              .put(custApi, this.account)
+              .then((response) => {
+                console.log(response.data);
 
-      const custApi = `${process.env.VUE_APP_API}/cust`;
-      const config = {
-        headers: { "Content-Type": "application/json" },
-      };
-      console.log(JSON.stringify(this.account));
-
-      this.axios
-        .put(custApi, JSON.stringify(this.account), config)
-        .then((response) => {
-          console.log(JSON.stringify(this.account));
-          console.log(response.data);
-          // response.data.email = this.account.email;
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-
-      this.newEmail = "";
-      this.newPhoneNumber = "";
-      this.newAddress = "";
-      this.oldCityIdx = "";
-      this.oldAreaIdx = "";
+                response.data.add1 = allAddr1;
+                console.log(response.data.add1);
+              })
+              .catch((err) => {
+                console.log(err.message);
+              });
+            let arrAddr1 = allAddr1.split("|");
+            this.account.addr1 = arrAddr1[3];
+            this.clearUserInfo();
+          } else {
+            alert("請填寫所有欄位");
+            this.showHandler();
+          }
+        }
+      }
     },
+    // checkMobile() {
+    //   if (!/^09[0-9]{8}$/.test(this.newMobile)) {
+    //     alert("手機號碼格式錯誤");
+    //   }
+    // },
     cancelHandler() {
       this.showBtn = false;
       this.hideBtn = true;
       //改成舊的
-      this.newEmail = "";
-      this.newPhoneNumber = "";
-      this.newAddress = "";
-      this.newZip = "";
       this.cityIdx = this.oldCityIdx;
       this.areaIdx = this.oldAreaIdx;
-      this.oldCityIdx = "";
-      this.oldAreaIdx = "";
+      this.clearUserInfo();
+    },
+
+    getUserInfo() {
+      this.axios
+        .get(`${process.env.VUE_APP_API}/cust`)
+        .then((response) => {
+          // console.log(response.data);
+          this.account.name = response.data.name;
+          // 去身分證識別化 整個資料顯示50%若除不盡則多顯示1位
+          let str = response.data.custid;
+          // 顯示幾個
+          const showLen = Math.round(str.length / 2);
+          // 要隱藏幾個
+          const markLen = str.length - showLen;
+          // 從哪開始隱
+          const showStart = Math.round((str.length - showLen) / 2);
+          this.account.custid = str.replace(
+            str.substr(showStart, markLen),
+            "*".repeat(markLen)
+          );
+          let arr = response.data.addr1.split("|");
+          this.account.zip = arr[0];
+          this.account.city = arr[1];
+          this.account.area = arr[2];
+          this.account.addr1 = arr[3];
+          this.account.mobile = response.data.mobile;
+
+          //---------找index
+
+          const cityIndex = this.cities.findIndex(
+            (city) => city.name === this.account.city
+          );
+          this.cityIdx = cityIndex;
+
+          const areaIndex = this.areas.findIndex(
+            (area) => area.name === this.account.area
+          );
+          this.areaIdx = areaIndex;
+        })
+        .catch((err) => {
+          //有錯誤時
+          console.log(err.message);
+        });
     },
   },
   created() {
-    this.axios
-      .get(`${process.env.VUE_APP_API}/cust`)
-      .then((response) => {
-        // console.log(response.data);
-        this.account.name = response.data.name;
-        // 去身分證識別化 整個資料顯示50%若除不盡則多顯示1位
-        let str = response.data.custid;
-        // 顯示幾個
-        const showLen = Math.round(str.length / 2);
-        // 要隱藏幾個
-        const markLen = str.length - showLen;
-        // 從哪開始隱
-        const showStart = Math.round((str.length - showLen) / 2);
-        this.account.idNumber = str.replace(
-          str.substr(showStart, markLen),
-          "*".repeat(markLen)
-        );
-        this.account.address = response.data.addr1;
-        this.account.phoneNumber = response.data.mobile;
-      })
-      .catch((err) => {
-        //有錯誤時
-        console.log(err.message);
-      });
+    this.getUserInfo();
   },
 };
 </script>
