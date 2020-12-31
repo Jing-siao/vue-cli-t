@@ -1,4 +1,5 @@
 @import"../public/main.scss";
+@import"../public/mixins/accountForm.scss";
 
 .signupMain {
 
@@ -6,36 +7,17 @@
   min-width: 95%;
   text-align: center;
   overflow: hidden;
+  // border: 1px solid red;
+  min-height: calc(100vh - 209px);
 
   .signup {
     display: inline-block;
     // border: 1px solid red;
     padding: 0 15px;
-    max-width: 550px;
-
-    .steps {
-
-      margin: 0 0 20px 0;
-      display: flex;
-      justify-content: space-between;
+    max-width: 700px;
+    margin-top: 50px;
 
 
-      p {
-        border-radius: 50%;
-        background-color: $darkgrey;
-        border: 2px solid black;
-        color: $grey;
-        padding: 7px 11px;
-      }
-
-      span {
-        border-bottom: 2px solid $darkgrey;
-
-        height: 20px;
-
-      }
-
-    }
 
     .wrap {
       background-color: $grey;
@@ -56,25 +38,9 @@
 
       }
 
-      .iframe {
-
-        min-height: 365px;
-
-      }
+      @include accountForm;
 
 
-    }
-
-    .note {
-
-      margin-top: 15px;
-
-
-      p {
-        text-align: start;
-        letter-spacing: 0.05rem;
-        line-height: 1.2rem;
-      }
     }
   }
 }
@@ -82,70 +48,17 @@
 @media (min-width:577px) {
   .signupMain {
 
-    min-height: calc(100vh - 200px);
 
-    .signup {
-      margin-top: 4vh;
-
-      .steps {
-
-        span {
-          width: 35%;
-
-        }
-      }
-
-
-
-      .iframeWrap {
-        // border: 1px solid black;
-        min-width: 480px;
-        display: inline-block;
-
-        .iframe {
-
-          height: 100%;
-          width: 100%;
-          min-height: 365px;
-
-        }
-      }
-
-    }
+    min-height: calc(100vh - 209px);
   }
 }
 
 @media (max-width:576px) {
   .signupMain {
+
+
     min-height: calc(100vh - 173px);
-
-    .signup {
-
-      // display: inline-block;
-      margin-top: 20px;
-
-      .steps {
-
-        span {
-          width: 25%;
-
-        }
-      }
-
-      .wrap {
-        display: inline-block;
-
-        .iframeWrap {
-
-          .iframe {
-
-            height: 100%;
-            width: 100%;
-
-
-          }
-        }
-      }
-    }
   }
 }
+
+@include accountFormRWD;

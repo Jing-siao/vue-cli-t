@@ -74,7 +74,7 @@
           </div>
         </div>
         <div v-else>
-          <router-link to="/Signup">
+          <router-link to="/InternetBanking">
             <button class="col-5 col-sm-4 first">網路銀行</button>
           </router-link>
           <router-link to="/SignupCardReader">

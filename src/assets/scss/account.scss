@@ -1,150 +1,17 @@
 @import"../public/main.scss";
-
+@import"../public/mixins/accountForm.scss";
 
 .memberAccount {
+
   // border: 1px solid black;
-  margin-top: -10px;
+  @include accountForm;
+}
 
+@media (min-width: 1141px) {
+  .memberAccount {
 
-  form {
-    display: flex;
-    flex-direction: column;
-    // display: inline-block;
-    // border: 1px solid black;
-
-    table {
-      // border: 1px solid rgb(251, 255, 0);
-      display: inline-block;
-      margin: 0;
-
-      tr {
-        border: 1px solid blue;
-        text-align: left;
-        margin: 0;
-        width: 100%;
-
-        td {
-          // border: 1px solid rgb(243, 210, 241);
-
-          display: flex;
-          align-items: center;
-          overflow-x: auto;
-          white-space: nowrap;
-
-          // overflow-y: hidden;
-
-          &.title::after {
-            content: "";
-            height: 50%;
-            position: absolute;
-            right: 0;
-            font-size: 0;
-            top: auto;
-            // background-color: $darkgrey;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-
-          }
-
-
-          // &:first-child {
-          //   border-right: 1px solid;
-          // }
-          p {
-            padding: 6px 0;
-
-            // border: 1px solid green;
-
-            &.original {
-              padding-left: 5px;
-            }
-
-            &.warning {
-              // border: 1px solid black;
-              padding: 2px 0;
-
-            }
-          }
-
-          input {
-            width: 100%;
-            padding: 5px;
-            margin: 0;
-            // font-size: 1rem;
-          }
-
-          select {
-            border: 1px solid $darkgrey;
-            font-size: 1rem;
-            padding: 4px;
-          }
-
-          // #postalCode {
-          //   max-width: 90%;
-          // }
-
-
-        }
-
-      }
-    }
-
+    margin-top: -10px;
   }
 }
 
-@media (min-width: 577px) {
-  tr.address {
-    td:last-child {
-      margin-left: 25%;
-      display: block;
-    }
-  }
-
-  td {
-    height: 3.2rem;
-    padding: 5px 2px;
-
-    select {
-      padding: 5px;
-
-    }
-
-    &.warning {
-      // border: 1px solid black;
-      padding: 0;
-
-
-    }
-  }
-
-}
-
-@media (max-width: 576px) {
-  tr.address {
-    td:last-child {
-      margin-left: 0;
-    }
-  }
-
-  td {
-    padding: 5px 2px;
-
-    select {
-      padding: 2px;
-
-    }
-
-    p.address {
-
-      margin-left: 33.5%;
-
-    }
-
-    &.warning {
-      // border: 1px solid black;
-      padding: 0;
-      height: 1.5rem;
-      margin-left: 35%;
-
-    }
-  }
-}
+@include accountFormRWD;

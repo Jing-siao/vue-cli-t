@@ -97,18 +97,18 @@ export default {
       hideBtn: true,
       editIndex: null,
       account: {
-        name: "余文樂",
-        custid: "A123456789",
-        loginid: "lok666",
-        gender: "1",
-        brthDt: "2020/11/30",
-        email: "123456@gmail.com",
-        mobile: "0912345678",
-        city: "台北市",
-        area: "內湖區",
-        zip: "114",
-        addr1: "這裡是聯絡地址",
-        addr2: "這裡是戶籍地址",
+        name: "",
+        custid: "",
+        loginid: "",
+        gender: "",
+        brthDt: "",
+        email: "",
+        mobile: "",
+        city: "",
+        area: "",
+        zip: "",
+        addr1: "",
+        addr2: "",
       },
       cityIdx: 0,
       areaIdx: 0,
@@ -201,6 +201,7 @@ export default {
             let arrAddr1 = allAddr1.split("|");
             this.account.addr1 = arrAddr1[3];
             this.clearUserInfo();
+            // this.getUserInfo();
           } else {
             alert("請填寫所有欄位");
             this.showHandler();
@@ -228,6 +229,24 @@ export default {
         .then((response) => {
           // console.log(response.data);
           this.account.name = response.data.name;
+          this.account.loginid = response.data.loginid;
+          this.account.gender = response.data.gender;
+          this.account.mobile = response.data.mobile;
+          this.account.brthDt = response.data.brthDt;
+          this.account.email = response.data.email;
+          this.account.addr2 = response.data.addr2;
+          //    name: "余文樂",
+          // custid: "A123456789",
+          // loginid: "lok666",
+          // gender: "1",
+          // brthDt: "2020/11/30",
+          // email: "123456@gmail.com",
+          // mobile: "0912345678",
+          // city: "台北市",
+          // area: "內湖區",
+          // zip: "114",
+          // addr1: "這裡是聯絡地址",
+          // addr2: "這裡是戶籍地址",
           // 去身分證識別化 整個資料顯示50%若除不盡則多顯示1位
           let str = response.data.custid;
           // 顯示幾個
@@ -245,7 +264,6 @@ export default {
           this.account.city = arr[1];
           this.account.area = arr[2];
           this.account.addr1 = arr[3];
-          this.account.mobile = response.data.mobile;
 
           //---------找index
 

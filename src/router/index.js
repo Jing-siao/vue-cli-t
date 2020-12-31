@@ -8,6 +8,7 @@ import Question from '../views/Question.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import SignupCardReader from '../views/SignupCardReader.vue'
+import InternetBanking from '../views/InternetBanking.vue'
 import Error from '../views/Error.vue'
 
 
@@ -132,6 +133,19 @@ const routes = [
     name: 'SignupCardReader',
     component: SignupCardReader
   },
+  {
+    path: '/internetBanking',
+    name: 'InternetBanking',
+    component: InternetBanking,
+    children: [
+      {
+        path: 'step1',
+        name: 'InternetBanking-step1',
+        component: () => import(/* webpackChunkName: "InternetBanking" */'../components/public/InternetBankingIframe.vue'),
+      },
+    ]
+  },
+
   {
     path: '/404',
     name: 'Error',

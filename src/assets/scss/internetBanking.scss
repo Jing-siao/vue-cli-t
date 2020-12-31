@@ -1,0 +1,87 @@
+@import"../public/main.scss";
+
+.internetBankingIframe {
+
+  // border: 1px solid rgb(51, 255, 0);
+  display: inline-block;
+
+  .wrap {
+    background-color: $grey;
+    // display: block;
+    // border: 1px solid rgb(51, 255, 0);
+    margin: 0 auto;
+    border-radius: 15px;
+    padding: 15px;
+
+
+
+
+    // z-index: 1;
+    // border: 1px solid rgb(51, 255, 0);
+    h5 {
+      text-align: center;
+      margin-bottom: 20px;
+
+    }
+
+    .iframe {
+
+      min-height: 365px;
+
+    }
+
+
+  }
+
+  .note {
+
+    margin-top: 15px;
+
+
+    p {
+      text-align: start;
+      letter-spacing: 0.05rem;
+      line-height: 1.2rem;
+    }
+  }
+
+}
+
+@media (min-width:577px) {
+
+
+
+
+  .iframeWrap {
+    // border: 1px solid black;
+    min-width: 480px;
+    display: inline-block;
+
+    .iframe {
+
+      height: 100%;
+      width: 100%;
+      min-height: 365px;
+
+    }
+  }
+}
+
+@media (max-width:576px) {
+
+
+  .wrap {
+    display: inline-block;
+
+    .iframeWrap {
+
+      .iframe {
+
+        height: 100%;
+        width: 100%;
+
+
+      }
+    }
+  }
+}
