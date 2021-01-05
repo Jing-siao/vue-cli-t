@@ -184,22 +184,7 @@ export default {
         } else {
           this.emailWarning = false;
           if (this.newAddr1 && this.newEmail && this.newMobile) {
-            var allAddr1 = `${this.userZip}|${this.userCity}|${this.userArea}|${this.newAddr1}`;
-            this.account.addr1 = allAddr1;
-            const custApi = `${process.env.VUE_APP_API}/cust`;
-            this.axios
-              .put(custApi, this.account)
-              .then((response) => {
-                console.log(response.data);
-
-                response.data.add1 = allAddr1;
-                console.log(response.data.add1);
-              })
-              .catch((err) => {
-                console.log(err.message);
-              });
-            let arrAddr1 = allAddr1.split("|");
-            this.account.addr1 = arrAddr1[3];
+            this.submitUserInfo();
             this.clearUserInfo();
             // this.getUserInfo();
           } else {
@@ -281,6 +266,24 @@ export default {
           //有錯誤時
           console.log(err.message);
         });
+    },
+    submitUserInfo() {
+      var allAddr1 = `${this.userZip}|${this.userCity}|${this.userArea}|${this.newAddr1}`;
+      this.account.addr1 = allAddr1;
+      const custApi = `${process.env.VUE_APP_API}/cust`;
+      this.axios
+        .put(custApi, this.account)
+        .then((response) => {
+          console.log(response.data);
+
+          response.data.add1 = allAddr1;
+          console.log(response.data.add1);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+      let arrAddr1 = allAddr1.split("|");
+      this.account.addr1 = arrAddr1[3];
     },
   },
   created() {
