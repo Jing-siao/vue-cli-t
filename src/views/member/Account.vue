@@ -144,7 +144,11 @@ export default {
       return this.areas[this.areaIdx].name;
     },
   },
-
+  watch: {
+    cityIdx() {
+      this.areaIdx = 0;
+    },
+  },
   methods: {
     clearUserInfo() {
       this.newEmail = "";
@@ -264,7 +268,8 @@ export default {
         })
         .catch((err) => {
           //有錯誤時
-          console.log(err.message);
+          let message = err.response.data.message;
+          console.log(message);
         });
     },
     submitUserInfo() {

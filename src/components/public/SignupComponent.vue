@@ -13,24 +13,59 @@
               <td class="col-4 col-sm-3 title">
                 <p>姓名</p>
               </td>
-              <td class="col-8 col-sm-9">
-                <p class="original">{{ account.name }}</p>
+              <td class="col-8 col-sm-6">
+                <input
+                  type="text"
+                  v-model.trim.lazy="account.name"
+                  placeholder="請輸入姓名"
+                />
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="col-4 col-sm-3 title">
+                <p>姓別</p>
+              </td>
+              <td class="col-4 col-sm-2">
+                <input
+                  type="radio"
+                  v-model.trim.lazy="account.gender"
+                  value="1"
+                  id="male"
+                />
+                <label for="male">男</label>
+              </td>
+              <td class="col-4 col-sm-2">
+                <input
+                  type="radio"
+                  v-model.trim.lazy="account.gender"
+                  value="2"
+                  id="female"
+                />
+                <label for="female">女</label>
               </td>
             </tr>
             <tr class="row">
               <td class="col-4 col-sm-3 title">
                 <p>身份證字號</p>
               </td>
-              <td class="col-8 col-sm-9">
-                <p class="original">{{ account.custid }}</p>
+              <td class="col-8 col-sm-6">
+                <input
+                  type="text"
+                  v-model.trim.lazy="account.custid"
+                  placeholder="請輸入身分證字號"
+                />
               </td>
             </tr>
             <tr class="row">
               <td class="col-4 col-sm-3 title">
                 <p>使用者代號</p>
               </td>
-              <td class="col-8 col-sm-9">
-                <p class="original">{{ account.loginid }}</p>
+              <td class="col-8 col-sm-6">
+                <input
+                  type="text"
+                  v-model.trim.lazy="account.loginid"
+                  placeholder="請輸入使用者代號"
+                />
               </td>
             </tr>
             <tr class="row">
@@ -38,7 +73,7 @@
               <td class="col-8 col-sm-6">
                 <input
                   type="password"
-                  v-model.trim.lazy="newPassword"
+                  v-model.trim.lazy="account.password"
                   placeholder="請輸入8-12碼"
                 />
               </td>
@@ -49,23 +84,28 @@
               <td class="col-8 col-sm-6">
                 <input
                   type="password"
-                  v-model.trim.lazy="newPassword"
+                  v-model.trim.lazy="checkPassword"
                   placeholder="請輸入8-12碼"
                 />
+              </td>
+              <td class="warning col-4 col-sm-3" v-if="passwordWarning">
+                <p class="warning">兩者密碼不相同</p>
               </td>
             </tr>
             <tr class="row">
               <td class="col-4 col-sm-3 title"><p>出生日期</p></td>
-              <td class="col-8 col-sm-9">
-                <p class="original">{{ account.brthDt }}</p>
+              <td class="col-8 col-sm-6">
+                <input
+                  type="text"
+                  v-model.trim.lazy="account.bday"
+                  placeholder="YYYY-MM-DD"
+                />
               </td>
             </tr>
             <tr class="row">
               <td class="col-4 col-sm-3 title"><p>Email</p></td>
               <td class="col-8 col-sm-6">
-                <!-- <p v-if="hideBtn" class="original">{{ account.email }}</p> -->
-                <input type="text" v-model.trim.lazy="newEmail" />
-                <!-- v-else -->
+                <input type="text" v-model.trim.lazy="account.email" />
               </td>
               <td class="warning col-4 col-sm-3" v-if="emailWarning">
                 <p class="warning">email格式錯誤</p>
@@ -74,20 +114,7 @@
             <tr class="row">
               <td class="col-4 col-sm-3 title"><p>手機號碼</p></td>
               <td class="col-8 col-sm-6">
-                <!-- <p v-if="hideBtn" class="original">{{ account.mobile }}</p> -->
-                <input type="text" v-model.trim.lazy="newMobile" />
-                <!-- v-else -->
-              </td>
-              <td class="warning col-4 col-sm-3" v-if="mobileWarning">
-                <p class="warning">手機格式錯誤</p>
-              </td>
-            </tr>
-            <tr class="row">
-              <td class="col-4 col-sm-3 title"><p>電話號碼</p></td>
-              <td class="col-8 col-sm-6">
-                <!-- <p v-if="hideBtn" class="original">{{ account.mobile }}</p> -->
-                <input type="text" v-model.trim.lazy="newMobile" />
-                <!-- v-else -->
+                <input type="text" v-model.trim.lazy="account.mobile" />
               </td>
               <td class="warning col-4 col-sm-3" v-if="mobileWarning">
                 <p class="warning">手機格式錯誤</p>
@@ -96,52 +123,39 @@
             <tr class="row address">
               <td class="col-4 col-sm-3 title"><p>聯絡地址</p></td>
               <td class="col-3 col-sm-3">
-                <!-- <p v-if="hideBtn" class="original">
-                  {{ account.city }}
-          
-                </p> -->
                 <CitySelect v-model="cityIdx" :options="cities"></CitySelect>
-                <!-- v-else -->
               </td>
               <td class="col-3 col-sm-3">
-                <!-- <p v-if="hideBtn">{{ account.area }}</p> -->
                 <CitySelect v-model="areaIdx" :options="areas"></CitySelect>
-                <!-- v-else -->
               </td>
               <td class="col-2 col-sm-3">
-                <!-- <p>{{ userZip }}</p> -->
-
-                <!-- <p v-if="hideBtn">{{ account.zip }}</p> -->
                 <p>{{ userZip }}</p>
-                <!-- v-else -->
               </td>
               <td class="col-12 col-sm-9">
-                <!-- <p v-if="hideBtn" class="original address">
-                  {{ account.addr1 }}
-                </p> -->
                 <input type="text" v-model.trim="newAddr1" />
-                <!-- v-else -->
+              </td>
+            </tr>
+            <tr class="row address">
+              <td class="col-4 col-sm-3 title"><p>戶籍地址</p></td>
+              <td class="col-3 col-sm-3">
+                <CitySelect v-model="cityIdx2" :options="cities2"></CitySelect>
+              </td>
+              <td class="col-3 col-sm-3">
+                <CitySelect v-model="areaIdx2" :options="areas2"></CitySelect>
+              </td>
+              <td class="col-2 col-sm-3">
+                <p>{{ userZip2 }}</p>
+              </td>
+              <td class="col-12 col-sm-9">
+                <input type="text" v-model.trim="newAddr2" />
               </td>
             </tr>
           </table>
           <div>
             <!-- 先加prevent 之後要記得改-->
-            <button class="first" @click.prevent="submitlHandler">
-              送出
-              <!-- v-if="hideBtn" -->
-            </button>
-            <!-- <button class="cancel" @click.prevent="cancelHandler">取消</button> -->
-            <!-- <template v-else>
-              <button class="first" @click.prevent="submitlHandler">
-                確認修改
-              </button>
-              <button class="cancel" @click.prevent="cancelHandler">
-                取消
-              </button>
-            </template> -->
+            <button class="first" @click.prevent="submitlHandler">送出</button>
           </div>
         </form>
-        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -158,32 +172,31 @@ export default {
       hideBtn: true,
       editIndex: null,
       account: {
-        name: "王小美",
-        custid: "A123123123",
-        loginid: "jing0808",
-        gender: "2",
-        brthDt: "2020/12/31",
+        name: "",
+        custid: "",
+        loginid: "",
+        gender: "",
+        bday: "",
         email: "",
         mobile: "",
-        city: "",
-        area: "",
-        zip: "",
         addr1: "",
-        addr2: "這裡是戶籍地址",
-        password: "1qaz2wsx",
-        phone: "02-26817965",
+        addr2: "",
+        password: "",
       },
+
       cityIdx: 0,
       areaIdx: 0,
-      oldCityIdx: "",
-      oldAreaIdx: "",
-      newEmail: "",
-      newPassword: "",
-      newMobile: "",
+      cityIdx2: 0,
+      areaIdx2: 0,
+      checkPassword: "",
       newAddr1: "",
+      newAddr2: "",
       emailWarning: false,
       mobileWarning: false,
+      passwordWarning: false,
     };
+    // text@gmail.com
+    // 114|台北市|內湖區|陽光街100號
   },
   computed: {
     cities() {
@@ -207,144 +220,130 @@ export default {
     userArea() {
       return this.areas[this.areaIdx].name;
     },
-  },
-
-  methods: {
-    clearUserInfo() {
-      this.newEmail = "";
-      this.newMobile = "";
-      this.newAddr1 = "";
-      this.oldCityIdx = "";
-      this.oldAreaIdx = "";
-      this.newZip = "";
+    cities2() {
+      // const cities = this.cityJson.push();
+      return cities;
     },
-    // showHandler() {
-    //   this.hideBtn = false;
-    //   this.newEmail = this.account.email;
-    //   this.newMobile = this.account.mobile;
-    //   this.newAddr1 = this.account.addr1;
-    //   this.oldCityIdx = this.cityIdx;
-    //   this.oldAreaIdx = this.areaIdx;
-    //   this.getUserInfo();
-    // },
-    submitlHandler() {
-      // this.hideBtn = true;
-      //改成新的
-      this.account.city = this.userCity;
-      this.account.area = this.userArea;
-      this.account.zip = this.userZip;
-      this.account.email = this.newEmail;
-      this.account.mobile = this.newMobile;
-      var emailRule = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-      var mobileRule = /^09[0-9]{8}$/;
-      if (!mobileRule.test(this.newMobile)) {
-        this.mobileWarning = true;
-        // this.showHandler();
+    areas2() {
+      if (this.cities2) {
+        return this.cities2[this.cityIdx2].areas;
       } else {
-        this.mobileWarning = false;
-        if (!emailRule.test(this.newEmail)) {
-          this.emailWarning = true;
-          // this.showHandler();
-        } else {
-          this.emailWarning = false;
-          if (this.newAddr1 && this.newEmail && this.newMobile) {
-            var allAddr1 = `${this.userZip}|${this.userCity}|${this.userArea}|${this.newAddr1}`;
-            this.account.addr1 = allAddr1;
-            const custApi = `${process.env.VUE_APP_API}/auth/signup`;
-            this.axios
-              .post(custApi, this.account)
-              .then((response) => {
-                console.log(response.data);
-
-                response.data.add1 = allAddr1;
-                console.log(response.data.add1);
-              })
-              .catch((err) => {
-                console.log(err.message);
-              });
-            let arrAddr1 = allAddr1.split("|");
-            this.account.addr1 = arrAddr1[3];
-            this.clearUserInfo();
-          } else {
-            alert("請填寫所有欄位");
-            this.showHandler();
-          }
-        }
+        return null;
       }
     },
 
-    cancelHandler() {
-      // this.showBtn = false;
-      // this.hideBtn = true;
-      //改成舊的
-      this.cityIdx = this.oldCityIdx;
-      this.areaIdx = this.oldAreaIdx;
-      this.clearUserInfo();
+    userZip2() {
+      return this.areas2[this.areaIdx2].zip;
+    },
+    userCity2() {
+      return this.cities2[this.cityIdx2].name;
+    },
+    userArea2() {
+      return this.areas2[this.areaIdx2].name;
+    },
+  },
+  watch: {
+    cityIdx() {
+      this.areaIdx = 0;
+    },
+    cityIdx2() {
+      this.areaIdx2 = 0;
+    },
+  },
+  methods: {
+    clearSignUp() {
+      this.account.name = "";
+      this.account.custid = "";
+      this.account.loginid = "";
+      this.account.gender = "";
+      this.account.bday = "";
+      this.account.email = "";
+      this.account.mobile = "";
+      this.account.addr1 = "";
+      this.account.addr2 = "";
+      this.account.password = "";
+      this.passwordWarning = false;
+      this.emailWarning = false;
+      this.mobileWarning = false;
     },
 
-    getUserInfo() {
+    verification() {
+      var emailRule = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+      var mobileRule = /^09[0-9]{8}$/;
+      //--驗證
+
+      if (this.checkPassword !== this.account.password) {
+        this.passwordWarning = true;
+      } else {
+        this.passwordWarning = false;
+      }
+      if (!emailRule.test(this.account.email)) {
+        this.emailWarning = true;
+      } else {
+        this.emailWarning = false;
+      }
+
+      if (!mobileRule.test(this.account.mobile)) {
+        this.mobileWarning = true;
+      } else {
+        this.mobileWarning = false;
+      }
+    },
+    submitlHandler() {
+      let {
+        name,
+        custid,
+        loginid,
+        gender,
+        bday,
+        email,
+        mobile,
+        password,
+      } = this.account;
+      this.verification();
+      if (
+        !name ||
+        !custid ||
+        !loginid ||
+        !gender ||
+        !bday ||
+        !email ||
+        !mobile ||
+        !password ||
+        !this.newAddr1 ||
+        !this.newAddr2 ||
+        !this.checkPassword
+      ) {
+        alert("請填寫所有欄位");
+      } else if (
+        !this.passwordWarning &&
+        !this.emailWarning &&
+        !this.mobileWarning
+      ) {
+        this.postSignUp();
+        alert("123");
+      }
+    },
+    postSignUp() {
+      this.account.addr1 = `${this.userZip}|${this.userCity}|${this.userArea}|${this.newAddr1}`;
+
+      this.account.addr2 = `${this.userZip2}|${this.userCity2}|${this.userArea2}|${this.newAddr2}`;
+      const custApi = `${process.env.VUE_APP_API}/auth/signup`;
       this.axios
-        .get(`${process.env.VUE_APP_API}/cust`)
+        .post(custApi, this.account)
         .then((response) => {
-          // console.log(response.data);
-          this.account.name = response.data.name;
-          this.account.loginid = response.data.loginid;
-          this.account.gender = response.data.gender;
-          this.account.mobile = response.data.mobile;
-          this.account.brthDt = response.data.brthDt;
-          this.account.email = response.data.email;
-          this.account.addr2 = response.data.addr2;
-          //    name: "余文樂",
-          // custid: "A123456789",
-          // loginid: "lok666",
-          // gender: "1",
-          // brthDt: "2020/11/30",
-          // email: "123456@gmail.com",
-          // mobile: "0912345678",
-          // city: "台北市",
-          // area: "內湖區",
-          // zip: "114",
-          // addr1: "這裡是聯絡地址",
-          // addr2: "這裡是戶籍地址",
-          // 去身分證識別化 整個資料顯示50%若除不盡則多顯示1位
-          let str = response.data.custid;
-          // 顯示幾個
-          const showLen = Math.round(str.length / 2);
-          // 要隱藏幾個
-          const markLen = str.length - showLen;
-          // 從哪開始隱
-          const showStart = Math.round((str.length - showLen) / 2);
-          this.account.custid = str.replace(
-            str.substr(showStart, markLen),
-            "*".repeat(markLen)
-          );
-          let arr = response.data.addr1.split("|");
-          this.account.zip = arr[0];
-          this.account.city = arr[1];
-          this.account.area = arr[2];
-          this.account.addr1 = arr[3];
-
-          //---------找index
-
-          const cityIndex = this.cities.findIndex(
-            (city) => city.name === this.account.city
-          );
-          this.cityIdx = cityIndex;
-
-          const areaIndex = this.areas.findIndex(
-            (area) => area.name === this.account.area
-          );
-          this.areaIdx = areaIndex;
+          console.log(response.data.message);
         })
         .catch((err) => {
-          //有錯誤時
-          console.log(err.message);
+          console.log(err);
+          let message = err.response.data.message;
+          alert(message);
+          this.clearSignUp();
+          this.checkPassword = "";
         });
     },
   },
-  created() {
-    this.getUserInfo();
-  },
+  created() {},
 };
 </script>
 

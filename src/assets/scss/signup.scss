@@ -40,6 +40,18 @@
 
       @include accountForm;
 
+      input[type="radio"] {
+        width: 30%;
+        cursor: pointer;
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        &~label {
+          cursor: pointer;
+        }
+      }
 
     }
   }
