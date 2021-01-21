@@ -18,7 +18,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/public/variables.scss";
 .SignupCardReader {
   @include hederFixed();
 }

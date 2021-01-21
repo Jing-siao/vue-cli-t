@@ -22,7 +22,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/public/variables.scss";
 .question {
   @include hederFixed();
   min-height: calc(100vh - 124px);

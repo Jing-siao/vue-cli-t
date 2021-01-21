@@ -19,8 +19,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../assets/public/variables.scss";
-// @import "../assets/public/main.scss";
 .member {
   // border: 1px solid black;
   // min-height: calc(100vh - 124px);

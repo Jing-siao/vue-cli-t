@@ -194,8 +194,8 @@ export default {
                     //在app的main.js接Token並在http header都加上token
                     //呼叫store裡action的updateLogin方法 並傳入true參數會帶到status
                     this.$store.dispatch("updateLogin", true);
-                    //之後再打開push
-                    this.$router.push("/");
+                    //登入後push到會員中心
+                    this.$router.push("/member/allPoint");
                     //接到token 登入按鈕要變登出
                   }
                 })
@@ -288,6 +288,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import "../../assets/public/main.scss";
 @import "../../assets/scss/login.scss";
 </style>

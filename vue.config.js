@@ -10,6 +10,15 @@ module.exports = {
       }),
     ],
   },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `
+           @import "~@/assets/public/scss/main.scss";
+        `
+      }
+    }
+  },
   // publicPath: process.env.NODE_ENV === 'production'
   //   ? '/production-sub-path/'
   //   : '/'

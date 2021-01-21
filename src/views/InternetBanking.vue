@@ -30,7 +30,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/public/variables.scss";
 .InternetBanking {
   @include hederFixed();
   .internetBankingMain {

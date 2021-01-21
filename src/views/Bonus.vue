@@ -68,8 +68,6 @@ export default {
 };
 </script>
 <style lang="scss" >
-@import "../assets/public/variables.scss";
-
 .bonus {
   @include hederFixed();
   .main {

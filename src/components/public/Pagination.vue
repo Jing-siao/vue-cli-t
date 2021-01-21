@@ -17,7 +17,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/public/variables.scss";
 .pagination {
   // border: 1px solid blue;
   margin-top: 10px;

@@ -96,7 +96,6 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../assets/public/variables.scss";
 .home {
   @include hederFixed();
 

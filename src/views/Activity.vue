@@ -6,7 +6,6 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "../assets/public/variables.scss";
 .about {
   @include hederFixed();
   min-height: calc(100vh - 124px);

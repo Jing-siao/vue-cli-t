@@ -321,7 +321,7 @@ export default {
         !this.mobileWarning
       ) {
         this.postSignUp();
-        alert("123");
+        this.$router.push("/login");
       }
     },
     postSignUp() {
@@ -332,7 +332,7 @@ export default {
       this.axios
         .post(custApi, this.account)
         .then((response) => {
-          console.log(response.data.message);
+          alert(response.data.message);
         })
         .catch((err) => {
           console.log(err);
@@ -349,5 +349,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/scss/signup.scss";
-// @import "@/assets/scss/account.scss";
 </style>
