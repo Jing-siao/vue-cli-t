@@ -1,6 +1,6 @@
 import "babel-polyfill";
 import Vue from 'vue'
-
+import VCalendar from 'v-calendar'; //日曆套件
 import axios from 'axios'//Ajax套件
 import VueAxios from 'vue-axios'//將Ajax套件轉為vue的套件
 import App from './App.vue'
@@ -16,7 +16,9 @@ Vue.use(VueAxios, axios)
 // Vue.directive("color", function (el, binding, vnode) {
 //   el.style.color = binding.value;
 // });
-
+Vue.use(VCalendar, {
+  componentPrefix: 'vc',
+});
 new Vue({
   router,
   store,

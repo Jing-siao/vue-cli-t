@@ -10,6 +10,7 @@ module.exports = {
       }),
     ],
   },
+  //共用scss
   css: {
     loaderOptions: {
       scss: {

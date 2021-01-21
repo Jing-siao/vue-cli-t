@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
     "slick-carousel": "^1.8.1",
+    "v-calendar": "^2.2.0",
     "vue": "^2.6.11",
     "vue-axios": "^3.2.0",
     "vue-router": "^3.2.0",
