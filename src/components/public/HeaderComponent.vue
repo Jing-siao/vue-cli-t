@@ -231,6 +231,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// @import "../../assets/public/main.scss";
 @import "../../assets/scss/header.scss";
 </style>

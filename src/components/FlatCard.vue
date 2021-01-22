@@ -29,31 +29,7 @@ export default {
   name: "flatCard",
   data() {
     return {
-      news: [
-        // {
-        //   src: "http://fakeimg.pl/600x300/bbb/ccc/",
-        //   title: "京站禮券現金100元等你拿",
-        //   content: "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
-        //   contentMore: "10/26~10/31滿額贈現金禮券",
-        //   link: "javascript:;",
-        // },
-        // {
-        //   src: "http://fakeimg.pl/600x300/bbb/ccc/",
-        //   title: "京站禮券現金200元等你拿",
-        //   content:
-        //     "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
-        //   contentMore: "11/26~11/30滿額贈現金禮券",
-        //   link: "javascript:;",
-        // },
-        // {
-        //   src: "http://fakeimg.pl/600x300/bbb/ccc/",
-        //   title: "京站禮券現金300元等你拿",
-        //   content:
-        //     "還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐還有卡友專屬活動歐",
-        //   contentMore: "12/26~12/31滿額贈現金禮券",
-        //   link: "javascript:;",
-        // },
-      ],
+      news: [],
     };
   },
   created() {

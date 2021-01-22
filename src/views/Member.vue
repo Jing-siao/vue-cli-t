@@ -20,11 +20,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .member {
-  // border: 1px solid black;
-  // min-height: calc(100vh - 124px);
-  // background: $grey;
-  border-radius: 1.5rem;
-  overflow: hidden;
+  // border: 1px solid rgb(230, 43, 43);
   width: 92%;
   margin: auto;
   @include hederFixed();
@@ -51,14 +47,14 @@ export default {
     width: 100%;
   }
 }
-@media (min-width: 577px) {
+@media (min-width: 576px) {
   .main {
-    min-height: calc(100vh - 269px);
+    min-height: calc(100vh - 249px);
   }
 }
-@media (max-width: 576px) {
+@media (max-width: 575px) {
   .main {
-    min-height: calc(100vh - 233px);
+    min-height: calc(100vh - 213px);
   }
 }
 </style>

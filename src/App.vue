@@ -37,6 +37,7 @@ export default {
 @import "./assets/public/css/reset.css";
 @import "./assets/public/css/bootstrap-grid.min.css";
 @import "./assets/public/css/hamburgers.css";
+@import "./assets/public/scss/main.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

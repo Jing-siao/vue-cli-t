@@ -1,4 +1,4 @@
-@import'./variables.scss';
+// @import'./variables.scss';
 
 * {
   padding: 0;
@@ -120,7 +120,7 @@ a {
 
 
 input {
-  padding: 5px;
+  padding: 5px !important;
   font-size: 1rem;
   outline: none;
   border-radius: 5px;
@@ -160,7 +160,6 @@ button {
   color: black;
   cursor: pointer;
   font-size: 1rem;
-  min-width: 60px;
 
   a {
     color: black;
