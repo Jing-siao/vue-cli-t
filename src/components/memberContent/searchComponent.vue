@@ -1,10 +1,11 @@
 <template>
-  <form action="#">
+  <form @submit="pointForm">
     <div class="type row">
-      <p class="col-sm-2">點數查詢</p>
-      <select name="" id="">
-        <option value="P01">財富點</option>
-        <option value="P02">自由點</option>
+      <p class="col-sm-2">點數類型</p>
+      <select name="" id="" v-model="formVal.type">
+        <option v-for="type in select" :value="type.typeId" :key="type.guid">
+          {{ type.typeName }}
+        </option>
       </select>
     </div>
     <div class="time row">
@@ -12,8 +13,10 @@
       <label for="" class="col-sm-6 col-md-5 col-lg-4"
         >開始日期
         <vc-date-picker
-          v-model="searchecord.strDate"
+          v-model="formVal.strDate"
           :model-config="modelConfig"
+          :min-date="minDate"
+          :max-date="new Date()"
         >
           <template v-slot="{ inputValue, inputEvents }">
             <input :value="inputValue" v-on="inputEvents" />
@@ -23,8 +26,10 @@
       <label for="" class="col-12 col-sm-6 col-md-5 col-lg-4"
         >結束日期
         <vc-date-picker
-          v-model="searchecord.endDate"
+          v-model="formVal.endDate"
           :model-config="modelConfig"
+          :min-date="formVal.strDate"
+          :max-date="new Date()"
         >
           <template v-slot="{ inputValue, inputEvents }">
             <input :value="inputValue" v-on="inputEvents" />
@@ -35,3 +40,42 @@
     <button class="first"><i class="fas fa-search"></i>查詢</button>
   </form>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      select: [],
+      formVal: {
+        type: "",
+        strDate: "",
+        endDate: "",
+      },
+      modelConfig: {
+        type: "string",
+        mask: "YYYY-MM-DD", // Uses 'iso' if missing
+      },
+    };
+  },
+  mounted() {
+    this.axios.get(`${process.env.VUE_APP_API}/bonus/type`).then((response) => {
+      this.select = response.data.detail;
+      this.formVal.type = this.select[0].typeId;
+    });
+  },
+  methods: {
+    pointForm() {
+      this.$emit("pointForm", this.formVal);
+    },
+  },
+  computed: {
+    minDate() {
+      let nDate = new Date();
+      let minDate = nDate.setMonth(nDate.getMonth() - 6);
+      return minDate;
+    },
+  },
+};
+</script>
+<style lang="scss" scoped>
+@import "@/assets/scss/searchComponent.scss";
+</style>

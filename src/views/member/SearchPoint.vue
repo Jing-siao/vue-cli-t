@@ -1,6 +1,6 @@
 <template>
   <div class="memberSearchPoint">
-    <form action="#">
+    <!-- <form action="#">
       <div class="type row">
         <p class="col-sm-2">點數查詢</p>
         <select name="" id="" v-model="selsctType">
@@ -35,7 +35,8 @@
         </label>
       </div>
       <button class="first"><i class="fas fa-search"></i>查詢</button>
-    </form>
+    </form> -->
+    <SearchComponent @pointForm="getDetail" />
     <div class="searchPointTable">
       <table class="formTable">
         <thead>
@@ -44,63 +45,91 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row" v-for="(item, index) in detail" :key="index">
-            <td class="col-md" :data-th="tableTh[0]">
-              {{ item.date }}
-            </td>
-            <td :data-th="tableTh[1]" class="col-md">{{ item.note }}</td>
-            <td :data-th="tableTh[2]" class="col-md">{{ selsctType }}</td>
-            <td :data-th="tableTh[3]" class="col-md">{{ item.bonus }}</td>
-            <td :data-th="tableTh[4]" class="col-md">{{ item.expiryDate }}</td>
-          </tr>
+          <template v-if="detail.length > 0">
+            <tr
+              class="row hasData"
+              v-for="(item, index) in detail"
+              :key="index"
+            >
+              <td class="col-md" :data-th="tableTh[0]">
+                {{ item.date }}
+              </td>
+              <td :data-th="tableTh[1]" class="col-md">{{ item.note }}</td>
+              <td :data-th="tableTh[2]" class="col-md">{{ typeName }}</td>
+              <td :data-th="tableTh[3]" class="col-md">{{ item.bonus }}</td>
+              <td :data-th="tableTh[4]" class="col-md">
+                {{ item.expiryDate }}
+              </td>
+            </tr>
+          </template>
+          <template v-else>
+            <tr>
+              <td colspan="5" class="noData">暫無資料</td>
+            </tr>
+          </template>
         </tbody>
       </table>
     </div>
   </div>
 </template>
 <script>
+import SearchComponent from "@/components/memberContent/SearchComponent.vue";
 export default {
+  components: { SearchComponent },
   data() {
     return {
-      ptype: null,
-      selsctType: "",
-      typeName: "財富點",
       select: [],
-      strDateShow: false,
-      searchecord: {
-        strDate: "",
-        endDate: "",
-      },
-      modelConfig: {
-        type: "string",
-        mask: "YYYY-MM-DD", // Uses 'iso' if missing
-      },
+      searchPoint: {},
+      typeName: "",
       tableTh: ["日期", "說明", "點數類型", "點數異動", "有效期限"],
 
-      detail: [
-        {
-          bonus: 20,
-          date: "2021-01-22",
-          expiryDate: "2021-01-22",
-          note: "會員生日禮",
-        },
-        {
-          bonus: 30,
-          date: "2021-01-22",
-          expiryDate: "2021-01-22",
-          note: "會員生日禮",
-        },
-      ],
+      detail: [],
     };
   },
   methods: {
-    pickstrDate() {
-      this.strDateShow = true;
+    getType(val) {
+      this.searchPoint = val;
+      this.getDetail();
+      this.getTypeName();
     },
-    pickstrDateHide() {
-      this.strDateShow = false;
+    getDetail(val) {
+      this.searchPoint = val;
+      let { type, strDate, endDate } = this.searchPoint;
+      this.axios
+        .get(
+          `${process.env.VUE_APP_API}/bonus/cust/bonusRecord/${type}?strDate=${strDate}&endDate=${endDate}`
+        )
+        .then((response) => {
+          this.detail = response.data.detail;
+        });
+    },
+    getTypeName() {
+      // var self = this,
+      //   name = "";
+      this.select.filter((type) => {
+        if (type.typeId == this.searchPoint.type) {
+          this.typeName = type.typeName;
+          // return;
+        }
+      });
+
+      // return name;
     },
   },
+  computed: {
+    // typeName() {
+    //   var self = this,
+    //     name = "";
+    //   this.select.filter((type) => {
+    //     if (type.typeId == self.searchPoint.type) {
+    //       name = type.typeName;
+    //       return;
+    //     }
+    //   });
+    //   return name;
+    // },
+  },
+
   created() {
     this.axios.get(`${process.env.VUE_APP_API}/bonus/type`).then((response) => {
       this.select = response.data.detail;
@@ -109,128 +138,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.memberSearchPoint {
-  form {
-    // border: 1px solid black;
-    .type {
-      p {
-        line-height: 1.2rem;
-      }
-    }
-    .time {
-      margin-top: 15px;
-      p {
-        line-height: 1.2rem;
-      }
-      label {
-        // padding: 0;
-        // border: 1px solid rebeccapurple;
-        position: relative;
-        input {
-          width: 150px;
-          margin-left: 10px;
-        }
-        .calendar {
-          position: absolute;
-          top: 30px;
-          left: 0;
-          z-index: 2;
-        }
-      }
-    }
-    button {
-      min-width: 64px;
-      i {
-        margin-right: 5px;
-      }
-      // border: 1px solid rgb(197, 24, 24);
-    }
-  }
-  .searchPointTable {
-    // border: 1px solid black;
-    margin-top: 20px;
-    table {
-      // border: 1px solid rgb(243, 45, 45);
-      width: 100%;
-      .row {
-        margin: 0;
-      }
-      thead tr th {
-        // border: 1px solid rgb(243, 45, 45);
-        // text-align: left;
-        padding: 0.6rem 0;
-      }
-      tbody td {
-        background-color: $mainColor;
-      }
-    }
-  }
-}
-@media (min-width: 768px) {
-  label {
-    padding: 0;
-  }
-  .searchPointTable {
-    thead tr th {
-      background-color: whitesmoke;
-      // color: $grey;
-      border-right: 1px solid $darkgrey;
-      &:last-child {
-        border-right: none;
-      }
-    }
-    tbody tr {
-      border-bottom: 1px solid $darkgrey;
-      &:last-child {
-        border-bottom: none;
-      }
-
-      td {
-        border-right: 1px solid $darkgrey;
-        padding: 0.5rem 5px;
-        &:last-child {
-          border-right: none;
-        }
-      }
-    }
-  }
-}
-@media (max-width: 767px) {
-  p {
-    padding-right: 5px;
-  }
-  .searchPointTable {
-    thead tr th {
-      // border: 1px solid rgb(45, 243, 111);
-      display: none;
-    }
-
-    tbody {
-      tr {
-        margin: 10px;
-        border-bottom: 6px solid $grey;
-
-        td {
-          padding: 0.5rem 0;
-          &::before {
-            content: attr(data-th) " ";
-            width: 5.5rem;
-            padding-right: 5px;
-            font-weight: bold;
-            // width: 6.5em;
-            display: inline-block;
-          }
-        }
-      }
-    }
-  }
-}
-@media (max-width: 575px) {
-  select {
-    margin-left: 15px;
-  }
-  label {
-    margin-top: 8px;
-  }
-}
+@import "@/assets/scss/searchPoint.scss";
 </style>
