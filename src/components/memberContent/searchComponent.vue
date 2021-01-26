@@ -37,7 +37,9 @@
         </vc-date-picker>
       </label>
     </div>
-    <button class="first"><i class="fas fa-search"></i>查詢</button>
+    <button type="submit" class="first">
+      <i class="fas fa-search"></i>查詢
+    </button>
   </form>
 </template>
 <script>
@@ -64,7 +66,18 @@ export default {
   },
   methods: {
     pointForm() {
-      this.$emit("pointForm", this.formVal);
+      if (this.formVal.type && this.formVal.strDate && this.formVal.endDate) {
+        this.$emit("pointForm", this.formVal);
+        this.clearForm();
+      } else {
+        alert("請輸入日期");
+        return;
+      }
+    },
+    clearForm() {
+      this.formVal.type = this.select[0].typeId;
+      this.formVal.strDate = "";
+      this.formVal.endDate = "";
     },
   },
   computed: {

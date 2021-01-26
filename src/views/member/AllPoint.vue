@@ -7,54 +7,70 @@
       </p>
       <p>你好</p>
     </div>
-    <div class="row memberInfo">
-      <div class="info">
-        <h5>會員等級</h5>
-        <p>一般會員</p>
-      </div>
-      <div class="info">
-        <h5>積分</h5>
-        <p>0</p>
-      </div>
-      <div class="info">
-        <h5>積分到期日</h5>
-        <p>2021-12-31</p>
-      </div>
-    </div>
-    <div class="row point">
-      <div class="col-md-3 valid">
-        <p>
-          <i class="fas fa-circle"></i>
-        </p>
-        <p>point</p>
-      </div>
-      <div class="col-md-3 valid">
-        <p>有效點數</p>
-        <p>40</p>
-      </div>
-      <div class="col-md-6 allExpireDate">
-        <p>年度到期點數</p>
-        <div class="expireDate">
-          <p>20 (2020-12-31)</p>
-          <p>20 (2020-12-31)</p>
-        </div>
-      </div>
+    <div class="row allPointTable">
+      <table>
+        <thead>
+          <tr class="row">
+            <th class="col-md">點數類型</th>
+            <th class="col-md">有效總點數</th>
+            <th class="col-md">年度點數(到期日)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hasData row">
+            <td data-th="點數類型" class="col-md" rowspan="2">財富點</td>
+            <td data-th="有效總點數" class="col-md" rowspan="2">40</td>
+            <td data-th="年度到期點數" class="col-md">
+              <div>20 (2021-12-31)</div>
+              <div>20 (2021-12-31)</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr class="row">
+            <th class="col-md">點數類型</th>
+            <th class="col-md">有效總點數</th>
+            <th class="col-md">年度點數(到期日)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hasData row">
+            <td data-th="點數類型" class="col-md" rowspan="2">財富點</td>
+            <td data-th="有效總點數" class="col-md" rowspan="2">40</td>
+            <td data-th="年度到期點數" class="col-md">
+              <div>20 (2021-12-31)</div>
+              <div>20 (2021-12-31)</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
 <script>
-// import axios from "axios";
-
 export default {
   name: "allPoint",
   components: {},
   data() {
     return {
-      userName: "國眾電腦",
+      userName: "",
     };
   },
 
-  created() {},
+  created() {
+    this.userName = sessionStorage.getItem("userName");
+    this.axios
+      .get(`${process.env.VUE_APP_API}/bonus/type`)
+      .then((response) => {
+        this.select = response.data.detail;
+        this.formVal.type = this.select[0].typeId;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   computed: {},
   watch: {},
   mounted() {},

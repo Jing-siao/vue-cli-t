@@ -151,11 +151,6 @@ export default {
   },
   methods: {
     loginHandler() {
-      //接token?
-      //登入成功要直接導向首頁
-      //不成功跳aleart帳密錯誤
-      // const token = "asds32adsavrAS3Fadf5567"; // token本身就是加密過的字串，隨意
-      // console.log(this.user.custid.toUpperCase());
       let custid = this.user.custid;
       let loginid = this.user.loginid;
       let password = this.user.password;
@@ -163,12 +158,7 @@ export default {
       let key = this.identify.key;
       // custid = custid.toUpperCase();
       // 帳號密碼需驗證不能為空
-      if (
-        custid !== "" &&
-        loginid !== "" &&
-        password !== "" &&
-        verificationCode !== ""
-      ) {
+      if (custid && loginid && password && verificationCode) {
         //先驗證圖片是否成功
         const keyApi = `${process.env.VUE_APP_API}/auth/captcha/${key}?code=${verificationCode}`;
         this.axios
@@ -184,7 +174,7 @@ export default {
                   //登入成功跳轉首頁
                   if (response.data.accessToken) {
                     // console.log(response.data);
-
+                    this.getName(); //存名字
                     //先存token和date到sessionStorage再跳轉頁面
                     sessionStorage.setItem(
                       "accessToken",
@@ -194,6 +184,7 @@ export default {
                     //在app的main.js接Token並在http header都加上token
                     //呼叫store裡action的updateLogin方法 並傳入true參數會帶到status
                     this.$store.dispatch("updateLogin", true);
+
                     //登入後push到會員中心
                     this.$router.push("/member/allPoint");
                     //接到token 登入按鈕要變登出
@@ -253,6 +244,11 @@ export default {
     otherLogin() {
       this.commonForm = false;
       this.isActive = "other";
+    },
+    getName() {
+      this.axios.get(`${process.env.VUE_APP_API}/cust`).then((response) => {
+        sessionStorage.setItem("userName", response.data.name);
+      });
     },
   },
   watch: {
