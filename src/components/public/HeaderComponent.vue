@@ -210,6 +210,7 @@ export default {
       // localStorage.clear();
       sessionStorage.clear("accessToken");
       sessionStorage.clear("expDate");
+      sessionStorage.clear("userName");
       this.$store.dispatch("updateLogin", false);
     },
   },

@@ -47,12 +47,12 @@ export default {
     width: 100%;
   }
 }
-@media (min-width: 576px) {
+@media (min-width: 577px) {
   .main {
     min-height: calc(100vh - 249px);
   }
 }
-@media (max-width: 575px) {
+@media (max-width: 576px) {
   .main {
     min-height: calc(100vh - 213px);
   }

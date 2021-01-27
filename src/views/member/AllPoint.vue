@@ -8,40 +8,22 @@
       <p>你好</p>
     </div>
     <div class="row allPointTable">
-      <table>
+      <table v-for="(table, index) in tables" :key="index">
         <thead>
           <tr class="row">
-            <th class="col-md">點數類型</th>
-            <th class="col-md">有效總點數</th>
-            <th class="col-md">年度點數(到期日)</th>
+            <th class="col-md" v-for="th in tableTh" :key="th">{{ th }}</th>
           </tr>
         </thead>
         <tbody>
           <tr class="hasData row">
-            <td data-th="點數類型" class="col-md" rowspan="2">財富點</td>
-            <td data-th="有效總點數" class="col-md" rowspan="2">40</td>
-            <td data-th="年度到期點數" class="col-md">
-              <div>20 (2021-12-31)</div>
-              <div>20 (2021-12-31)</div>
+            <td :data-th="tableTh[0]" class="col-md">
+              {{ table.typeName }}
             </td>
-          </tr>
-        </tbody>
-      </table>
-      <table>
-        <thead>
-          <tr class="row">
-            <th class="col-md">點數類型</th>
-            <th class="col-md">有效總點數</th>
-            <th class="col-md">年度點數(到期日)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="hasData row">
-            <td data-th="點數類型" class="col-md" rowspan="2">財富點</td>
-            <td data-th="有效總點數" class="col-md" rowspan="2">40</td>
-            <td data-th="年度到期點數" class="col-md">
-              <div>20 (2021-12-31)</div>
-              <div>20 (2021-12-31)</div>
+            <td :data-th="tableTh[1]" class="col-md">{{ table.total }}</td>
+            <td :data-th="tableTh[2]" class="col-md">
+              <div v-for="(data, index) in table.datas" :key="index">
+                {{ data.cnt }} ({{ data.expiryDate }})
+              </div>
             </td>
           </tr>
         </tbody>
@@ -56,6 +38,38 @@ export default {
   data() {
     return {
       userName: "",
+      types: [],
+      tableTh: ["點數類型", "有效總點數", "年度點數(到期日)"],
+      tables: [
+        // {
+        //   total: 200,
+        //   typeName: "財富點",
+        //   datas: [
+        //     {
+        //       cnt: 130,
+        //       expiryDate: "2021-12-31",
+        //     },
+        //     {
+        //       cnt: 70,
+        //       expiryDate: "2022-12-31",
+        //     },
+        //   ],
+        // },
+        // {
+        //   total: 80,
+        //  typeName: "自由點",
+        //   datas: [
+        //     {
+        //       cnt: 30,
+        //       expiryDate: "2021-12-31",
+        //     },
+        //     {
+        //       cnt: 50,
+        //       expiryDate: "2022-12-31",
+        //     },
+        //   ],
+        // },
+      ],
     };
   },
 
@@ -64,16 +78,49 @@ export default {
     this.axios
       .get(`${process.env.VUE_APP_API}/bonus/type`)
       .then((response) => {
-        this.select = response.data.detail;
-        this.formVal.type = this.select[0].typeId;
+        this.types = response.data.detail;
+      })
+      .then(() => {
+        //跑有幾支api迴圈
+        this.types.forEach((type) => {
+          this.axios
+            .all([
+              this.axios.get(
+                `${process.env.VUE_APP_API}/bonus/cust/${type.typeId}`
+              ),
+            ])
+            .then(
+              this.axios.spread((res) => {
+                // console.log(res);
+                this.tables.push(res.data);
+                // this.tables.forEach((arr) => {
+                //   // this.tables.push({ typeName: "123" }, { typeName: "456" });
+                //   arr[0].typeName = type[0].typeName;
+                // });
+                // this.typeName();
+              })
+            );
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   },
-  computed: {},
-  watch: {},
-  mounted() {},
+  // computed: {
+  //   typeName() {
+  //     this.types.forEach((item) => {
+  //       console.log(item.typeName);
+  //       // return item.typeName;
+  //     });
+  //   },
+  // },
+  methods: {
+    name() {
+      this.types.forEach((item) => {
+        item.typeName = this.tables.typeName;
+      });
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -52,8 +52,14 @@
 
 @media (max-width: 767px) {
   .allPointTable {
+    tr.hasData {
+      td::before {
+        width: 9rem !important;
+      }
+    }
+
     td div {
-      margin-left: 8rem;
+      margin-left: 9rem;
       margin-top: 0.5rem;
 
       &:first-child {
