@@ -1,5 +1,5 @@
 <template>
-  <form @submit="pointForm">
+  <form @submit.prevent="pointForm">
     <div class="type row">
       <p class="col-sm-2">點數類型</p>
       <select name="" id="" v-model="formVal.type">

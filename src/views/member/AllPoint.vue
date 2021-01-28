@@ -17,7 +17,7 @@
         <tbody>
           <tr class="hasData row">
             <td :data-th="tableTh[0]" class="col-md">
-              {{ table.typeName }}
+              {{ types[index].typeName }}
             </td>
             <td :data-th="tableTh[1]" class="col-md">{{ table.total }}</td>
             <td :data-th="tableTh[2]" class="col-md">
@@ -40,41 +40,13 @@ export default {
       userName: "",
       types: [],
       tableTh: ["點數類型", "有效總點數", "年度點數(到期日)"],
-      tables: [
-        // {
-        //   total: 200,
-        //   typeName: "財富點",
-        //   datas: [
-        //     {
-        //       cnt: 130,
-        //       expiryDate: "2021-12-31",
-        //     },
-        //     {
-        //       cnt: 70,
-        //       expiryDate: "2022-12-31",
-        //     },
-        //   ],
-        // },
-        // {
-        //   total: 80,
-        //  typeName: "自由點",
-        //   datas: [
-        //     {
-        //       cnt: 30,
-        //       expiryDate: "2021-12-31",
-        //     },
-        //     {
-        //       cnt: 50,
-        //       expiryDate: "2022-12-31",
-        //     },
-        //   ],
-        // },
-      ],
+      tables: [],
     };
   },
-
-  created() {
+  beforeUpdate() {
     this.userName = sessionStorage.getItem("userName");
+  },
+  mounted() {
     this.axios
       .get(`${process.env.VUE_APP_API}/bonus/type`)
       .then((response) => {
@@ -93,11 +65,6 @@ export default {
               this.axios.spread((res) => {
                 // console.log(res);
                 this.tables.push(res.data);
-                // this.tables.forEach((arr) => {
-                //   // this.tables.push({ typeName: "123" }, { typeName: "456" });
-                //   arr[0].typeName = type[0].typeName;
-                // });
-                // this.typeName();
               })
             );
         });
@@ -106,14 +73,6 @@ export default {
         console.log(err);
       });
   },
-  // computed: {
-  //   typeName() {
-  //     this.types.forEach((item) => {
-  //       console.log(item.typeName);
-  //       // return item.typeName;
-  //     });
-  //   },
-  // },
   methods: {
     name() {
       this.types.forEach((item) => {

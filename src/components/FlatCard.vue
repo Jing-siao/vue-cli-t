@@ -10,7 +10,6 @@
         <p>{{ item.date }}</p>
         <p class="ellipsis" v-html="domDecoder(item.content)" v-ellipsis></p>
         <p>
-          <!-- <i class="fas fa-check"></i> -->
           {{ item.note }}
         </p>
         <div class="more align-self-end">

@@ -15,9 +15,7 @@
               v-for="(item, index) in detail"
               :key="index"
             >
-              <td class="col-md" :data-th="tableTh[0]">
-                {{ item.date }}
-              </td>
+              <td :data-th="tableTh[0]" class="col-md">{{ item.date }}</td>
               <td :data-th="tableTh[1]" class="col-md">{{ item.note }}</td>
               <td :data-th="tableTh[2]" class="col-md">{{ typeName }}</td>
               <td :data-th="tableTh[3]" class="col-md">{{ item.bonus }}</td>
@@ -75,19 +73,7 @@ export default {
       });
     },
   },
-  computed: {
-    // typeName() {
-    //   var self = this,
-    //     name = "";
-    //   this.select.filter((type) => {
-    //     if (type.typeId == self.searchPoint.type) {
-    //       name = type.typeName;
-    //       return;
-    //     }
-    //   });
-    //   return name;
-    // },
-  },
+  computed: {},
 
   created() {
     this.axios.get(`${process.env.VUE_APP_API}/bonus/type`).then((response) => {

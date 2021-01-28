@@ -63,7 +63,6 @@
 
     tbody {
       tr {
-        margin: 10px;
         border-bottom: 6px solid $grey;
 
         td {
@@ -76,10 +75,13 @@
       }
 
       tr.hasData {
+
+
         td::before {
-          content: attr(data-th) " ";
+          content: attr(data-th);
           width: 8rem;
-          padding-right: 5px;
+          // border: 1px solid black;
+          // padding-right: 5px;
           font-weight: bold;
           // width: 6.5em;
           display: inline-block;

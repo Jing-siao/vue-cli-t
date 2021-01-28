@@ -1,0 +1,69 @@
+@import '../public/mixins/table';
+
+.memberExchangeRecord {
+  .exchangeRecordTable {
+    // border: 1px solid black;
+    margin-top: 20px;
+    @include table();
+
+
+  }
+}
+
+
+@media (min-width: 768px) {
+  .exchangeRecordTable {
+    th {
+      &:nth-child(1) {
+        min-width: 100px;
+      }
+
+      &:nth-child(3) {
+        min-width: 180px;
+      }
+
+      &:nth-child(6) {
+        min-width: 110px;
+
+      }
+    }
+
+
+
+
+    tbody {
+      td {
+        &:nth-child(1) {
+          min-width: 100px;
+        }
+
+
+        &:nth-child(3) {
+          min-width: 180px;
+        }
+
+        &:nth-child(4) {
+          text-align: right;
+        }
+
+        &:nth-child(6) {
+          min-width: 110px;
+          text-align: right;
+        }
+
+        &.noNote {
+          text-align: center;
+        }
+
+        a {
+          text-decoration: underline;
+          color: blue;
+
+          &:hover {
+            color: rgb(92, 1, 1);
+          }
+        }
+      }
+    }
+  }
+}
