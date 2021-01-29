@@ -6,17 +6,19 @@
       :key="question.title"
       @click="showAnswer(index)"
     >
-      <div class="questionWrap row" :class="{ up: index == current }">
-        <h5 class="col-11">Q{{ index + 1 }} : {{ question.qaName }}</h5>
-        <div class="col-1">
+      <div class="questionWrap" :class="{ up: index == current }">
+        <h5>Q{{ index + 1 }} :</h5>
+        <h5>
+          {{ question.qaName }}
+        </h5>
+        <div>
           <i class="fas fa-angle-down" :class="{ up: index == current }"></i>
         </div>
       </div>
-      <div
-        class="answer row"
-        :class="{ up: index == current }"
-        v-html="domDecoder(question.content)"
-      ></div>
+      <div class="answer" :class="{ up: index == current }">
+        <p>A{{ index + 1 }} :</p>
+        <p v-html="domDecoder(question.content)"></p>
+      </div>
     </div>
   </div>
 </template>
@@ -64,6 +66,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import "../assets/scss/question.scss";
 </style>
