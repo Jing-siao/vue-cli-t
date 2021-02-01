@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    form {
+      background-color: rgb(214, 214, 214);
+      width: 350px;
+      border-radius: 10px;
+      margin: 10% auto;
+
+    }
+
+    div {
+      /* border: 1px solid black; */
+      margin: 0 auto;
+      width: 300px;
+      padding: 20px;
+    }
+
+    input {
+      padding: 5px;
+      font-size: 15px;
+      width: 170px;
+      outline: none;
+      border-radius: 5px;
+      border: 2px solid rgb(131, 131, 131);
+    }
+
+    button {
+      display: block;
+      margin: 20px 0;
+      width: 100%;
+      padding: 10px;
+      background-color: rgb(80, 80, 80);
+      color: white;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+
+      background-color: rgb(131, 131, 131);
+
+    }
+
+    p {
+      display: inline-block;
+    }
+
+    label {
+      display: block;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="">
+    <div>
+      <label for="custid">
+        <p class="col-sm-2 col-10">身分證字號</p>
+        <input type="text" class="col-sm-6 col-10" placeholder="例:A123456789" />
+      </label>
+
+      <label for="loginid">
+        <p class="col-sm-2 col-10">使用者代號</p>
+        <input type="text" class="col-sm-6 col-10" placeholder="請輸入8-12碼" />
+      </label>
+      <label for="password">
+        <p class="col-sm-2 col-10">密碼</p>
+        <input type="password" class="col-sm-6 col-10" placeholder="請輸入8-12碼" />
+      </label>
+
+      <button type="submit" class="col-10 col-sm-8 first">下一步</button>
+    </div>
+  </form>
+</body>
+
+</html>

@@ -25,9 +25,10 @@
 
 <script>
 // import $ from "jquery";
-
+import domDecoder from "../mixins/domDecoder.js";
 export default {
   name: "questionComponent",
+  mixins: [domDecoder],
   data() {
     return {
       // index: 0,
@@ -53,14 +54,6 @@ export default {
       } else {
         this.current = index;
       }
-    },
-    domDecoder(str) {
-      let parser = new DOMParser();
-      let dom = parser.parseFromString(
-        `<!doctype html><body>${str}`,
-        "text/html"
-      );
-      return dom.body.textContent;
     },
   },
 };

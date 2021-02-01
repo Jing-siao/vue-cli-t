@@ -24,8 +24,10 @@
 </template>
 
 <script>
+import domDecoder from "../mixins/domDecoder.js";
 export default {
   name: "flatCard",
+  mixins: [domDecoder],
   data() {
     return {
       news: [],
@@ -45,16 +47,7 @@ export default {
         console.log(err);
       });
   },
-  methods: {
-    domDecoder(str) {
-      let parser = new DOMParser();
-      let dom = parser.parseFromString(
-        `<!doctype html><body>${str}`,
-        "text/html"
-      );
-      return dom.body.textContent;
-    },
-  },
+  methods: {},
   directives: {
     ellipsis: {
       inserted(el) {
