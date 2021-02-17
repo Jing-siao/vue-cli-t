@@ -1,0 +1,56 @@
+.newsWrap {
+  @include hederFixed();
+
+
+  .news {
+    background-color: $grey;
+    border-radius: 1.5rem;
+
+    h4 {
+      padding: 15px 0 0px;
+      letter-spacing: 0.12rem;
+      line-height: 1.8rem;
+    }
+
+    .imgWrap {
+      margin-top: 15px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .textWrap {
+      margin-top: 15px;
+
+      p {
+        letter-spacing: .08rem;
+        line-height: 1.25rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .newsWrap {
+    min-height: calc(100vh - 124px);
+
+    .news {
+      width: 80%;
+      margin: 30px auto 0;
+      padding: 15px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .newsWrap {
+    min-height: calc(100vh - 88px);
+
+    .news {
+      width: 92%;
+      margin: 15px auto 0;
+    }
+  }
+}

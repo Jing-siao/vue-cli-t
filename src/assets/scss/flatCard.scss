@@ -19,7 +19,7 @@
     div.imgWrap {
       // border: 1px solid black;
       display: inline-block;
-
+      padding: 0;
 
       img {
         // border: 1px solid black;
@@ -27,12 +27,14 @@
         width: 100%;
         height: auto;
 
+
       }
     }
 
     div.info {
       // border: 1px solid black;
       text-align: left;
+      padding: 0;
 
 
       p.ellipsis {
@@ -54,9 +56,26 @@
         color: lightseagreen;
         // border: 1px solid black;
         display: inline-block;
+        cursor: pointer;
+        padding: 5px;
 
+        &:hover {
+          color: rgb(3, 131, 124);
+        }
       }
     }
 
+  }
+
+  .noNews {
+    text-align: center;
+    margin: 30px 5px;
+  }
+}
+
+
+@media(max-width:767px) {
+  div.info {
+    margin-top: 10px;
   }
 }
