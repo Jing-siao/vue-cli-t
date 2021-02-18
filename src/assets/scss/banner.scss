@@ -1,43 +1,34 @@
 div.banner {
 
   // border: 1px solid rgb(219, 60, 60);
-  .slider {
+  .slick-slider {
 
     margin: 0 auto;
-    border: 1px solid snow;
+    // border: 1px solid snow;
 
     button.slick-prev {
-      left: 2%;
+      left: 1.5%;
       z-index: 1;
-      // border: 1px solid black;
- // padding: 5px;
- // display: inline-block;
+
     }
 
     button.slick-next {
 
-      right: 2%;
+      right: 1.5%;
     }
 
-    // .slick-dots {
-    //   position: absolute;
-    //   bottom: 20px;
-    //   display: block;
-    //   width: 100%;
-    //   padding: 10;
-    //   margin: 0;
-    //   list-style: none;
-    //   text-align: center;
-    // }
+    .slick-dots {
+      bottom: -35px;
+    }
 
-    // .slick-dots li.slick-active button:before {
-    //   font-size: 15px;
-    //   color: blue;
-    // }
+    .slick-dots li.slick-active button:before {
+      font-size: 15px;
+      color: $darkgrey;
+    }
 
     .pic {
       padding: 0;
-
+      // border: 1px solid rgb(78, 16, 26);
 
       a {
         outline: none;
@@ -79,10 +70,32 @@ div.banner {
 
 }
 
+@media(min-width:577px) {
+  div.banner {
+    .row {
+      .pic {
+        border: 1px solid blue;
+        padding: 0;
+
+        a {
+          .description {
+            display: inline-block;
+            transform: translateY(0%);
+          }
+        }
+      }
+
+    }
+  }
+}
+
 @media(max-width:576px) {
   div.banner {
     .row {
       .pic {
+
+        border: 1px solid pink;
+
         a {
           .description {
             display: block;

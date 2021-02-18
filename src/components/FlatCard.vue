@@ -47,7 +47,6 @@ export default {
         this.news = response.data.detail;
         // console.log("設定前", this.news[0].title);
         // this.news[0].title = response.data.detail[0].title1;
-        console.log(this.news);
       })
       .catch((err) => {
         //有錯誤時
