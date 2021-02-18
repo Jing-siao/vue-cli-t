@@ -6,7 +6,11 @@
     <a href="#">
       <i class="fas fa-angle-left"></i>
     </a>
-    <a href="#" v-for="page in 5" :key="page">{{ page }}</a>
+    <ul>
+      <li v-for="page in paginationService.pageTotal" :key="page">
+        {{ page }}
+      </li>
+    </ul>
     <a href="#">
       <i class="fas fa-angle-right"></i>
     </a>
@@ -15,7 +19,20 @@
     </a>
   </div>
 </template>
-
+<script>
+export default {
+  props: {
+    paginationService: {
+      type: Object,
+    },
+  },
+  methods: {
+    getPagesService(item) {
+      this.$emit("pageService", item);
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 .pagination {
   // border: 1px solid blue;
@@ -34,6 +51,27 @@
 
     i {
       vertical-align: middle;
+    }
+  }
+  ul {
+    // border: 1px solid black;
+    display: inline-block;
+    li {
+      // border: 1px solid red;
+      display: inline-block;
+      color: $grey;
+      padding: 5px 9px;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: $grey;
+        color: $body;
+      }
+      &:active {
+        background-color: $grey;
+        color: $body;
+      }
     }
   }
 }

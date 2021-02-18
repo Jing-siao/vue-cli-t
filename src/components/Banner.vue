@@ -7,14 +7,14 @@
         ref="slick"
         class="pic col-md-12"
         v-for="(item, i) in banner"
-        :key="item.title"
+        :key="item.guid"
       >
-        <a :href="item.link">
-          <img :src="item.src" alt="" />
+        <a :href="item.webUrl" target="_blank">
+          <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
           <div class="description">
             <span class="number">{{ i + 1 }}</span>
-            <p>{{ item.title }}</p>
-            <p>{{ item.notes }}</p>
+            <p>{{ item.name }}</p>
+            <p>{{ item.note }}</p>
           </div>
         </a>
       </div>
@@ -55,49 +55,47 @@ export default {
           //     slidesToScroll: 1,
           //   }
           // },
-          {
-            breakpoint: 576,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              arrows: false,
-            },
-          },
+          // {
+          //   breakpoint: 576,
+          //   settings: {
+          //     slidesToShow: 1,
+          //     slidesToScroll: 1,
+          //     arrows: false,
+          //   },
+          // },
         ],
       },
-      index: 0,
-
       banner: [
-        {
-          title: "活動一",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          notes: "次要說明次要說明次要說明",
-        },
-        {
-          title: "活動二",
-          src: "http://fakeimg.pl/600x300/282828/ccc/",
-          link: "javascript:;",
-          notes: "次要說明次要說明次要說明",
-        },
-        {
-          title: "活動三",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          notes: "次要說明次要說明次要說明",
-        },
-        {
-          title: "活動四",
-          src: "http://fakeimg.pl/600x300/282828/ccc/",
-          link: "javascript:;",
-          notes: "次要說明次要說明次要說明",
-        },
-        {
-          title: "活動五",
-          src: "http://fakeimg.pl/600x300/bbb/ccc/",
-          link: "javascript:;",
-          notes: "次要說明次要說明次要說明",
-        },
+        // {
+        //   title: "活動一",
+        //   src: "http://fakeimg.pl/600x300/aaa/ccc/",
+        //   link: "javascript:;",
+        //   notes: "次要說明次要說明次要說明",
+        // },
+        // {
+        //   title: "活動二",
+        //   src: "http://fakeimg.pl/600x300/282828/ccc/",
+        //   link: "javascript:;",
+        //   notes: "次要說明次要說明次要說明",
+        // },
+        // {
+        //   title: "活動三",
+        //   src: "http://fakeimg.pl/600x300/aaa/ccc/",
+        //   link: "javascript:;",
+        //   notes: "次要說明次要說明次要說明",
+        // },
+        // {
+        //   title: "活動四",
+        //   src: "http://fakeimg.pl/600x300/282828/ccc/",
+        //   link: "javascript:;",
+        //   notes: "次要說明次要說明次要說明",
+        // },
+        // {
+        //   title: "活動五",
+        //   src: "http://fakeimg.pl/600x300/bbb/ccc/",
+        //   link: "javascript:;",
+        //   notes: "次要說明次要說明次要說明",
+        // },
       ],
     };
   },
@@ -114,6 +112,24 @@ export default {
         this.$refs.slick.reSlick();
       });
     },
+    getData() {
+      this.axios
+        .get(`${process.env.VUE_APP_API}/ad/index1`)
+        .then((response) => {
+          console.log(response.data.detail);
+          this.banner = response.data.detail;
+          console.log(this.banner);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  beforeUpdate() {
+    this.getData();
+  },
+  created() {
+    this.getData();
   },
 };
 </script>

@@ -10,7 +10,7 @@
           <!-- v-on:cardType="filterData" -->
         </div>
       </div>
-      <Pagination />
+      <Pagination :paginationService="pagination" />
     </div>
     <GoTOPBtn />
   </div>
@@ -37,11 +37,18 @@ export default {
     return {
       data: [],
       type: "all",
+      pagination: {},
     };
   },
   computed: {
     pointCard() {
+      // this.cacheProducts.forEach((item, index) => {
+      //   let num = index + 1;
+      //   if (num >= this.pagination.minPage && num <= this.pagination.maxPage) {
+      //     return pointCard.push(item);
+      //   }
       return pointCard;
+      // });
     },
     filterData() {
       if (this.type == "all") {
@@ -60,10 +67,32 @@ export default {
     },
   },
   created() {
-    this.axios.get(`${process.env.VUE_APP_API}/gift/all`).then((response) => {
-      console.log(response.data);
-      // this.base64Data = response.data.base64Data;
-    });
+    this.axios
+      .get(`${process.env.VUE_APP_API}/gift/all`)
+      .then((response) => {
+        console.log(response.data);
+        console.log(this.pointCard);
+        //先解構
+        let { totalResult, per_page, pageTotal, currentPage } = this.pagination;
+        totalResult = this.pointCard.length;
+        per_page = 8;
+        //無條件進位算總頁數
+        pageTotal = Math.ceil(totalResult / per_page);
+        currentPage = 1;
+        //判斷避免當前頁數超過總頁數
+        if (currentPage > pageTotal) {
+          currentPage = pageTotal;
+        }
+        const minPage = currentPage * per_page - per_page + 1;
+        const maxPage = currentPage * per_page;
+        console.log(
+          `總資料數量:${totalResult},每頁數量:${per_page},總頁數:${pageTotal},當前頁數:${currentPage},每頁第一筆:${minPage},每頁最後一筆${maxPage}`
+        );
+        this.pagination = { totalResult, per_page, pageTotal, currentPage };
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>
