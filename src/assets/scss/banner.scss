@@ -5,10 +5,21 @@ div.banner {
     margin: 0 auto;
     // border: 1px solid snow;
 
+    button.slick-prev,
+    button.slick-next {
+      width: auto;
+      height: 30px;
+      border-radius: none;
+
+      &::before {
+        font-size: 20px;
+        padding: 5px;
+      }
+    }
+
     button.slick-prev {
       left: 1%;
       z-index: 1;
-
     }
 
     button.slick-next {

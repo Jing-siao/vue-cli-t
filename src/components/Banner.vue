@@ -4,7 +4,10 @@
     <VueSlickCarousel v-bind="settings" class="slider" v-if="banner.length > 0">
       <div class="pic col-md-12" v-for="item in banner" :key="item.guid">
         <a :href="item.webUrl" target="_blank">
-          <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
+          <!-- <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" /> -->
+          <!-- <img :src="'@/assets/img/' + item.pic" alt="" /> -->
+          <img src="../assets/下載.png" />
+          <!-- <img src="../assets/LEO-logo.png" /> -->
           <div class="description">
             <span>{{ item.name }}</span>
             <p>{{ item.note }}</p>
