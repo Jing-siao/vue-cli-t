@@ -4,10 +4,9 @@
     <VueSlickCarousel v-bind="settings" class="slider" v-if="banner.length > 0">
       <div class="pic col-md-12" v-for="item in banner" :key="item.guid">
         <a :href="item.webUrl" target="_blank">
-          <!-- <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" /> -->
-          <!-- <img :src="'@/assets/img/' + item.pic" alt="" /> -->
-          <img src="../assets/下載.png" />
-          <!-- <img src="../assets/LEO-logo.png" /> -->
+          <!-- <img :src="item.src" alt="" /> -->
+          <img :src="require('../assets/img/ad/' + item.pic)" alt="" />
+
           <div class="description">
             <span>{{ item.name }}</span>
             <p>{{ item.note }}</p>
@@ -35,7 +34,7 @@ export default {
         arrows: true,
         dots: true,
         swipeToSlide: true,
-        autoplay: true,
+        // autoplay: true,
         autoplaySpeed: 5000,
         responsive: [
           {
@@ -53,7 +52,11 @@ export default {
       this.axios
         .get(`${process.env.VUE_APP_API}/ad/index1`)
         .then((response) => {
-          // console.log(response.data.detail);
+          // let carousel = response.data.detail.map((item) => {
+          //   let pic = item.pic;
+          //   item.src = require(`../assets/img/ad/${pic}`);
+          //   return { ...item };
+          // });
           this.banner = response.data.detail;
         })
         .catch((err) => {

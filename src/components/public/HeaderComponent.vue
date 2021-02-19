@@ -20,7 +20,7 @@
           </button>
           <div id="logo">
             <router-link to="/" @click.native="closeMenu">
-              <img src="../../assets/LEO-logo.png" alt="logo" />
+              <img src="../../assets/img/LEO-logo.png" alt="logo" />
             </router-link>
           </div>
           <ul class="menu">
