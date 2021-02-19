@@ -1,0 +1,23 @@
+.main {
+  margin-top: 50px;
+
+  .content {
+    border: 1px solid salmon;
+
+    div {
+      border: 1px solid blue;
+      color: aliceblue;
+
+      div {
+        border: 1px solid blue;
+
+      }
+
+      table {
+        border: 1px solid salmon;
+      }
+    }
+
+
+  }
+}

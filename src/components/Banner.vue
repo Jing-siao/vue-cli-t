@@ -6,7 +6,6 @@
         <a :href="item.webUrl" target="_blank">
           <!-- <img :src="item.src" alt="" /> -->
           <img :src="require('../assets/img/ad/' + item.pic)" alt="" />
-
           <div class="description">
             <span>{{ item.name }}</span>
             <p>{{ item.note }}</p>
@@ -52,11 +51,16 @@ export default {
       this.axios
         .get(`${process.env.VUE_APP_API}/ad/index1`)
         .then((response) => {
+          //以下之後可用先留著
           // let carousel = response.data.detail.map((item) => {
           //   let pic = item.pic;
           //   item.src = require(`../assets/img/ad/${pic}`);
           //   return { ...item };
           // });
+          //排序
+          response.data.detail.sort((a, b) => {
+            return a.autoS - b.autoS;
+          });
           this.banner = response.data.detail;
         })
         .catch((err) => {
