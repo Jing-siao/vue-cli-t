@@ -16,7 +16,7 @@
           v-model="formVal.strDate"
           :model-config="modelConfig"
           :min-date="minDate"
-          :max-date="new Date()"
+          :max-date="maxDate"
         >
           <template v-slot="{ inputValue, inputEvents }">
             <input :value="inputValue" v-on="inputEvents" />
@@ -85,6 +85,9 @@ export default {
       let nDate = new Date();
       let minDate = nDate.setMonth(nDate.getMonth() - 6);
       return minDate;
+    },
+    maxDate() {
+      return this.formVal.endDate || new Date();
     },
   },
 };

@@ -1,19 +1,19 @@
 <template>
   <div class="about">
-    <div class="container main">
+    <div class="col main">
       <h1>{{ act.actName }}</h1>
       <div class="content">
         <!-- <p v-html="domDecoder(act.content)"></p> -->
-        <div v-html="act.content"></div>
+        <!-- <div v-html="act.content"></div> -->
         <div class="ac_list">
           <h5>壹、活動說明：</h5>
-          <div>
+          <div class="section">
             參加資格：
             凡持臺灣新光商業銀行（以下簡稱本行）或其他銀行晶片金融卡之自然人，於紅利活動網站(以下簡稱本活動網站)之會員專區註冊成為會員，即可參加本活動。
           </div>
-          <div>活動期間：107/7/16～108/12/31。</div>
-          <div>
-            <p>活動說明：</p>
+          <div class="section">活動期間：107/7/16～108/12/31。</div>
+          <div class="section">
+            活動說明：
 
             <p>
               (一) 點數類型：Mega Point（簡稱M
@@ -28,81 +28,123 @@
               Point，可於本活動網站兌換電子商品券。
             </p>
 
-            <div>
-              <p>(四) 「M Point」回饋方式：</p>
+            <p>(四) 「M Point」回饋方式：</p>
 
-              <table>
+            <table>
+              <thead>
                 <tr class="row">
-                  <td class="col-3">管道</td>
-                  <td class="col-3">交易項目</td>
-                  <td class="col-3">M Point回饋</td>
-                  <td class="col-3">會員積分回饋</td>
+                  <th class="col-md">管道</th>
+                  <th class="col-md">交易項目</th>
+                  <th class="col-md">M Point回饋</th>
+                  <th class="col-md">會員積分回饋</th>
                 </tr>
-                <tr class="row">
-                  <td class="col-3">網路銀行 (含行動銀行)</td>
-                  <td class="col-3">
+              </thead>
+              <tbody>
+                <tr class="row hasData">
+                  <td class="col-md" data-th="管道">網路銀行 (含行動銀行)</td>
+                  <td class="col-md" data-th="交易項目">
                     單筆新臺幣即時及預約跨行轉帳成功之交易。
                   </td>
-                  <td class="col-3">2</td>
-                  <td class="col-3">2</td>
+                  <td class="col-md" data-th="M Point回饋">2</td>
+                  <td class="col-md" data-th="會員積分回饋">2</td>
                 </tr>
-                <tr class="row">
-                  <td class="col-3"></td>
-                  <td class="col-3">
+                <tr class="row hasData">
+                  <td class="col-md" data-th="管道">網路銀行 (含行動銀行)</td>
+                  <td class="col-md" data-th="交易項目">
                     外幣即時換匯交易(限新臺幣轉外幣、外幣轉新臺幣、不同外幣間互轉)每筆最低等值NT$5,000元(不含預約交易)。
                   </td>
-                  <td class="col-3">4</td>
-                  <td class="col-3">4</td>
+                  <td class="col-md" data-th="M Point回饋">4</td>
+                  <td class="col-md" data-th="會員積分回饋">4</td>
                 </tr>
-                <tr class="row">
-                  <td class="col-3"></td>
-                  <td class="col-3">
+                <tr class="row hasData">
+                  <td class="col-md" data-th="管道">網路銀行 (含行動銀行)</td>
+                  <td class="col-md" data-th="交易項目">
                     外幣即時跨行匯款交易(不含預約交易及外幣轉帳交易)
                   </td>
-                  <td class="col-3">10</td>
-                  <td class="col-3">10</td>
+                  <td class="col-md" data-th="M Point回饋">10</td>
+                  <td class="col-md" data-th="會員積分回饋">10</td>
                 </tr>
-                <tr class="row">
-                  <td class="col-3">網路ATM</td>
-                  <td class="col-3">
+                <tr class="row hasData">
+                  <td class="col-md" data-th="管道">網路ATM</td>
+                  <td class="col-md" data-th="交易項目">
                     單筆新臺幣即時及預約跨行轉帳成功之交易。
                   </td>
-                  <td class="col-3">2</td>
-                  <td class="col-3">2</td>
+                  <td class="col-md" data-th="M Point回饋">2</td>
+                  <td class="col-md" data-th="會員積分回饋">2</td>
                 </tr>
 
-                <tr class="row">
-                  <td class="col-3">線上結匯</td>
-                  <td class="col-3">
+                <tr class="row hasData">
+                  <td class="col-md" data-th="管道">線上結匯</td>
+                  <td class="col-md" data-th="交易項目">
                     繳款成功之交易(每筆最低下單金額等值NT$10,000元)。
                   </td>
-                  <td class="col-3">4</td>
-                  <td class="col-3">4</td>
+                  <td class="col-md" data-th="M Point回饋">4</td>
+                  <td class="col-md" data-th="會員積分回饋">4</td>
                 </tr>
-                <tr class="row">
-                  <td class="col-3">數位存款帳戶</td>
-                  <td class="col-3">開戶成功(新臺幣及外幣帳戶分別計算)。</td>
-                  <td class="col-3">10</td>
-                  <td class="col-3">10</td>
+                <tr class="row hasData">
+                  <td class="col-md" data-th="管道">數位存款帳戶</td>
+                  <td class="col-md" data-th="交易項目">
+                    開戶成功(新臺幣及外幣帳戶分別計算)。
+                  </td>
+                  <td class="col-md" data-th="M Point回饋">10</td>
+                  <td class="col-md" data-th="會員積分回饋">10</td>
                 </tr>
-              </table>
-              <p>
-                備註
-                本行帳戶如已享有跨行交易免手續費優惠，將不發送點數及會員積分，非本行帳戶則不在此限。
-                各項即時及預約交易，均須於活動期間內完成始符合發放資格。
-                持他行晶片金融卡之自然人會員亦適用。
-              </p>
-            </div>
-            <p>
-              (五) 會員分級 積分 生日禮 會員年度禮 兌換贈品折扣 備註 一般會員 -
-              20點 - - 會員註冊成功即為一般會員。 鈦金會員 200分 100點 40點
-              10點* *該等級會員於每次兌換贈品時可折減之點數 金鑽會員 500分 300點
-              100點 20點* *該等級會員於每次兌換贈品時可折減之點數
+              </tbody>
+            </table>
+            <p class="note">
+              備註
+              本行帳戶如已享有跨行交易免手續費優惠，將不發送點數及會員積分，非本行帳戶則不在此限。
+              各項即時及預約交易，均須於活動期間內完成始符合發放資格。
+              持他行晶片金融卡之自然人會員亦適用。
             </p>
           </div>
-          <div>
-            備註
-            <p>※ 等級資格及積分到期說明</p>
+          <div class="section">
+            <p>(五)會員分級</p>
+            <table>
+              <thead>
+                <tr class="row">
+                  <th class="col-md">會員分級</th>
+                  <th class="col-md">積分</th>
+                  <th class="col-md">生日禮</th>
+                  <th class="col-md">會員年度禮</th>
+                  <th class="col-md">兌換贈品折扣</th>
+                  <th class="col-md">備註</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr tr class="row hasData">
+                  <td class="col-md" data-th="會員分級">一般會員</td>
+                  <td class="col-md" data-th="積分">-</td>
+                  <td class="col-md" data-th="生日禮">20點</td>
+                  <td class="col-md" data-th="會員年度禮">-</td>
+                  <td class="col-md" data-th="兌換贈品折扣">-</td>
+                  <td class="col-md" data-th="備註">
+                    會員註冊成功即為一般會員。
+                  </td>
+                </tr>
+                <tr tr class="row hasData">
+                  <td class="col-md" data-th="會員分級">鈦金會員</td>
+                  <td class="col-md" data-th="積分">200分</td>
+                  <td class="col-md" data-th="生日禮">100點</td>
+                  <td class="col-md" data-th="會員年度禮">40點</td>
+                  <td class="col-md" data-th="兌換贈品折扣">10點*</td>
+                  <td class="col-md" data-th="備註">
+                    *該等級會員於每次兌換贈品時可折減之點數
+                  </td>
+                </tr>
+                <tr tr class="row hasData">
+                  <td class="col-md" data-th="會員分級">金鑽會員</td>
+                  <td class="col-md" data-th="積分">500分</td>
+                  <td class="col-md" data-th="生日禮">300點</td>
+                  <td class="col-md" data-th="會員年度禮">100點</td>
+                  <td class="col-md" data-th="兌換贈品折扣">20點*</td>
+                  <td class="col-md" data-th="備註">
+                    *該等級會員於每次兌換贈品時可折減之點數
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>備註 ※ 等級資格及積分到期說明</p>
 
             <p>
               ☆一般會員積分達200分（含）即可升級為鈦金會員，原會員積分同時歸零並重新計算。鈦金會員資格自升級日起，可保留至次一年度12月31日止；於鈦金會員資格有效期間（自升級日起至次一年度12月31日止）內，新增積分累計達200分（含）者，鈦金會員資格續延至次一年度；新增積分累計未達200分者，則將轉返為一般會員。
@@ -120,7 +162,7 @@
         </div>
         <div class="ac_list">
           <h5>貳、 注意事項：</h5>
-          <div>
+          <div class="section">
             點數期限及相關限制：
             <p>
               (一)
@@ -136,7 +178,7 @@
               本行將視商品兌換情形，隨時調整各商品之每人兌換數量限制，並於本活動網站公告。
             </p>
           </div>
-          <div>
+          <div class="section">
             參加資格、領獎條件及方式：
             <p>(一) 登錄個人基本資料：</p>
             <p>
@@ -173,7 +215,7 @@
               兌換商品規格以實物為準，如有瑕疵，或因任何因素導致商品故障、服務中止或異動、或需增補差額，概與本行無關，請逕洽新加坡商宜睿智慧股份有限公司或商品及服務之提供商。
             </p>
           </div>
-          <div>
+          <div class="section">
             其他應注意事項：
             <p>
               (一)
@@ -185,8 +227,9 @@
             </p>
             <p>
               (三)
-              本行保留更換等值商品，及解釋、取消、終止、修改或暫停本活動之權利，活動辦法以本活動網站
-              ( www.megabank.com.tw )公告為準。
+              本行保留更換等值商品，及解釋、取消、終止、修改或暫停本活動之權利，活動辦法以本活動網站(
+              <a href=" www.megabank.com.tw"> www.megabank.com.tw</a>
+              )公告為準。
             </p>
             <p>(四) 若有其他未盡事宜，悉依本行相關規定或解釋辦理。</p>
           </div>
@@ -196,6 +239,7 @@
   </div>
 </template>
 <script>
+// import $ from "jquery";
 // import domDecoder from "../mixins/domDecoder.js";
 export default {
   // mixins: [domDecoder],
@@ -204,11 +248,30 @@ export default {
       act: {},
     };
   },
+  methods: {
+    changeClass() {
+      // let td = document.getElementsByTagName("td");
+      // let col = document.getElementsByClassName("col-md");
+      // for (let i = 0; i < col.length; i++) {
+      //   let test = col[i].innerText.length;
+      //   if (test > 19) {
+      //     col[i].className = "col-md-5";
+      //   } else if (test <= 4) {
+      //     col[i].className = "col-md-2";
+      //   }
+      // }
+      // let col1 = $("td.col-md");
+      // console.log(col1.text());
+    },
+  },
+  mounted() {
+    this.changeClass();
+  },
   created() {
     this.axios
       .get(`${process.env.VUE_APP_API}/act/pcs1`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.act = response.data;
       })
       .catch((err) => {

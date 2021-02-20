@@ -42,6 +42,14 @@ export default {
       ],
     };
   },
+  methods: {
+    inner() {
+      console.log("內部");
+    },
+  },
+  mounted() {
+    this.inner();
+  },
 };
 </script>
 

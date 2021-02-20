@@ -1,23 +1,71 @@
+@import '../public/mixins/table';
+
 .main {
-  margin-top: 50px;
-
   .content {
-    border: 1px solid salmon;
+    // border: 1px solid salmon;
+    background-color: $darkgrey;
+    border-radius: 1rem;
 
-    div {
-      border: 1px solid blue;
-      color: aliceblue;
+    div.ac_list {
 
-      div {
-        border: 1px solid blue;
+      // background-color: $grey;
+      h5 {
+        margin-bottom: 10px;
+        color: white;
+      }
 
+      div.section {
+        border-top: 1px solid $mainColor;
+        padding: 8px 0;
+        line-height: 1.4rem;
+        letter-spacing: .04rem;
+        @include table();
+
+        p {
+          color: $grey;
+          line-height: 1.2rem;
+        }
       }
 
       table {
-        border: 1px solid salmon;
+        color: $darkgrey;
+        margin: 10px 0;
       }
     }
+  }
+}
 
+@media(min-width:576px) {
+  .main {
+    margin-top: 50px;
 
+    .content {
+      padding: 20px;
+      border-radius: 1rem;
+
+      div.ac_list {
+        color: aliceblue;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+@media(max-width:575px) {
+  .main {
+    margin-top: 20px;
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .content {
+      padding: 8px;
+
+      div.ac_list {
+        margin-bottom: 10px;
+
+      }
+    }
   }
 }

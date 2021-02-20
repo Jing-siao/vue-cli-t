@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <style>
     * {
       box-sizing: border-box;
@@ -68,21 +70,26 @@
     <div>
       <label for="custid">
         <p class="col-sm-2 col-10">身分證字號</p>
-        <input type="text" class="col-sm-6 col-10" placeholder="例:A123456789" />
+        <input type="text" class="col-sm-6 col-10" placeholder="例:A123456789" id="userId" />
       </label>
 
       <label for="loginid">
         <p class="col-sm-2 col-10">使用者代號</p>
-        <input type="text" class="col-sm-6 col-10" placeholder="請輸入8-12碼" />
+        <input type="text" class="col-sm-6 col-10" placeholder="請輸入8-12碼" id="userName" />
       </label>
       <label for="password">
         <p class="col-sm-2 col-10">密碼</p>
-        <input type="password" class="col-sm-6 col-10" placeholder="請輸入8-12碼" />
+        <input type="password" class="col-sm-6 col-10" placeholder="請輸入8-12碼" id="userPassword" />
       </label>
 
-      <button type="submit" class="col-10 col-sm-8 first">下一步</button>
+      <button type="submit" class="col-10 col-sm-8 first" id="next">下一步</button>
     </div>
   </form>
+  <script>
+    console.log('外嵌')
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./login.js"></script>
 </body>
 
 </html>
