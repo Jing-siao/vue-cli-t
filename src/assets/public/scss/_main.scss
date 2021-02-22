@@ -171,11 +171,7 @@ button {
 
 button.first {
   padding: 8px 15px;
-  outline: none;
-  border-radius: 5px;
-  border: none;
-  color: black;
-  cursor: pointer;
+
 
   &:hover {
     background-color: $darkgrey;
@@ -186,11 +182,15 @@ button.first {
 button.cancel {
   background-color: transparent;
   padding: 5px 10px;
-  outline: none;
-  border-radius: 5px;
-  border: none;
-  color: black;
-  cursor: pointer;
+
+  &:hover {
+    color: red;
+  }
+}
+
+button.delete {
+  padding: 4px 10px;
+  margin: 0 2px;
 
   &:hover {
     color: red;

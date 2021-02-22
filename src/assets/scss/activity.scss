@@ -1,14 +1,16 @@
 @import '../public/mixins/table';
 
-.main {
+.activityMain {
   .content {
     // border: 1px solid salmon;
     background-color: $darkgrey;
     border-radius: 1rem;
 
+
+
+
     div.ac_list {
 
-      // background-color: $grey;
       h5 {
         margin-bottom: 10px;
         color: white;
@@ -35,13 +37,15 @@
   }
 }
 
+
 @media(min-width:576px) {
-  .main {
+  .activityMain {
     margin-top: 50px;
 
     .content {
       padding: 20px;
       border-radius: 1rem;
+
 
       div.ac_list {
         color: aliceblue;
@@ -52,7 +56,7 @@
 }
 
 @media(max-width:575px) {
-  .main {
+  .activityMain {
     margin-top: 20px;
 
     h1 {
