@@ -6,17 +6,26 @@
       <div class="mainBonus col">
         <SelectOrder />
         <div class="bonusCard row">
-          <FourCard v-for="item in filterData" :key="item.title" :data="item" />
-          <!-- v-on:cardType="filterData" -->
+          <FourCard
+            v-for="item in filterData.slice(
+              pagination.minPage,
+              pagination.maxPage
+            )"
+            :key="item.title"
+            :data="item"
+          />
         </div>
       </div>
-      <Pagination :paginationService="pagination" />
+      <Pagination
+        :paginationService="pagination"
+        @pageService="countPageData"
+      />
     </div>
     <GoTOPBtn />
   </div>
 </template>
 <script>
-import pointCard from "@/data/pointCard.json";
+// import pointCard from "@/data/pointCard.json";
 import FilterBonus from "@/components/FilterBonus.vue";
 import SelectOrder from "@/components/SelectOrder.vue";
 import FourCard from "../components/FourCard.vue";
@@ -41,20 +50,20 @@ export default {
     };
   },
   computed: {
-    pointCard() {
-      // this.cacheProducts.forEach((item, index) => {
-      //   let num = index + 1;
-      //   if (num >= this.pagination.minPage && num <= this.pagination.maxPage) {
-      //     return pointCard.push(item);
-      //   }
-      return pointCard;
-      // });
-    },
+    // pointCard() {
+    //   // this.cacheProducts.forEach((item, index) => {
+    //   //   let num = index + 1;
+    //   //   if (num >= this.pagination.minPage && num <= this.pagination.maxPage) {
+    //   //     return pointCard.push(item);
+    //   //   }
+    //   return pointCard;
+    //   // });
+    // },
     filterData() {
       if (this.type == "all") {
-        return this.pointCard;
+        return this.data;
       } else {
-        return this.pointCard.filter((item) => {
+        return this.data.filter((item) => {
           return item.type == this.type;
         });
       }
@@ -63,36 +72,58 @@ export default {
   methods: {
     getType(val) {
       this.type = val;
-      // console.log(val);
+      this.pages();
+    },
+    pages() {
+      //先解構
+      let { totalResult, per_page, pageTotal, currentPage } = this.pagination;
+      totalResult = this.filterData.length;
+      per_page = 4;
+      //無條件進位算總頁數
+      pageTotal = Math.ceil(totalResult / per_page);
+      currentPage = 1;
+      //判斷避免當前頁數超過總頁數
+      if (currentPage > pageTotal) {
+        currentPage = pageTotal;
+      }
+      let minPage = currentPage * per_page - per_page;
+      let maxPage = currentPage * per_page;
+      // console.log(
+      //   `總資料數量:${totalResult},每頁數量:${per_page},總頁數:${pageTotal},當前頁數:${currentPage},每頁第一筆:${minPage},每頁最後一筆${maxPage}`
+      // );
+      this.pagination = {
+        totalResult,
+        per_page,
+        pageTotal,
+        currentPage,
+        minPage,
+        maxPage,
+      };
+      // console.log(pagination)
+    },
+    countPageData(pageNum) {
+      this.pagination.currentPage = pageNum;
+      this.pagination.minPage = (pageNum - 1) * this.pagination.per_page;
+      this.pagination.maxPage = pageNum * this.pagination.per_page;
     },
   },
   created() {
     this.axios
       .get(`${process.env.VUE_APP_API}/gift/all`)
       .then((response) => {
-        console.log(response.data);
-        console.log(this.pointCard);
-        //先解構
-        let { totalResult, per_page, pageTotal, currentPage } = this.pagination;
-        totalResult = this.pointCard.length;
-        per_page = 8;
-        //無條件進位算總頁數
-        pageTotal = Math.ceil(totalResult / per_page);
-        currentPage = 1;
-        //判斷避免當前頁數超過總頁數
-        if (currentPage > pageTotal) {
-          currentPage = pageTotal;
-        }
-        const minPage = currentPage * per_page - per_page + 1;
-        const maxPage = currentPage * per_page;
-        console.log(
-          `總資料數量:${totalResult},每頁數量:${per_page},總頁數:${pageTotal},當前頁數:${currentPage},每頁第一筆:${minPage},每頁最後一筆${maxPage}`
-        );
-        this.pagination = { totalResult, per_page, pageTotal, currentPage };
+        this.data = response.data.detail;
+        // console.log(this.data);
+        this.pages();
       })
       .catch((err) => {
         console.log(err);
       });
+  },
+  beforeUpdate() {
+    this.pagination;
+    // this.pages();
+    // this.countPageData();
+    // this.pointCard;
   },
 };
 </script>

@@ -1,22 +1,44 @@
 <template>
   <div class="pagination">
-    <a href="#">
+    <div
+      class="page"
+      @click="getPagesService(1)"
+      v-if="paginationService.currentPage > 1"
+    >
       <i class="fas fa-long-arrow-alt-left"></i>
-    </a>
-    <a href="#">
+    </div>
+    <div
+      class="page"
+      @click="getPagesService(paginationService.currentPage - 1)"
+      v-if="paginationService.currentPage > 1"
+    >
       <i class="fas fa-angle-left"></i>
-    </a>
+    </div>
     <ul>
-      <li v-for="page in paginationService.pageTotal" :key="page">
+      <li
+        v-for="page in paginationService.pageTotal"
+        :key="page"
+        @click="getPagesService(page)"
+        :class="{ active: page == paginationService.currentPage }"
+        v-show="page >= minPage && page <= maxPage"
+      >
         {{ page }}
       </li>
     </ul>
-    <a href="#">
+    <div
+      class="page"
+      @click="getPagesService(paginationService.currentPage + 1)"
+      v-if="paginationService.currentPage < paginationService.pageTotal"
+    >
       <i class="fas fa-angle-right"></i>
-    </a>
-    <a href="#">
+    </div>
+    <div
+      class="page"
+      @click="getPagesService(paginationService.pageTotal)"
+      v-if="paginationService.currentPage < paginationService.pageTotal"
+    >
       <i class="fas fa-long-arrow-alt-right"></i>
-    </a>
+    </div>
   </div>
 </template>
 <script>
@@ -26,9 +48,30 @@ export default {
       type: Object,
     },
   },
+  data() {
+    return {
+      minPage: 1,
+      maxPage: 4,
+      multiple: 3,
+    };
+  },
   methods: {
-    getPagesService(item) {
-      this.$emit("pageService", item);
+    getPagesService(page) {
+      if (page > 0 && page <= this.paginationService.pageTotal) {
+        this.$emit("pageService", page);
+      }
+      let mod = this.paginationService.currentPage % this.multiple;
+      // let ceil = Math.ceil(this.paginationService.currentPage / this.multiple);
+      if (mod == 1) {
+        this.minPage = this.paginationService.currentPage;
+        this.maxPage = this.paginationService.currentPage + 3;
+      } else if (mod == 2) {
+        this.minPage = this.paginationService.currentPage - 1;
+        this.maxPage = this.paginationService.currentPage + mod;
+      } else if (mod == 0) {
+        this.minPage = this.paginationService.currentPage - 2;
+        this.maxPage = this.paginationService.currentPage + 1;
+      }
     },
   },
 };
@@ -39,7 +82,7 @@ export default {
   margin-top: 10px;
   padding: 8px 0;
   text-align: center;
-  a {
+  div.page {
     color: $grey;
     // border: 1px solid blue;
 
@@ -60,7 +103,9 @@ export default {
       // border: 1px solid red;
       display: inline-block;
       color: $grey;
-      padding: 5px 9px;
+      width: 30px;
+      height: 29px;
+      padding: 5px;
       border-radius: 50%;
       margin: 0 5px;
       cursor: pointer;
@@ -68,7 +113,7 @@ export default {
         background-color: $grey;
         color: $body;
       }
-      &:active {
+      &.active {
         background-color: $grey;
         color: $body;
       }
@@ -77,7 +122,7 @@ export default {
 }
 @media (min-width: 401px) {
   .pagination {
-    a {
+    div.page {
       padding: 5px 9px;
       border-radius: 50%;
       margin: 0 5px;
@@ -96,7 +141,7 @@ export default {
   .pagination {
     display: flex;
     justify-content: space-between;
-    a {
+    div.page {
       padding: 4px 8px;
       border-radius: 50%;
       margin: 0 2px;
