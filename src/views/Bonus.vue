@@ -11,7 +11,7 @@
               pagination.minPage,
               pagination.maxPage
             )"
-            :key="item.title"
+            :key="item.guid"
             :data="item"
           />
         </div>

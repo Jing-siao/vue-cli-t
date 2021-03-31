@@ -12,14 +12,16 @@
       </div>
     </div>
     <div class="col">
-      <button class="first">立即兌換</button>
+      <button class="first" @click.prevent="exchange">立即兌換</button>
     </div>
   </router-link>
 </template>
 <script>
+import exchange from "../mixins/exchange.js";
 export default {
   name: "fourCard",
   props: ["data"],
+  mixins: [exchange],
   data() {
     return {};
   },

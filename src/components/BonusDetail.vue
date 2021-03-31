@@ -1,14 +1,26 @@
 <template>
-  <div class="newsWrap">
-    <div class="news col">
-      <h4>{{ gift.name }}</h4>
-      <p>{{ gift.ptypeName }}</p>
-      <div class="imgWrap">
-        <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
-        <!-- :src="item.src" -->
+  <div class="bonusDetailWrap">
+    <div class="bonusDetail col">
+      <h3>{{ gift.name }}</h3>
+      <div class="row">
+        <div class="imgWrap col-sm-6">
+          <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
+          <!-- :src="item.src" -->
+        </div>
+        <div class="col-sm-6">
+          <div class="textWrap">
+            <h5>兌換點數</h5>
+            <p>{{ gift.ptypeName }} : {{ gift.cnt }}點</p>
+          </div>
+          <div class="textWrap">
+            <h5>商品說明</h5>
+            <p>{{ gift.content }}</p>
+          </div>
+          <button class="first col-sm-6" @click="exchange">立即兌換</button>
+        </div>
       </div>
-      <div class="textWrap">
-        <p>{{ gift.content }}</p>
+      <div class="noteWrap">
+        <h5>注意事項</h5>
         <p v-html="domDecoder(gift.note)"></p>
       </div>
     </div>
@@ -16,11 +28,13 @@
 </template>
 <script>
 import domDecoder from "../mixins/domDecoder.js";
+import exchange from "../mixins/exchange.js";
 export default {
-  mixins: [domDecoder],
+  mixins: [domDecoder, exchange],
   data() {
     return {
       gift: {},
+      titles: ["兌換點數", "商品說明"],
     };
   },
   mounted() {
@@ -30,17 +44,15 @@ export default {
       .get(`${process.env.VUE_APP_API}/gift/${guid}`)
       .then((response) => {
         this.gift = response.data;
-        console.log(this.gift);
-        // console.log("設定前", this.news[0].title);
-        // this.news[0].title = response.data.detail[0].title1;
       })
       .catch((err) => {
         //有錯誤時
         console.log(err);
       });
   },
+  methods: {},
 };
 </script>
 <style lang="scss">
-@import "@/assets/scss/news.scss";
+@import "@/assets/scss/bonusDetail.scss";
 </style>

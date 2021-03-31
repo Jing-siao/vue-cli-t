@@ -1,0 +1,68 @@
+.bonusDetailWrap {
+  @include hederFixed();
+
+  .bonusDetail {
+    background-color: $grey;
+    border-radius: 1.5rem;
+    padding: 15px;
+
+    h4 {
+      // border: 1px solid black;
+      letter-spacing: 0.12rem;
+      line-height: 1.8rem;
+    }
+
+    .imgWrap {
+      // margin-top: 15px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .noteWrap,
+    .textWrap {
+      p {
+        letter-spacing: .08rem;
+        line-height: 1.3rem;
+        padding-left: 0;
+      }
+    }
+
+    button {
+      margin-left: 0;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .bonusDetailWrap {
+    min-height: calc(100vh - 124px);
+
+    .bonusDetail {
+      width: 80%;
+      margin: 30px auto 0;
+      padding: 15px;
+
+      .noteWrap {
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .bonusDetailWrap {
+    min-height: calc(100vh - 88px);
+
+    .bonusDetail {
+      width: 92%;
+      margin: 15px auto 0;
+
+      .textWrap {
+        margin-top: 10px;
+      }
+    }
+  }
+}

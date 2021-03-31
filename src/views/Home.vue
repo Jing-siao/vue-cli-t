@@ -15,8 +15,8 @@
           <h1>{{ point }}</h1>
           <div class="row pointRow">
             <FourCard
-              v-for="item in hotPointList"
-              :key="item.title"
+              v-for="item in filterData"
+              :key="item.guid"
               :data="item"
             />
           </div>
@@ -53,45 +53,24 @@ export default {
       announcement: "最新消息",
       gift: "好禮三重送",
       point: "熱門兌換",
-      hotPointList: [
-        {
-          type: "coffee",
-          title: "cama cafe 中杯紅茶拿鐵兌換券",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "110",
-        },
-        {
-          type: "coffee",
-          title: "麥當勞McCafe特選熱那堤(中)即享券",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "210",
-        },
-        {
-          type: "food",
-          title: "陶板屋和風創作料理套餐即享券(價值$625)",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "118",
-        },
-        {
-          type: "art",
-          title: "誠品生活即享券500元",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
-          link: "javascript:;",
-          total: "988",
-          limit: "無上限",
-          point: "115",
-        },
-      ],
+      hotdata: [],
     };
+  },
+  computed: {
+    filterData() {
+      return this.hotdata.slice(0, 8);
+    },
+  },
+
+  created() {
+    this.axios
+      .get(`${process.env.VUE_APP_API}/gift/hot`)
+      .then((response) => {
+        this.hotdata = response.data.detail;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>
