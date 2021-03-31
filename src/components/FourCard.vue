@@ -1,5 +1,6 @@
 <template>
-  <a class="card" :href="data.link">
+  <router-link class="card" :to="'/bonus/' + data.guid">
+    <!-- { name: 'BonusDetail', params: { guid: data.guid } } -->
     <div class="imgWrap col-sm-12">
       <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
     </div>
@@ -13,7 +14,7 @@
     <div class="col">
       <button class="first">立即兌換</button>
     </div>
-  </a>
+  </router-link>
 </template>
 <script>
 export default {

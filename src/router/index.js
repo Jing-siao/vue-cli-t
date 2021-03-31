@@ -20,13 +20,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    // children: [
-    //   {
-    //     path: 'news/:index',
-    //     component: News,
-    //     name: 'News',
-    //   }
-    // ],
   },
   {
     path: '/news/:index',
@@ -42,7 +35,13 @@ const routes = [
   {
     path: '/bonus',
     name: 'Bonus',
-    component: () => import('../views/Bonus.vue')
+    component: () => import('../views/Bonus.vue'),
+
+  },
+  {
+    path: '/bonus/:guid',
+    component: () => import(/* webpackChunkName: "Bonus" */'../components/BonusDetail.vue'),
+    name: 'BonusDetail',
   },
   {
     path: '/question',

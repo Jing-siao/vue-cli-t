@@ -1,17 +1,15 @@
 <template>
   <div class="newsWrap">
     <div class="news col">
-      <h4>{{ news.title1 }}</h4>
-      <p>{{ news.date }}</p>
+      <h4>{{ gift.name }}</h4>
+      <p>{{ gift.ptypeName }}</p>
       <div class="imgWrap">
         <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
         <!-- :src="item.src" -->
       </div>
       <div class="textWrap">
-        <p v-html="domDecoder(news.content)"></p>
-        <p>
-          {{ news.note }}
-        </p>
+        <p>{{ gift.content }}</p>
+        <p v-html="domDecoder(gift.note)"></p>
       </div>
     </div>
   </div>
@@ -22,16 +20,17 @@ export default {
   mixins: [domDecoder],
   data() {
     return {
-      news: {},
+      gift: {},
     };
   },
   mounted() {
+    let guid = this.$route.params.guid;
+    console.log(guid);
     this.axios
-      .get(`${process.env.VUE_APP_API}/news`)
+      .get(`${process.env.VUE_APP_API}/gift/${guid}`)
       .then((response) => {
-        console.log(this.$route.params);
-        let index = this.$route.params.index;
-        this.news = response.data.detail[index];
+        this.gift = response.data;
+        console.log(this.gift);
         // console.log("設定前", this.news[0].title);
         // this.news[0].title = response.data.detail[0].title1;
       })

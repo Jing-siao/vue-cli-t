@@ -154,7 +154,7 @@ export default {
     .mainBonus {
       padding: 15px 0 5px;
       .bonusCard {
-        margin-top: 15px;
+        margin-top: 8px;
         padding: 0 15px;
       }
     }

@@ -139,11 +139,15 @@ export default {
 }
 @media (max-width: 400px) {
   .pagination {
+    border: 1px solid blue;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     div.page {
-      padding: 4px 8px;
+      padding: 4px 5px;
       border-radius: 50%;
+      width: 25px;
+      height: 26px;
+      // padding: 5px;
       margin: 0 2px;
       &:first-child {
         padding: 5px 7px;
