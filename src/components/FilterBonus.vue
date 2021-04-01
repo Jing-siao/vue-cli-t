@@ -27,35 +27,35 @@ export default {
           iconClass: "fas fa-tag",
         },
         {
-          title: "推薦",
+          title: "熱門",
           visibility: "recommend",
           iconClass: "fas fa-thumbs-up",
         },
-        {
-          title: "美食",
-          visibility: "food",
-          iconClass: "fas fa-utensils",
-        },
-        {
-          title: "百貨",
-          visibility: "groceries",
-          iconClass: "fas fa-shopping-bag",
-        },
-        {
-          title: "咖啡",
-          visibility: "coffee",
-          iconClass: "fas fa-coffee",
-        },
-        {
-          title: "藝文",
-          visibility: "art",
-          iconClass: "fas fa-ticket-alt",
-        },
-        {
-          title: "旅遊",
-          visibility: "travel",
-          iconClass: "fas fa-plane",
-        },
+        // {
+        //   title: "美食",
+        //   visibility: "food",
+        //   iconClass: "fas fa-utensils",
+        // },
+        // {
+        //   title: "百貨",
+        //   visibility: "groceries",
+        //   iconClass: "fas fa-shopping-bag",
+        // },
+        // {
+        //   title: "咖啡",
+        //   visibility: "coffee",
+        //   iconClass: "fas fa-coffee",
+        // },
+        // {
+        //   title: "藝文",
+        //   visibility: "art",
+        //   iconClass: "fas fa-ticket-alt",
+        // },
+        // {
+        //   title: "旅遊",
+        //   visibility: "travel",
+        //   iconClass: "fas fa-plane",
+        // },
       ],
     };
   },
@@ -67,7 +67,21 @@ export default {
         active: this.visibility,
       };
     },
+    // getCategory() {
+    //   this.axios
+    //     .get(`${process.env.VUE_APP_API}/category/`)
+    //     .then((response) => {
+    //       // this.bonusList.push(response.data.detail);
+    //       console.log(response.data.detail);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
   },
+  // created() {
+  //   this.getCategory();
+  // },
 };
 </script>
 <style lang="scss" scoped>

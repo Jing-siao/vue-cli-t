@@ -12,7 +12,9 @@
       </div>
     </div>
     <div class="col">
-      <button class="first" @click.prevent="exchange">立即兌換</button>
+      <button class="first" @click.prevent="exchange(data.guid)">
+        立即兌換
+      </button>
     </div>
   </router-link>
 </template>

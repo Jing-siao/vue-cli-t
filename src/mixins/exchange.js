@@ -1,13 +1,40 @@
 export default {
   methods: {
-    exchange() {
+    exchange(giftGuid) {
       let isLogin = this.$store.state.isLogin;
       if (isLogin === false) {
         alert("請先登入");
         this.$router.push({ name: "Login" });
       } else {
-        alert("兌換成功");
+        this.postExchange(giftGuid);
       }
     },
+
+    postExchange(giftGuid) {
+      const exchangeApi = `${process.env.VUE_APP_API}/exchange`;
+      let gift = {
+        giftGuid,
+        qty: 1
+      };
+      this.axios
+        .post(exchangeApi, gift)
+        .then((response) => {
+          alert(response.data.message);
+          if (this.$route.path == '/bonus') {
+            this.$router.go(0);
+          } else {
+
+            this.$router.push('/bonus')
+          }
+          // this.$nextTick(function () {
+          // });
+        })
+        .catch((err) => {
+          console.log(err);
+          let message = err.response.data.message;
+          alert(message);
+        });
+    },
   },
+
 }

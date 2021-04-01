@@ -228,10 +228,9 @@ header {
               // border-bottom: 3px solid $darkgrey;
             }
 
-            &.router-link-exact-active {
+            &.router-link-active {
               @include after();
             }
-
 
           }
 

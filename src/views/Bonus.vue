@@ -69,6 +69,12 @@ export default {
       }
     },
   },
+  // watch: {
+  //   filterData(item) {
+  //     console.log("value changed!!");
+  //   },
+  //   deep: true,
+  // },
   methods: {
     getType(val) {
       this.type = val;
@@ -106,25 +112,37 @@ export default {
       this.pagination.minPage = (pageNum - 1) * this.pagination.per_page;
       this.pagination.maxPage = pageNum * this.pagination.per_page;
     },
+    getGiftData() {
+      this.axios
+        .get(`${process.env.VUE_APP_API}/gift/all`)
+        .then((response) => {
+          this.data = response.data.detail;
+          // console.log(this.data);
+          this.pages();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   created() {
-    this.axios
-      .get(`${process.env.VUE_APP_API}/gift/all`)
-      .then((response) => {
-        this.data = response.data.detail;
-        // console.log(this.data);
-        this.pages();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.getGiftData();
+    // this.pages();
   },
+  // brforeMounted() {
+  //   this.pages();
+  // },
   beforeUpdate() {
     this.pagination;
-    // this.pages();
-    // this.countPageData();
-    // this.pointCard;
+    // this.getGiftData();
   },
+  // updated() {
+  //   this.pagination;
+  //   // this.$router.go(0);
+  // },
+  // destroyed() {
+  //   this.pages();
+  // },
 };
 </script>
 <style lang="scss" >

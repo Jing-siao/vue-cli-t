@@ -1,5 +1,10 @@
 <template>
   <div class="bonusDetailWrap">
+    <div class="col">
+      <button class="back" @click="goBack">
+        <i class="fas fa-chevron-left"></i> 回前頁
+      </button>
+    </div>
     <div class="bonusDetail col">
       <h3>{{ gift.name }}</h3>
       <div class="row">
@@ -16,7 +21,9 @@
             <h5>商品說明</h5>
             <p>{{ gift.content }}</p>
           </div>
-          <button class="first col-sm-6" @click="exchange">立即兌換</button>
+          <button class="first col-sm-6" @click="exchange(gift.guid)">
+            立即兌換
+          </button>
         </div>
       </div>
       <div class="noteWrap">
@@ -39,7 +46,6 @@ export default {
   },
   mounted() {
     let guid = this.$route.params.guid;
-    console.log(guid);
     this.axios
       .get(`${process.env.VUE_APP_API}/gift/${guid}`)
       .then((response) => {
@@ -50,7 +56,11 @@ export default {
         console.log(err);
       });
   },
-  methods: {},
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+  },
 };
 </script>
 <style lang="scss">
