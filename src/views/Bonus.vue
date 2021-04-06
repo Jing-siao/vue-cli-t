@@ -82,18 +82,26 @@ export default {
     },
     pages() {
       //先解構
-      let { totalResult, per_page, pageTotal, currentPage } = this.pagination;
+      let {
+        totalResult,
+        per_page,
+        pageTotal,
+        currentPage,
+        initPage,
+      } = this.pagination;
       totalResult = this.filterData.length;
       per_page = 4;
       //無條件進位算總頁數
       pageTotal = Math.ceil(totalResult / per_page);
-      currentPage = 1;
+      // initPage = 1;
+      currentPage = currentPage || 1; //有就帶變數 沒有就初始化
       //判斷避免當前頁數超過總頁數
       if (currentPage > pageTotal) {
         currentPage = pageTotal;
       }
       let minPage = currentPage * per_page - per_page;
       let maxPage = currentPage * per_page;
+
       // console.log(
       //   `總資料數量:${totalResult},每頁數量:${per_page},總頁數:${pageTotal},當前頁數:${currentPage},每頁第一筆:${minPage},每頁最後一筆${maxPage}`
       // );
@@ -101,6 +109,7 @@ export default {
         totalResult,
         per_page,
         pageTotal,
+        initPage,
         currentPage,
         minPage,
         maxPage,
@@ -127,22 +136,12 @@ export default {
   },
   created() {
     this.getGiftData();
-    // this.pages();
   },
-  // brforeMounted() {
-  //   this.pages();
-  // },
+
   beforeUpdate() {
     this.pagination;
-    // this.getGiftData();
+    this.getGiftData();
   },
-  // updated() {
-  //   this.pagination;
-  //   // this.$router.go(0);
-  // },
-  // destroyed() {
-  //   this.pages();
-  // },
 };
 </script>
 <style lang="scss" >

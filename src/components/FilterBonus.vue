@@ -8,7 +8,7 @@
         @click="visibilityShow(index)"
       >
         <i :class="list.iconClass"></i>
-        {{ list.title }}
+        {{ list.tabName }}
       </li>
     </ul>
   </div>
@@ -22,12 +22,12 @@ export default {
       visibility: "all",
       bonusList: [
         {
-          title: "全部",
+          tabName: "全部",
           visibility: "all",
           iconClass: "fas fa-tag",
         },
         {
-          title: "熱門",
+          tabName: "熱門",
           visibility: "recommend",
           iconClass: "fas fa-thumbs-up",
         },
@@ -67,21 +67,22 @@ export default {
         active: this.visibility,
       };
     },
-    // getCategory() {
-    //   this.axios
-    //     .get(`${process.env.VUE_APP_API}/category/`)
-    //     .then((response) => {
-    //       // this.bonusList.push(response.data.detail);
-    //       console.log(response.data.detail);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
+    getCategory() {
+      this.axios
+        .get(`${process.env.VUE_APP_API}/category/`)
+        .then((response) => {
+          let categoryArr = response.data.detail;
+          this.bonusList = [...this.bonusList, ...categoryArr];
+          // console.log(response.data.detail);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  // created() {
-  //   this.getCategory();
-  // },
+  created() {
+    this.getCategory();
+  },
 };
 </script>
 <style lang="scss" scoped>

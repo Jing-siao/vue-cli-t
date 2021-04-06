@@ -20,10 +20,8 @@ export default {
         .post(exchangeApi, gift)
         .then((response) => {
           alert(response.data.message);
-          if (this.$route.path == '/bonus') {
-            this.$router.go(0);
-          } else {
-
+          if (this.$route.path !== '/bonus') {
+            // this.$router.go(0);
             this.$router.push('/bonus')
           }
           // this.$nextTick(function () {
