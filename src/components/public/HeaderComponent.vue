@@ -24,8 +24,12 @@
             </router-link>
           </div>
           <ul class="menu">
-            <li v-for="(item, index) in menu" :key="index.title">
-              <router-link :to="{ name: item.link }" @click.native="closeMenu">
+            <li v-for="item in menu" :key="item.title">
+              <router-link
+                :to="{ name: item.link, params: { page: 1 } }"
+                @click.native="closeMenu"
+                :key="$route.params.page"
+              >
                 {{ item.title }}
               </router-link>
             </li>

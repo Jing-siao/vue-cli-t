@@ -1,7 +1,7 @@
 <template>
   <div class="bonusDetailWrap">
     <div class="col">
-      <button class="back" @click="goBack">
+      <button class="back" @click="goBack()">
         <i class="fas fa-chevron-left"></i> 回前頁
       </button>
     </div>
@@ -58,7 +58,12 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.go(-1);
+      let page = this.$route.params.page;
+      if (page == 0) {
+        this.$router.go(-1);
+      } else {
+        this.$router.push(`/bonus/${page}`);
+      }
     },
   },
 };

@@ -13,6 +13,8 @@
             )"
             :key="item.guid"
             :data="item"
+            :thisPage="pagination.currentPage"
+            @pageService="countPageData"
           />
         </div>
       </div>
@@ -31,6 +33,7 @@ import SelectOrder from "@/components/SelectOrder.vue";
 import FourCard from "../components/FourCard.vue";
 import Pagination from "@/components/public/Pagination.vue";
 import GoTOPBtn from "../components/public/GoTOPBtn.vue";
+// import BonusDetail from "@/components/BonusDetail.vue";
 
 export default {
   name: "bonus",
@@ -41,7 +44,7 @@ export default {
     Pagination,
     GoTOPBtn,
   },
-
+  // mixins: [BonusDetail],
   data() {
     return {
       data: [],
@@ -70,10 +73,12 @@ export default {
     },
   },
   // watch: {
-  //   filterData(item) {
-  //     console.log("value changed!!");
+  //   $route(to, from) {
+  //     if (this.$route.params.page == 1) {
+  //       this.$router.go(0);
+  //     }
+  //     console.log(to, from);
   //   },
-  //   deep: true,
   // },
   methods: {
     getType(val) {
@@ -126,7 +131,6 @@ export default {
         .get(`${process.env.VUE_APP_API}/gift/all`)
         .then((response) => {
           this.data = response.data.detail;
-          // console.log(this.data);
           this.pages();
         })
         .catch((err) => {
@@ -136,11 +140,10 @@ export default {
   },
   created() {
     this.getGiftData();
+    this.countPageData(this.$route.params.page);
   },
-
   beforeUpdate() {
     this.pagination;
-    this.getGiftData();
   },
 };
 </script>

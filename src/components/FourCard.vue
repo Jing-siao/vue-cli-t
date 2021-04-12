@@ -1,5 +1,9 @@
 <template>
-  <router-link class="card" :to="'/bonus/' + data.guid">
+  <router-link
+    class="card"
+    :to="'/bonus/' + currentPage + '/' + data.guid"
+    @click="getPagesService(currentPage)"
+  >
     <!-- { name: 'BonusDetail', params: { guid: data.guid } } -->
     <div class="imgWrap col-sm-12">
       <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
@@ -22,12 +26,25 @@
 import exchange from "../mixins/exchange.js";
 export default {
   name: "fourCard",
-  props: ["data"],
+  props: ["data", "thisPage"],
   mixins: [exchange],
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    currentPage() {
+      if (this.thisPage) {
+        return this.thisPage;
+      } else {
+        return 0;
+      }
+    },
+  },
+  methods: {
+    getPagesService(page) {
+      this.$emit("pageService", page);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

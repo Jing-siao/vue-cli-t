@@ -59,6 +59,7 @@ export default {
     getPagesService(page) {
       if (page > 0 && page <= this.paginationService.pageTotal) {
         this.$emit("pageService", page);
+        this.$router.push(`/bonus/${page}`);
       }
       let mod = this.paginationService.currentPage % this.multiple;
       // let ceil = Math.ceil(this.paginationService.currentPage / this.multiple);
@@ -101,13 +102,14 @@ export default {
     display: inline-block;
     li {
       // border: 1px solid red;
+      // text-align: center;
       display: inline-block;
       color: $grey;
-      width: 30px;
-      height: 29px;
       padding: 5px;
       border-radius: 50%;
       margin: 0 5px;
+      height: 30px;
+      width: 30px;
       cursor: pointer;
       &:hover {
         background-color: $grey;
@@ -123,15 +125,20 @@ export default {
 @media (min-width: 401px) {
   .pagination {
     div.page {
-      padding: 5px 9px;
+      // border: 1px solid blue;
+      padding: 5px;
       border-radius: 50%;
       margin: 0 5px;
+      height: 30px;
+      width: 30px;
+      // line-height: 20px;
+      text-align: center;
       &:first-child {
-        padding: 5px 8px;
+        padding: 5px;
         margin: 0 10px 0 0;
       }
       &:last-child {
-        padding: 5px 8px;
+        padding: 5px;
         margin: 0 0 0 10px;
       }
     }
