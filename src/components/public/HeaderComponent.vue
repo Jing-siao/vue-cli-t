@@ -26,21 +26,19 @@
           <ul class="menu">
             <li v-for="item in menu" :key="item.title">
               <router-link
-                :to="{ name: item.link, params: { page: 1 } }"
+                :to="{ name: item.link }"
                 @click.native="closeMenu"
                 :key="$route.params.page"
               >
+                <!-- , params: { page: 1 }  -->
                 {{ item.title }}
               </router-link>
             </li>
             <li class="memberList">
-              <!-- @mouseover="hover"
-              @mouseleave="hoverOut"
-              @click="showList" -->
               <router-link :to="{ name: memberList.link }" v-if="horizontalNav">
                 {{ memberList.title }}
               </router-link>
-              <p class="straightNav" @click.stop="showList" v-if="straightNav">
+              <p class="straightNav" @click.stop="showList" v-else>
                 {{ memberList.title }}
                 <i class="fas fa-angle-down"></i>
               </p>
@@ -126,17 +124,11 @@ export default {
       current: null,
       up: false,
       horizontalNav: true,
-      straightNav: false,
-      // limitPosition: 300,
-      // scrolled: false,
-      // lastPosition: 0,
 
       window: {
         width: 0,
       },
-      // showList: false,
-      // menuList: false,
-      // props: [MemberSideBar],
+
       menu: [
         {
           title: "活動辦法",
@@ -200,13 +192,9 @@ export default {
     },
     handleResize() {
       this.window.width = window.innerWidth;
-      if (this.window.width < 1140) {
-        this.straightNav = true;
-        this.horizontalNav = false;
-      } else {
-        this.straightNav = false;
-        this.horizontalNav = true;
-      }
+      this.window.width < 1140
+        ? (this.horizontalNav = false)
+        : (this.horizontalNav = true);
     },
 
     logOut() {

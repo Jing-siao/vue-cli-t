@@ -36,14 +36,15 @@ const routes = [
     path: '/bonus/:page?',
     name: 'Bonus',
     component: () => import('../views/Bonus.vue'),
-    // props: (route) => ({ page: route.params.page || 1 })
+    props: (route) => ({ page: route.params.page || 1 }),
     // children: [
     //   {
-    //     path: '1',
+    //     path: ':page?',
     //     name: 'Bonus',
     //     component: () => import('../views/Bonus.vue'),
-
-    //   },]
+    //     // props: (route) => ({ page: route.params.page || 1 }),
+    //   },
+    // ]
 
 
   },

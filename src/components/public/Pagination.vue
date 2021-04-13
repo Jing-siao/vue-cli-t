@@ -58,22 +58,36 @@ export default {
   methods: {
     getPagesService(page) {
       if (page > 0 && page <= this.paginationService.pageTotal) {
-        this.$emit("pageService", page);
-        this.$router.push(`/bonus/${page}`);
-      }
-      let mod = this.paginationService.currentPage % this.multiple;
-      // let ceil = Math.ceil(this.paginationService.currentPage / this.multiple);
-      if (mod == 1) {
-        this.minPage = this.paginationService.currentPage;
-        this.maxPage = this.paginationService.currentPage + 3;
-      } else if (mod == 2) {
-        this.minPage = this.paginationService.currentPage - 1;
-        this.maxPage = this.paginationService.currentPage + mod;
-      } else if (mod == 0) {
-        this.minPage = this.paginationService.currentPage - 2;
-        this.maxPage = this.paginationService.currentPage + 1;
+        if (this.paginationService.currentPage !== page) {
+          this.$router.push(`/bonus/${page}`); //router-link會閃
+          this.$emit("pageService", page);
+        }
+        this.showPages(page);
       }
     },
+    showPages(page) {
+      let mod = page % this.multiple;
+      let pageLast = this.paginationService.pageTotal;
+      if (page === pageLast) {
+        console.log(page);
+        this.minPage = page - 3;
+        this.maxPage = page;
+      } else {
+        if (mod == 1 && page != pageLast) {
+          this.minPage = page;
+          this.maxPage = page + 3;
+        } else if (mod == 2 && page != pageLast) {
+          this.minPage = page - 1;
+          this.maxPage = page + mod;
+        } else if (mod == 0 && page != pageLast) {
+          this.minPage = page - 2;
+          this.maxPage = page + 1;
+        }
+      }
+    },
+  },
+  updated() {
+    this.showPages(this.paginationService.currentPage);
   },
 };
 </script>

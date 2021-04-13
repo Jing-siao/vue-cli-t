@@ -72,14 +72,18 @@ export default {
       }
     },
   },
-  // watch: {
-  //   $route(to, from) {
-  //     if (this.$route.params.page == 1) {
-  //       this.$router.go(0);
-  //     }
-  //     console.log(to, from);
-  //   },
-  // },
+  watch: {
+    $route(to, from) {
+      if (!this.$route.params.page) {
+        this.$router.go(0);
+      } else {
+        this.countPageData(parseInt(this.$route.params.page));
+        this.pagination;
+      }
+      console.log(to, from);
+    },
+    deep: true,
+  },
   methods: {
     getType(val) {
       this.type = val;
@@ -92,20 +96,20 @@ export default {
         per_page,
         pageTotal,
         currentPage,
-        initPage,
+        minPage,
+        maxPage,
       } = this.pagination;
       totalResult = this.filterData.length;
       per_page = 4;
       //無條件進位算總頁數
       pageTotal = Math.ceil(totalResult / per_page);
-      // initPage = 1;
       currentPage = currentPage || 1; //有就帶變數 沒有就初始化
       //判斷避免當前頁數超過總頁數
       if (currentPage > pageTotal) {
         currentPage = pageTotal;
       }
-      let minPage = currentPage * per_page - per_page;
-      let maxPage = currentPage * per_page;
+      minPage = currentPage * per_page - per_page;
+      maxPage = currentPage * per_page;
 
       // console.log(
       //   `總資料數量:${totalResult},每頁數量:${per_page},總頁數:${pageTotal},當前頁數:${currentPage},每頁第一筆:${minPage},每頁最後一筆${maxPage}`
@@ -114,7 +118,6 @@ export default {
         totalResult,
         per_page,
         pageTotal,
-        initPage,
         currentPage,
         minPage,
         maxPage,
@@ -122,9 +125,12 @@ export default {
       // console.log(pagination)
     },
     countPageData(pageNum) {
+      // if (this.$route.params.page !== pageNum) {
+      // this.$set(this.pagination, "currentPage", 0);
       this.pagination.currentPage = pageNum;
       this.pagination.minPage = (pageNum - 1) * this.pagination.per_page;
       this.pagination.maxPage = pageNum * this.pagination.per_page;
+      // }
     },
     getGiftData() {
       this.axios
@@ -140,7 +146,7 @@ export default {
   },
   created() {
     this.getGiftData();
-    this.countPageData(this.$route.params.page);
+    this.countPageData(parseInt(this.$route.params.page));
   },
   beforeUpdate() {
     this.pagination;

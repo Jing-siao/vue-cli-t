@@ -362,12 +362,15 @@ header {
               transition: .3s;
             }
 
-            &.router-link-exact-active {
+            &.router-link-exact-active,
+            &.router-link-active {
 
               background-color: $darkgrey;
               color: white;
 
             }
+
+
           }
 
           &.memberList {
@@ -417,6 +420,7 @@ header {
                       color: white;
 
                     }
+
 
                   }
                 }
