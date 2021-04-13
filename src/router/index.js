@@ -36,7 +36,8 @@ const routes = [
     path: '/bonus/:page?',
     name: 'Bonus',
     component: () => import('../views/Bonus.vue'),
-    props: (route) => ({ page: route.params.page || 1 }),
+    props: (route) => ({ type: route.params.type || "all" }, { page: route.params.page || 1 }),
+
     // children: [
     //   {
     //     path: ':page?',
@@ -52,7 +53,7 @@ const routes = [
     path: '/bonus/:page/:guid',
     component: () => import(/* webpackChunkName: "Bonus" */'../components/BonusDetail.vue'),
     name: 'BonusDetail',
-    props: true
+    // props: (route) => ({ type: route.params.type || "all" }, { page: route.params.page || 1 }),
   },
   {
     path: '/question',

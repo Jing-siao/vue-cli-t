@@ -2,10 +2,10 @@
   <div class="FilterBonus">
     <ul>
       <li
-        v-for="(list, index) in bonusList"
-        :key="list.title"
-        :class="{ active: visibility == list.visibility }"
-        @click="visibilityShow(index)"
+        v-for="list in bonusList"
+        :key="list.tabId"
+        :class="{ active: visibility == list.tabId }"
+        @click="visibilityShow(list.tabId)"
       >
         <i :class="list.iconClass"></i>
         {{ list.tabName }}
@@ -23,46 +23,23 @@ export default {
       bonusList: [
         {
           tabName: "全部",
-          visibility: "all",
+          tabId: "all",
           iconClass: "fas fa-tag",
         },
         {
           tabName: "熱門",
-          visibility: "recommend",
+          tabId: "hot",
           iconClass: "fas fa-thumbs-up",
         },
-        // {
-        //   title: "美食",
-        //   visibility: "food",
-        //   iconClass: "fas fa-utensils",
-        // },
-        // {
-        //   title: "百貨",
-        //   visibility: "groceries",
-        //   iconClass: "fas fa-shopping-bag",
-        // },
-        // {
-        //   title: "咖啡",
-        //   visibility: "coffee",
-        //   iconClass: "fas fa-coffee",
-        // },
-        // {
-        //   title: "藝文",
-        //   visibility: "art",
-        //   iconClass: "fas fa-ticket-alt",
-        // },
-        // {
-        //   title: "旅遊",
-        //   visibility: "travel",
-        //   iconClass: "fas fa-plane",
-        // },
       ],
     };
   },
   methods: {
-    visibilityShow(index) {
-      this.$emit("type", this.bonusList[index].visibility);
-      this.visibility = this.bonusList[index].visibility;
+    visibilityShow(tabId) {
+      this.$emit("type", tabId);
+      this.visibility = tabId;
+      // let type = tabId;
+      // this.$router.push(`/bonus/${type}/1`);
       return {
         active: this.visibility,
       };

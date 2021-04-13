@@ -33,8 +33,6 @@ import SelectOrder from "@/components/SelectOrder.vue";
 import FourCard from "../components/FourCard.vue";
 import Pagination from "@/components/public/Pagination.vue";
 import GoTOPBtn from "../components/public/GoTOPBtn.vue";
-// import BonusDetail from "@/components/BonusDetail.vue";
-
 export default {
   name: "bonus",
   components: {
@@ -44,24 +42,15 @@ export default {
     Pagination,
     GoTOPBtn,
   },
-  // mixins: [BonusDetail],
   data() {
     return {
+      url: `${process.env.VUE_APP_API}/gift/all`,
       data: [],
       type: "all",
       pagination: {},
     };
   },
   computed: {
-    // pointCard() {
-    //   // this.cacheProducts.forEach((item, index) => {
-    //   //   let num = index + 1;
-    //   //   if (num >= this.pagination.minPage && num <= this.pagination.maxPage) {
-    //   //     return pointCard.push(item);
-    //   //   }
-    //   return pointCard;
-    //   // });
-    // },
     filterData() {
       if (this.type == "all") {
         return this.data;
@@ -87,7 +76,13 @@ export default {
   methods: {
     getType(val) {
       this.type = val;
-      this.pages();
+      if (val !== "all" && val !== "hot") {
+        this.url = `${process.env.VUE_APP_API}/category/gift/${val}`;
+      } else {
+        this.url = `${process.env.VUE_APP_API}/gift/${val}`;
+      }
+      this.getGiftData();
+      this.countPageData(parseInt(this.$route.params.page));
     },
     pages() {
       //先解構
@@ -134,7 +129,7 @@ export default {
     },
     getGiftData() {
       this.axios
-        .get(`${process.env.VUE_APP_API}/gift/all`)
+        .get(this.url)
         .then((response) => {
           this.data = response.data.detail;
           this.pages();

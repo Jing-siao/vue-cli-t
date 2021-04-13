@@ -69,7 +69,6 @@ export default {
       let mod = page % this.multiple;
       let pageLast = this.paginationService.pageTotal;
       if (page === pageLast) {
-        console.log(page);
         this.minPage = page - 3;
         this.maxPage = page;
       } else {
