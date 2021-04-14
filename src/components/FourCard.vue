@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="card"
-    :to="'/bonus/' + currentPage + '/' + data.guid"
+    :to="`/bonus/${type}/${currentPage}/${data.guid}`"
     @click="getPagesService(currentPage)"
   >
     <!-- { name: 'BonusDetail', params: { guid: data.guid } } -->
@@ -37,6 +37,13 @@ export default {
         return this.thisPage;
       } else {
         return 0;
+      }
+    },
+    type() {
+      if (this.$route.params.type) {
+        return this.$route.params.type;
+      } else {
+        return "hot";
       }
     },
   },

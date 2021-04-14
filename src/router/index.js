@@ -33,27 +33,27 @@ const routes = [
 
   },
   {
-    path: '/bonus/:page?',
+    path: '/bonus',
     name: 'Bonus',
     component: () => import('../views/Bonus.vue'),
     props: (route) => ({ type: route.params.type || "all" }, { page: route.params.page || 1 }),
 
-    // children: [
-    //   {
-    //     path: ':page?',
-    //     name: 'Bonus',
-    //     component: () => import('../views/Bonus.vue'),
-    //     // props: (route) => ({ page: route.params.page || 1 }),
-    //   },
-    // ]
+    children: [
+      {
+        path: ':type?/:page?',
+        // name: 'Bonus',
+        component: () => import('../views/Bonus.vue'),
+        props: (route) => ({ page: route.params.page || 1 }),
+      },
+    ]
 
 
   },
   {
-    path: '/bonus/:page/:guid',
+    path: '/bonus/:type?/:page/:guid',
     component: () => import(/* webpackChunkName: "Bonus" */'../components/BonusDetail.vue'),
     name: 'BonusDetail',
-    // props: (route) => ({ type: route.params.type || "all" }, { page: route.params.page || 1 }),
+    props: (route) => ({ type: route.params.type || "hot" }, { page: route.params.page || 1 }),
   },
   {
     path: '/question',

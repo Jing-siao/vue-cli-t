@@ -59,7 +59,8 @@ export default {
     getPagesService(page) {
       if (page > 0 && page <= this.paginationService.pageTotal) {
         if (this.paginationService.currentPage !== page) {
-          this.$router.push(`/bonus/${page}`); //router-link會閃
+          let type = this.$route.params.type;
+          this.$router.push(`/bonus/${type}/${page}`); //router-link會閃
           this.$emit("pageService", page);
         }
         this.showPages(page);

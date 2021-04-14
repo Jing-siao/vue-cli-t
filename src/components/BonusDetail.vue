@@ -59,10 +59,11 @@ export default {
   methods: {
     goBack() {
       let page = this.$route.params.page;
+      let type = this.$route.params.type;
       if (page == 0) {
         this.$router.go(-1);
       } else {
-        this.$router.push(`/bonus/${page}`);
+        this.$router.push(`/bonus/${type}/${page}`); //router-link會閃
       }
     },
   },

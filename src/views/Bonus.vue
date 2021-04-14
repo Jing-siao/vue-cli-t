@@ -2,7 +2,7 @@
   <div class="bonus">
     <div class="main container">
       <h1>兌換專區</h1>
-      <FilterBonus @type="getType"> </FilterBonus>
+      <FilterBonus @type="getType"></FilterBonus>
       <div class="mainBonus col">
         <SelectOrder />
         <div class="bonusCard row">
@@ -52,26 +52,39 @@ export default {
   },
   computed: {
     filterData() {
-      if (this.type == "all") {
-        return this.data;
-      } else {
-        return this.data.filter((item) => {
-          return item.type == this.type;
-        });
-      }
+      // this.type = this.$route.params.type;
+      // if (this.type == "all") {
+      return this.data;
+      // } else {
+      //   return this.data.filter((item) => {
+      //     return item.type == this.type;
+      //   });
+      // }
     },
   },
   watch: {
-    $route(to, from) {
-      if (!this.$route.params.page) {
-        this.$router.go(0);
-      } else {
-        this.countPageData(parseInt(this.$route.params.page));
-        this.pagination;
-      }
-      console.log(to, from);
-    },
-    deep: true,
+    // $route() {
+    //   if (this.$route.params.type) {
+    //     this.countPageData(parseInt(this.$route.params.page));
+    //     this.pagination;
+    //   } else {
+    //     this.type = "all";
+    //     this.url = `${process.env.VUE_APP_API}/gift/all`;
+    //     this.$router.push(`/bonus`);
+    //     // if (this.type !== "all" && this.type !== "hot") {
+    //     //   // this.url = `${process.env.VUE_APP_API}/category/gift/${this.type}`;
+    //     //   this.$router.push(
+    //     //     `/bonus/${this.type}/${this.pagination.currentPage}`
+    //     //   );
+    //     // } else {
+    //     //   // this.url = `${process.env.VUE_APP_API}/gift/${this.type}`;
+    //     //   this.$router.push(
+    //     //     `/bonus/${this.type}/${this.pagination.currentPage}`
+    //     //   );
+    //     // }
+    //   }
+    // },
+    // deep: true,
   },
   methods: {
     getType(val) {
@@ -81,8 +94,22 @@ export default {
       } else {
         this.url = `${process.env.VUE_APP_API}/gift/${val}`;
       }
-      this.getGiftData();
-      this.countPageData(parseInt(this.$route.params.page));
+      this.getGiftData(this.url);
+      this.countPageData(1);
+    },
+    getUrl() {
+      this.type = this.$route.params.type;
+      if (this.$route.params.type) {
+        if (this.type !== "all" && this.type !== "hot") {
+          this.url = `${process.env.VUE_APP_API}/category/gift/${this.type}`;
+        } else {
+          this.url = `${process.env.VUE_APP_API}/gift/${this.type}`;
+        }
+      } else {
+        this.type = "all";
+        this.url = `${process.env.VUE_APP_API}/gift/all`;
+        this.$router.push(`/bonus/all/1`);
+      }
     },
     pages() {
       //先解構
@@ -127,9 +154,9 @@ export default {
       this.pagination.maxPage = pageNum * this.pagination.per_page;
       // }
     },
-    getGiftData() {
+    getGiftData(url) {
       this.axios
-        .get(this.url)
+        .get(url)
         .then((response) => {
           this.data = response.data.detail;
           this.pages();
@@ -140,11 +167,13 @@ export default {
     },
   },
   created() {
-    this.getGiftData();
+    this.getUrl();
+    this.getGiftData(this.url);
     this.countPageData(parseInt(this.$route.params.page));
   },
   beforeUpdate() {
     this.pagination;
+    // this.getUrl();
   },
 };
 </script>

@@ -16,7 +16,6 @@
 <script>
 export default {
   name: "filterBonus",
-  // props: ["type"],
   data() {
     return {
       visibility: "all",
@@ -38,8 +37,7 @@ export default {
     visibilityShow(tabId) {
       this.$emit("type", tabId);
       this.visibility = tabId;
-      // let type = tabId;
-      // this.$router.push(`/bonus/${type}/1`);
+      this.$router.push(`/bonus/${tabId}/1`);
       return {
         active: this.visibility,
       };
@@ -57,7 +55,16 @@ export default {
         });
     },
   },
+  watch: {
+    $route() {
+      // if (this.$route.params.type) {
+      this.visibility = this.$route.params.type;
+      // }
+    },
+    deep: true,
+  },
   created() {
+    this.visibility = this.$route.params.type;
     this.getCategory();
   },
 };
