@@ -36,6 +36,7 @@ const routes = [
     path: '/bonus',
     name: 'Bonus',
     component: () => import('../views/Bonus.vue'),
+    redirect: "/bonus/all/1",
     props: (route) => ({ type: route.params.type || "all" }, { page: route.params.page || 1 }),
 
     children: [

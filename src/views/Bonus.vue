@@ -63,28 +63,16 @@ export default {
     },
   },
   watch: {
-    // $route() {
-    //   if (this.$route.params.type) {
-    //     this.countPageData(parseInt(this.$route.params.page));
-    //     this.pagination;
-    //   } else {
-    //     this.type = "all";
-    //     this.url = `${process.env.VUE_APP_API}/gift/all`;
-    //     this.$router.push(`/bonus`);
-    //     // if (this.type !== "all" && this.type !== "hot") {
-    //     //   // this.url = `${process.env.VUE_APP_API}/category/gift/${this.type}`;
-    //     //   this.$router.push(
-    //     //     `/bonus/${this.type}/${this.pagination.currentPage}`
-    //     //   );
-    //     // } else {
-    //     //   // this.url = `${process.env.VUE_APP_API}/gift/${this.type}`;
-    //     //   this.$router.push(
-    //     //     `/bonus/${this.type}/${this.pagination.currentPage}`
-    //     //   );
-    //     // }
-    //   }
-    // },
-    // deep: true,
+    $route() {
+      if (this.$route.path == "/bonus/all/1") {
+        this.type = "all";
+        this.url = `${process.env.VUE_APP_API}/gift/all`;
+        this.getGiftData(this.url);
+        this.countPageData(parseInt(this.$route.params.page));
+        this.pagination;
+      }
+    },
+    deep: true,
   },
   methods: {
     getType(val) {
@@ -147,12 +135,9 @@ export default {
       // console.log(pagination)
     },
     countPageData(pageNum) {
-      // if (this.$route.params.page !== pageNum) {
-      // this.$set(this.pagination, "currentPage", 0);
       this.pagination.currentPage = pageNum;
       this.pagination.minPage = (pageNum - 1) * this.pagination.per_page;
       this.pagination.maxPage = pageNum * this.pagination.per_page;
-      // }
     },
     getGiftData(url) {
       this.axios
@@ -173,7 +158,6 @@ export default {
   },
   beforeUpdate() {
     this.pagination;
-    // this.getUrl();
   },
 };
 </script>

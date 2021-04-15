@@ -35,12 +35,14 @@ export default {
   },
   methods: {
     visibilityShow(tabId) {
-      this.$emit("type", tabId);
-      this.visibility = tabId;
-      this.$router.push(`/bonus/${tabId}/1`);
-      return {
-        active: this.visibility,
-      };
+      if (this.visibility !== tabId) {
+        this.$emit("type", tabId);
+        this.visibility = tabId;
+        this.$router.push(`/bonus/${tabId}/1`);
+        return {
+          active: this.visibility,
+        };
+      }
     },
     getCategory() {
       this.axios
