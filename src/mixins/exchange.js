@@ -20,9 +20,9 @@ export default {
         .post(exchangeApi, gift)
         .then((response) => {
           alert(response.data.message);
-          if (!this.$route.params.guid) {
-            this.$router.go(0);
-          }
+          // if (!this.$route.params.guid) {
+          //   this.$router.go(0);
+          // }
           // this.$nextTick(function () {
           // });
         })

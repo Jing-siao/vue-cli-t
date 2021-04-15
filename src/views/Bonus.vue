@@ -4,7 +4,7 @@
       <h1>兌換專區</h1>
       <FilterBonus @type="getType"></FilterBonus>
       <div class="mainBonus col">
-        <SelectOrder />
+        <SelectOrder @selected="getSelected" />
         <div class="bonusCard row">
           <FourCard
             v-for="item in filterData.slice(
@@ -47,19 +47,22 @@ export default {
       url: `${process.env.VUE_APP_API}/gift/all`,
       data: [],
       type: "all",
+      selected: "all",
       pagination: {},
+      sortData: [],
     };
   },
   computed: {
     filterData() {
-      // this.type = this.$route.params.type;
-      // if (this.type == "all") {
-      return this.data;
-      // } else {
-      //   return this.data.filter((item) => {
-      //     return item.type == this.type;
-      //   });
-      // }
+      let sortData = this.data;
+      if (this.selected == "all") {
+        return this.data;
+      } else {
+        return sortData.sort((a, b) => {
+          if (this.selected == "increase") return a.cnt - b.cnt;
+          else return b.cnt - a.cnt;
+        });
+      }
     },
   },
   watch: {
@@ -84,6 +87,9 @@ export default {
       }
       this.getGiftData(this.url);
       this.countPageData(1);
+    },
+    getSelected(val) {
+      this.selected = val;
     },
     getUrl() {
       this.type = this.$route.params.type;
@@ -158,6 +164,7 @@ export default {
   },
   beforeUpdate() {
     this.pagination;
+    this.getGiftData(this.url);
   },
 };
 </script>

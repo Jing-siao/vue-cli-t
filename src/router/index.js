@@ -40,11 +40,10 @@ const routes = [
     props: (route) => ({ type: route.params.type || "all" }, { page: route.params.page || 1 }),
 
     children: [
+
       {
         path: ':type?/:page?',
-        // name: 'Bonus',
         component: () => import('../views/Bonus.vue'),
-        props: (route) => ({ page: route.params.page || 1 }),
       },
     ]
 
