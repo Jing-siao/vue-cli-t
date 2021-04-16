@@ -15,6 +15,7 @@
             :data="item"
             :thisPage="pagination.currentPage"
             @pageService="countPageData"
+            @msg="popMsg"
           />
         </div>
       </div>
@@ -24,6 +25,12 @@
       />
     </div>
     <GoTOPBtn />
+    <PopOut
+      :propMsg="msg"
+      :popOut="showPop"
+      :goRecordBtn="showBtn"
+      @close="closePop"
+    ></PopOut>
   </div>
 </template>
 <script>
@@ -49,7 +56,9 @@ export default {
       type: "all",
       selected: "all",
       pagination: {},
-      sortData: [],
+      showPop: false,
+      showBtn: false,
+      msg: "",
     };
   },
   computed: {
@@ -156,6 +165,19 @@ export default {
           console.log(err);
         });
     },
+    popMsg(text) {
+      this.msg = text;
+      this.msg !== `兌換成功<p>欲察看紀錄詳情，請至會員中心兌換紀錄查看</p>`
+        ? (this.showBtn = false)
+        : (this.showBtn = true);
+
+      this.showPop = true;
+    },
+    closePop() {
+      this.showPop = false;
+      this.showBtn = false;
+      this.getGiftData(this.url);
+    },
   },
   created() {
     this.getUrl();
@@ -164,39 +186,66 @@ export default {
   },
   beforeUpdate() {
     this.pagination;
-    this.getGiftData(this.url);
+    // this.getGiftData(this.url); //會閃;
   },
 };
 </script>
 <style lang="scss" >
 .bonus {
   @include hederFixed();
-  .main {
-    margin-top: 50px;
-  }
 }
-@media (min-width: 577px) {
-  .main {
-    min-height: calc(100vh - 259px);
-    .mainBonus {
-      padding: 30px 15px 5px;
-      background-color: $darkgrey;
-      border-radius: 0 0 0.8rem 0.8rem;
-      .bonusCard {
-        margin-top: 18px;
-        padding: 0 15px;
+
+@media (min-width: 768px) {
+  .bonus {
+    .main {
+      // margin-top: 50px;
+      min-height: calc(100vh - 259px);
+      .mainBonus {
+        padding: 30px 15px 5px;
+        background-color: $darkgrey;
+        border-radius: 0 0 0.8rem 0.8rem;
+        .bonusCard {
+          margin-top: 18px;
+          padding: 0 15px;
+        }
       }
     }
   }
 }
+@media (max-width: 767px) {
+  .bonus {
+    .main {
+      min-height: calc(100vh - 223px);
+      .mainBonus {
+        padding: 15px 0 5px;
+        .bonusCard {
+          margin-top: 8px;
+          padding: 0 15px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 576px) and( max-width: 767px) {
+  .bonus {
+    .main {
+      max-width: 100%;
+    }
+  }
+}
+@media (min-width: 577px) {
+  .bonus {
+    .main {
+      margin-top: 50px;
+    }
+  }
+}
 @media (max-width: 576px) {
-  .main {
-    min-height: calc(100vh - 223px);
-    .mainBonus {
-      padding: 15px 0 5px;
-      .bonusCard {
-        margin-top: 8px;
-        padding: 0 15px;
+  .bonus {
+    .main {
+      margin-top: 20px;
+      h1 {
+        margin-bottom: 20px;
       }
     }
   }

@@ -3,6 +3,7 @@ import Vue from 'vue'
 import VCalendar from 'v-calendar'; //日曆套件
 import axios from 'axios'//Ajax套件
 import VueAxios from 'vue-axios'//將Ajax套件轉為vue的套件
+import popOut from './components/public/PopOut.vue'
 import App from './App.vue'
 // import "./registerServiceWorker";
 import router from './router'
@@ -19,6 +20,7 @@ Vue.use(VueAxios, axios)
 Vue.use(VCalendar, {
   componentPrefix: 'vc',
 });
+Vue.component('PopOut', popOut);
 new Vue({
   router,
   store,

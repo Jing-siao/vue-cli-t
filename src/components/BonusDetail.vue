@@ -31,6 +31,12 @@
         <p v-html="domDecoder(gift.note)"></p>
       </div>
     </div>
+    <PopOut
+      :propMsg="msg"
+      :popOut="showPop"
+      :goRecordBtn="showBtn"
+      @close="closePop"
+    ></PopOut>
   </div>
 </template>
 <script>
@@ -42,6 +48,9 @@ export default {
     return {
       gift: {},
       titles: ["兌換點數", "商品說明"],
+      showPop: false,
+      showBtn: false,
+      msg: "",
     };
   },
   mounted() {
@@ -65,6 +74,15 @@ export default {
       } else {
         this.$router.push(`/bonus/${type}/${page}`); //router-link會閃
       }
+    },
+    // popMsg(text) {
+    //   this.msg = text;
+    //   this.showPop = true;
+    //   this.showBtn = true;
+    // },
+    closePop() {
+      this.showPop = false;
+      this.showBtn = false;
     },
   },
 };

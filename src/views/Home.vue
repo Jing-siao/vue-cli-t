@@ -18,12 +18,19 @@
               v-for="item in filterData"
               :key="item.guid"
               :data="item"
+              @msg="popMsg"
             />
           </div>
         </div>
       </div>
       <GoTOPBtn />
     </div>
+    <PopOut
+      :propMsg="msg"
+      :popOut="showPop"
+      :goRecordBtn="showBtn"
+      @close="closePop"
+    ></PopOut>
   </div>
 </template>
 
@@ -54,6 +61,9 @@ export default {
       gift: "好禮三重送",
       point: "熱門兌換",
       hotdata: [],
+      showPop: false,
+      showBtn: false,
+      msg: "",
     };
   },
   computed: {
@@ -61,16 +71,33 @@ export default {
       return this.hotdata.slice(0, 8);
     },
   },
+  methods: {
+    popMsg(text) {
+      this.msg = text;
+      this.msg !== `兌換成功<p>欲察看紀錄詳情，請至會員中心兌換紀錄查看</p>`
+        ? (this.showBtn = false)
+        : (this.showBtn = true);
 
+      this.showPop = true;
+    },
+    closePop() {
+      this.showPop = false;
+      this.showBtn = false;
+      this.getHotData();
+    },
+    getHotData() {
+      this.axios
+        .get(`${process.env.VUE_APP_API}/gift/hot`)
+        .then((response) => {
+          this.hotdata = response.data.detail;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
   created() {
-    this.axios
-      .get(`${process.env.VUE_APP_API}/gift/hot`)
-      .then((response) => {
-        this.hotdata = response.data.detail;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.getHotData(this.url);
   },
 };
 </script>

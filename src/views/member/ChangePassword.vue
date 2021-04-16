@@ -2,10 +2,10 @@
   <div class="changePassword">
     <form action="#" class="col-12 col-sm-9 col-md-8 col-lg-6">
       <div class="row" v-for="label in labelList" :key="label.title">
-        <label for="" class="col-sm-5 col-md-4">{{ label.title }}</label>
+        <label for="" class="col-sm-5">{{ label.title }}</label>
         <input
           type="password"
-          class="col-sm-7"
+          class="col-sm-6"
           v-model.trim.lazy="label.input"
         />
       </div>
