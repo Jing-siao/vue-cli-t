@@ -75,11 +75,6 @@ export default {
         this.$router.push(`/bonus/${type}/${page}`); //router-link會閃
       }
     },
-    // popMsg(text) {
-    //   this.msg = text;
-    //   this.showPop = true;
-    //   this.showBtn = true;
-    // },
     closePop() {
       this.showPop = false;
       this.showBtn = false;

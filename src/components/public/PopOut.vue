@@ -12,8 +12,12 @@
 <script>
 export default {
   props: ["propMsg", "popOut", "goRecordBtn"],
+  // props: ["propMsg"],
   data() {
-    return {};
+    return {
+      // popOut: false,
+      // goRecordBtn: false,
+    };
   },
   methods: {
     closePop() {
