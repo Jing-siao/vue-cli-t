@@ -5,6 +5,8 @@ export default {
       if (isLogin === false) {
         alert("請先登入");
         this.$router.push({ name: "Login" });
+        // let message = "請先登入"
+        // this.ifShowBtn(false, message)
       } else {
         this.postExchange(giftGuid);
       }

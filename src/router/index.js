@@ -11,9 +11,12 @@ import Signup from '../views/Signup.vue'
 import SignupCardReader from '../views/SignupCardReader.vue'
 import InternetBanking from '../views/InternetBanking.vue'
 import Error from '../views/Error.vue'
+import popOut from '@/components/public/PopOut.vue'
+
 
 
 Vue.use(VueRouter, store)
+Vue.component('PopOut', popOut);
 
 const routes = [
   {
@@ -37,7 +40,9 @@ const routes = [
     name: 'Bonus',
     component: () => import('../views/Bonus.vue'),
     redirect: "/bonus/all/1",
-    props: (route) => ({ type: route.params.type || "all" }, { page: route.params.page || 1 }),
+    // props: (route) => ({ type: route.params.type || "all" }, { page: route.params.page || 1 }),
+    props: true,
+
 
     children: [
 
@@ -53,7 +58,8 @@ const routes = [
     path: '/bonus/:type?/:page/:guid',
     component: () => import(/* webpackChunkName: "Bonus" */'../components/BonusDetail.vue'),
     name: 'BonusDetail',
-    props: (route) => ({ type: route.params.type || "hot" }, { page: route.params.page || 1 }),
+    // props: (route) => ({ type: route.params.type || "hot" }, { page: route.params.page || 1 }),
+    props: true
   },
   {
     path: '/question',
@@ -70,9 +76,10 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     //此方法可以省下一開始讀取時間 但就是換頁會多一次讀取
     //打包在同一支js
-    component: () => import(/* webpackChunkName: "Member" */'../views/Member.vue'),
+    component: () => import(/* webpackChunkName: "Member" */'../views/Member.vue'), popOut,
 
     redirect: "/member/allPoint",
+    // props: { popOut: true },
 
     children: [
       {
@@ -206,6 +213,7 @@ router.beforeEach((to, from, next) => {
     } else {
       //不是的話就導入登入頁
       alert('請先登入')
+      // Vue.popOut = true
       next({
         path: '/login',
       });
