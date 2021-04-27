@@ -48,12 +48,22 @@
       text-align: center;
     }
 
-    button.first {
-      padding: 8px 20px;
-      background-color: $darkgrey;
-      color: white;
-      margin-top: 30px;
+    div {
+
+      button {
+        margin: 5px 20px;
+
+      }
+
+      button.first {
+        padding: 8px 20px;
+        background-color: $darkgrey;
+        color: white;
+
+      }
     }
+
+
   }
 }
 

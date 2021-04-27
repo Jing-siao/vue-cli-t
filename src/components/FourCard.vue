@@ -15,11 +15,11 @@
         <p>{{ data.ptypeName }}:{{ data.cnt }}點</p>
       </div>
     </div>
-    <div class="col">
+    <!-- <div class="col">
       <button class="first" @click.prevent="exchange(data.guid)">
         立即兌換
       </button>
-    </div>
+    </div> -->
   </router-link>
 </template>
 <script>

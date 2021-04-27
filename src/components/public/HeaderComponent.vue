@@ -1,7 +1,6 @@
 <template>
   <!-- 有下拉選單用slot  -->
   <header :class="{ fixed: scrolled }" @scroll="handleScroll">
-    <!-- :class="{ fixed: scrolled }" @scroll="handleScroll" -->
     <div class="container-fluid">
       <div class="row header" v-cloak>
         <div class="col">
@@ -205,12 +204,10 @@ export default {
   created() {
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
-    // window.addEventListener("scroll", this.handleScroll);
   },
 
   beforeDestroy() {
     window.removeEventListener("resize", this.handleResize);
-    // window.removeEventListener("scroll", this.handleScroll);
   },
   computed: {
     isLogin() {

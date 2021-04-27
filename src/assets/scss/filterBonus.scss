@@ -2,7 +2,6 @@
 
   // border: 1px solid rgb(235, 105, 105);
 
-
   ul {
     // border: 1px solid rgb(212, 205, 141);
 
@@ -21,8 +20,42 @@
 
     }
   }
+
+
 }
 
+//兌換fixed 之後改
+// .FilterBonus.fixed {
+
+//   border: 1px solid rgb(235, 105, 105);
+//   position: fixed;
+//   top: 0px;
+//   left: 0;
+//   width: 100%;
+//   z-index: 3;
+//   background-color: $body;
+
+//   ul {
+//     border: 1px solid rgb(212, 205, 141);
+
+//     li {
+//       color: $grey;
+
+//       text-align: center;
+
+//       cursor: pointer;
+
+//       &.active {
+//         background-color: $darkgrey;
+//         color: white;
+//       }
+
+
+//     }
+//   }
+
+
+// }
 
 @media(min-width:768px) {
   ul {

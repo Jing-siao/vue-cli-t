@@ -1,6 +1,6 @@
 <template>
   <div class="dePosit">
-    <div class="col-12 col-sm-9 col-md-8 col-lg-6">
+    <div class="dePositWrap col-12 col-sm-9 col-md-8 col-lg-6">
       <div class="row">
         <label for="" class="col-sm-3">儲值序號</label>
         <input type="text" class="col-sm-7" />
@@ -13,10 +13,13 @@
 </template>
 <style lang="scss" scoped>
 .dePosit {
-  div.row {
-    margin: 0;
-    label {
-      padding: 5px 0;
+  .dePositWrap {
+    padding: 0;
+    div.row {
+      margin: 0;
+      label {
+        padding: 5px 0;
+      }
     }
   }
 }

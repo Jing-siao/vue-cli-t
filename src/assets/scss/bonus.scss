@@ -1,0 +1,75 @@
+.noCard {
+  padding: 10px 0;
+  text-align: center;
+  // color: $white;
+  background-color: $mainColor;
+  margin-bottom: 10px;
+  border-radius: 0.3rem;
+
+}
+
+@media (min-width: 768px) {
+  .bonus {
+    .main {
+      // margin-top: 50px;
+      min-height: calc(100vh - 259px);
+
+      .mainBonus {
+        padding: 30px 15px 5px;
+        background-color: $darkgrey;
+        border-radius: 0 0 0.8rem 0.8rem;
+
+        .bonusCard {
+          margin-top: 18px;
+          padding: 0 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .bonus {
+    .main {
+      min-height: calc(100vh - 223px);
+
+      .mainBonus {
+        padding: 15px 0 5px;
+
+        .bonusCard {
+          margin-top: 8px;
+          padding: 0 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) and(max-width: 767px) {
+  .bonus {
+    .main {
+      max-width: 100%;
+    }
+  }
+}
+
+@media (min-width: 577px) {
+  .bonus {
+    .main {
+      margin-top: 50px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .bonus {
+    .main {
+      min-height: calc(100vh - 193px);
+      margin-top: 20px;
+
+      h1 {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

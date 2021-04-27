@@ -24,9 +24,21 @@ export default {
 <style lang="scss">
 .question {
   @include hederFixed();
-  min-height: calc(100vh - 124px);
-  .main {
-    margin-top: 40px;
+}
+@media (min-width: 577px) {
+  .question {
+    min-height: calc(100vh - 124px);
+    .main {
+      margin-top: 40px;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .question {
+    min-height: calc(100vh - 88px);
+    .main {
+      margin-top: 20px;
+    }
   }
 }
 </style>

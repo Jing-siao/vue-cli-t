@@ -1,6 +1,7 @@
 <template>
   <div class="FilterBonus">
-    <ul>
+    <!-- 兌換fixed -->
+    <ul class="fixed">
       <li
         v-for="list in bonusList"
         :key="list.tabId"

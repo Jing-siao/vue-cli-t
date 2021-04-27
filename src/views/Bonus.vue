@@ -4,8 +4,8 @@
       <h1>兌換專區</h1>
       <FilterBonus @type="getType"></FilterBonus>
       <div class="mainBonus col">
-        <SelectOrder @selected="getSelected" />
-        <div class="bonusCard row">
+        <SelectOrder @selected="getSelected" v-if="hasCard" />
+        <div class="bonusCard row" v-if="hasCard">
           <FourCard
             v-for="item in filterData.slice(
               pagination.minPage,
@@ -18,8 +18,10 @@
             @msg="popMsg"
           />
         </div>
+        <h5 class="noCard" v-else>暫無贈品</h5>
       </div>
       <Pagination
+        v-if="hasCard"
         :paginationService="pagination"
         @pageService="countPageData"
       />
@@ -59,6 +61,7 @@ export default {
       showPop: false,
       showBtn: false,
       msg: "",
+      hasCard: true,
     };
   },
   computed: {
@@ -125,7 +128,7 @@ export default {
         maxPage,
       } = this.pagination;
       totalResult = this.filterData.length;
-      per_page = 4;
+      per_page = 12;
       //無條件進位算總頁數
       pageTotal = Math.ceil(totalResult / per_page);
       currentPage = currentPage || 1; //有就帶變數 沒有就初始化
@@ -158,8 +161,13 @@ export default {
       this.axios
         .get(url)
         .then((response) => {
-          this.data = response.data.detail;
-          this.pages();
+          if (response.data.count !== 0) {
+            this.data = response.data.detail;
+            this.pages();
+            this.hasCard = true;
+          } else {
+            this.hasCard = false;
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -190,64 +198,11 @@ export default {
   },
 };
 </script>
-<style lang="scss" >
+<style lang="scss">
+@import "@/assets/scss/bonus.scss";
 .bonus {
   @include hederFixed();
 }
-
-@media (min-width: 768px) {
-  .bonus {
-    .main {
-      // margin-top: 50px;
-      min-height: calc(100vh - 259px);
-      .mainBonus {
-        padding: 30px 15px 5px;
-        background-color: $darkgrey;
-        border-radius: 0 0 0.8rem 0.8rem;
-        .bonusCard {
-          margin-top: 18px;
-          padding: 0 15px;
-        }
-      }
-    }
-  }
-}
-@media (max-width: 767px) {
-  .bonus {
-    .main {
-      min-height: calc(100vh - 223px);
-      .mainBonus {
-        padding: 15px 0 5px;
-        .bonusCard {
-          margin-top: 8px;
-          padding: 0 15px;
-        }
-      }
-    }
-  }
-}
-@media (min-width: 576px) and( max-width: 767px) {
-  .bonus {
-    .main {
-      max-width: 100%;
-    }
-  }
-}
-@media (min-width: 577px) {
-  .bonus {
-    .main {
-      margin-top: 50px;
-    }
-  }
-}
-@media (max-width: 576px) {
-  .bonus {
-    .main {
-      margin-top: 20px;
-      h1 {
-        margin-bottom: 20px;
-      }
-    }
-  }
-}
 </style>
+
+

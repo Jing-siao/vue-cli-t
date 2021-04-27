@@ -30,9 +30,9 @@ export default {
     background: $grey;
     margin: 40px 0 20px 0;
     padding: 15px;
-    border-radius: 1.5rem;
+    border-radius: 0.8rem;
     .content {
-      border: 1px solid rgb(138, 138, 138);
+      border: 1px solid $white;
     }
   }
 }

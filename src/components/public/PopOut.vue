@@ -3,28 +3,25 @@
     <div class="popOutWrap">
       <i class="fas fa-times" @click="closePop"></i>
       <p v-html="propMsg" class="popMsg"></p>
-      <button class="popMsg first" v-if="goRecordBtn" @click="goRecordPage">
-        查詢兌換紀錄
-      </button>
+      <div v-if="showBtns">
+        <button class="popMsg cancel" @click="closePop">取消</button>
+        <button class="popMsg first" @click="submitYes">確認</button>
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ["propMsg", "popOut", "goRecordBtn"],
-  // props: ["propMsg"],
+  props: ["propMsg", "popOut", "showBtns"],
   data() {
-    return {
-      // popOut: false,
-      // goRecordBtn: false,
-    };
+    return {};
   },
   methods: {
     closePop() {
       this.$emit("close", false);
     },
-    goRecordPage() {
-      this.$router.push("/member/exchangeRecord");
+    submitYes() {
+      this.$emit("submit", "yes");
     },
   },
 };

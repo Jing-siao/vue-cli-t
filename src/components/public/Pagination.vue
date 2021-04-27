@@ -160,7 +160,7 @@ export default {
 }
 @media (max-width: 400px) {
   .pagination {
-    border: 1px solid blue;
+    // border: 1px solid blue;
     display: flex;
     justify-content: space-around;
     div.page {

@@ -21,7 +21,10 @@
             <h5>商品說明</h5>
             <p>{{ gift.content }}</p>
           </div>
-          <button class="first col-sm-6" @click="exchange(gift.guid)">
+          <button
+            class="first col-sm-6"
+            @click="exchange(gift.name, gift.cnt, gift.ptypeName)"
+          >
             立即兌換
           </button>
         </div>
@@ -34,8 +37,9 @@
     <PopOut
       :propMsg="msg"
       :popOut="showPop"
-      :goRecordBtn="showBtn"
+      :showBtns="showBtn"
       @close="closePop"
+      @submit="submitExchange"
     ></PopOut>
   </div>
 </template>
@@ -78,6 +82,11 @@ export default {
     closePop() {
       this.showPop = false;
       this.showBtn = false;
+    },
+    submitExchange(val) {
+      if (val === "yes") {
+        this.postExchange(this.gift.guid);
+      }
     },
   },
 };
