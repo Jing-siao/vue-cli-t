@@ -25,8 +25,9 @@ export default {
         .then((response) => {
           let message = "";
           if (response.data.message == "兌換成功") {
-            message = `兌換成功<p>欲察看紀錄詳情，請至會員中心兌換紀錄查看</p>`;
-            this.ifShowBtn(false, message)
+            this.$router.push(`/exchangeSuccess/${giftGuid}`);
+            // message = `兌換成功<p>欲察看紀錄詳情，請至會員中心兌換紀錄查看</p>`;
+            // this.ifShowBtn(false, message)
           } else {
             message = `兌換失敗<p>${response.data.message}</p>`;
             this.ifShowBtn(false, message)

@@ -12,6 +12,7 @@ import SignupCardReader from '../views/SignupCardReader.vue'
 import InternetBanking from '../views/InternetBanking.vue'
 import Error from '../views/Error.vue'
 import popOut from '@/components/public/PopOut.vue'
+import ExchangeSuccess from '@/components/ExchangeSuccess.vue'
 
 
 
@@ -53,6 +54,11 @@ const routes = [
     ]
 
 
+  },
+  {
+    path: '/exchangeSuccess/:guid',
+    name: 'ExchangeSuccess',
+    component: /* webpackChunkName: "Bonus" */ExchangeSuccess,
   },
   {
     path: '/bonus/:type?/:page/:guid',
