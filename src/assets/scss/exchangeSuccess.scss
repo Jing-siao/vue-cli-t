@@ -27,11 +27,16 @@
       }
 
       .barCodeWrap {
-        max-width: 300px;
+        max-width: 420px;
         margin: 30px auto 0;
 
         img {
           width: 95%;
+        }
+
+        .barCode {
+          display: inline-block;
+
         }
 
         p {

@@ -5,7 +5,6 @@ import axios from 'axios'//Ajax套件
 import VueAxios from 'vue-axios'//將Ajax套件轉為vue的套件
 import popOut from './components/public/PopOut.vue'
 // import VueQrcodeReader from 'vue-qrcode-reader'
-// import VueHtml2Canvas from 'vue-html2canvas';
 import App from './App.vue'
 // import "./registerServiceWorker";
 import router from './router'
@@ -22,8 +21,7 @@ Vue.use(VueAxios, axios)
 Vue.use(VCalendar, {
   componentPrefix: 'vc',
 });
-// Vue.use(VueQrcodeReader, VueHtml2Canvas);
-// Vue.use(VueHtml2Canvas);
+// Vue.use(VueQrcodeReader);
 Vue.component('PopOut', popOut);
 new Vue({
   router,

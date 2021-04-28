@@ -17,16 +17,32 @@
           <div class="wrap">
             <h4>標題標題標題標題標題標題標題標題標題標題標題標題</h4>
             <div class="barCodeWrap">
-              <img src="../assets/img/barCode.png" alt="" />
-              <p>1234568972312345</p>
+              <barcode
+                class="barCode"
+                :value="barcodeValue"
+                fontOptions="bold"
+                :height="barcodeHeight"
+                :width="barCodewidth"
+                :textMargin="barcodeTextMargin"
+                :fontSize="barcodeFontSize"
+                :margin="barcodeMargin"
+              ></barcode>
+              <!-- <img src="../assets/img/barCode.png" alt="" /> -->
+              <!-- <input v-model="barcodeValue" /><br /> -->
             </div>
           </div>
         </div>
       </div>
       <div class="btns row">
-        <a class="col">
+        <a class="col" v-if="saveBtn">
           <button class="first" @click="generatorImage">保存截圖</button>
         </a>
+        <router-link class="col" :to="{ name: 'Member-ExchangeRecord' }" v-else>
+          <button class="first">
+            <i class="fas fa-search"></i>
+            查詢兌換紀錄
+          </button>
+        </router-link>
         <router-link class="col" :to="{ name: 'Bonus' }">
           <button class="first">
             <i class="fas fa-shopping-bag"></i>
@@ -39,24 +55,64 @@
 </template>
 <script>
 import html2canvas from "html2canvas";
-// import VueHtml2Canvas from "vue-html2canvas";
+import $ from "jquery";
+import VueBarcode from "vue-barcode";
 export default {
+  components: {
+    barcode: VueBarcode,
+  },
   data() {
-    return {};
+    return {
+      barcodeValue: "987654321987654",
+      saveBtn: true,
+      barcodeHeight: 45,
+      barCodewidth: 1.6,
+      barcodeTextMargin: 1,
+      barcodeFontSize: 14,
+      barcodeMargin: 5,
+
+      window: {
+        width: 0,
+      },
+    };
   },
   methods: {
     generatorImage() {
+      let w = window.innerWidth;
+      var vp = $("#viewportMeta").attr("content");
+      $("#viewportMeta").attr("content", `width=${w}`);
       let capture = this.$refs.capture;
+      capture.scrollLeft = 0;
       capture.scrollTop = 0;
-      html2canvas(capture, { useCORS: true }).then((canvas) => {
-        this.$refs.addImage.append(canvas);
-        // 通過a標籤下載
-        let link = document.createElement("a");
-        link.href = canvas.toDataURL();
-        link.setAttribute("download", `${Date.now()}.png`);
-        link.click();
-      });
+      html2canvas(capture, {
+        width: $("#capture").width(),
+        height: $("#capture").height(),
+        useCORS: true,
+      })
+        .then((canvas) => {
+          this.$refs.addImage.append(canvas);
+          // 通過a標籤下載
+          let link = document.createElement("a");
+          link.href = canvas.toDataURL();
+          link.setAttribute("download", `${Date.now()}.png`);
+          link.click();
+        })
+        .then(() => {
+          $("#viewportMeta").attr("content", vp);
+        });
     },
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.width < 800 ? (this.saveBtn = false) : (this.saveBtn = true);
+    },
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
   },
 };
 </script>
