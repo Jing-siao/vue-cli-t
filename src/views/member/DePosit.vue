@@ -1,115 +1,123 @@
 <template>
   <div class="dePosit">
-    <div class="dePositWrap col-12 col-sm-9 col-md-8 col-lg-6">
+    <div class="dePositWrap col-12 col-sm-9 col-md-8 col-lg-6" v-if="showInput">
       <div class="row">
-        <label for="" class="col-sm-3">儲值序號</label>
-        <input type="text" class="col-sm-7" />
+        <label for="" class="col-sm-2">儲值序號</label>
+        <input type="text" class="col-sm-5 col-8" v-model="result" />
+        <button class="first scan" @click="showScan" v-if="showScanBtn">
+          <i class="fas fa-qrcode"></i>
+          掃描
+        </button>
       </div>
       <div class="row">
         <button class="first">確認</button>
       </div>
     </div>
-    <!-- <qrcode-stream
-      @decode="onDecode"
-      :camera="cameraSettings"
-      :track="false"
-      :paused="paused"
-    ></qrcode-stream> -->
-    <p class="decode-result">
-      Last result: <b>{{ result }}</b>
-    </p>
-
-    <p v-if="error !== null" class="drop-error">
-      {{ error }}
-    </p>
-    <qrcode-drop-zone
-      @detect="onDetect"
-      @dragover="onDragOver"
-      @init="logErrors"
+    <div
+      :class="{ qrcodeWrap: showScanBtn }"
+      class="col-12 col-sm-8 col-md-7 col-lg-6"
     >
-      <div class="drop-area" :class="{ dragover: dragover }">
-        DROP SOME IMAGES HERE
-      </div>
-    </qrcode-drop-zone>
+      <p>{{ error }}</p>
+      <qrcode-stream
+        @decode="onDecode"
+        @init="onInit"
+        :track="paintOutline"
+        v-if="showQrcode"
+      >
+        <div class="qrcodeSquare">
+          <span class="topRight"></span>
+          <span class="leftBottom"></span>
+        </div>
+        <div class="qrcodeOverlay"></div>
+      </qrcode-stream>
+    </div>
+    <div class="btns" v-if="showBtn">
+      <button class="first" @click="dePositWrap">手動輸入</button>
+    </div>
   </div>
 </template>
 <script>
 // import { QrcodeStream, QrcodeDropZone, QrcodeCapture } from "vue-qrcode-reader";
-import { QrcodeDropZone } from "vue-qrcode-reader";
+import { QrcodeStream } from "vue-qrcode-reader";
 export default {
-  // components: {
-  //   QrcodeStream,
-  //   QrcodeDropZone,
-  //   QrcodeCapture,
-  // },
   components: {
-    // QrcodeStream,
-    QrcodeDropZone,
+    QrcodeStream,
+    // QrcodeDropZone,
     // QrcodeCapture,
   },
   data() {
     return {
       result: null,
       error: null,
-      dragover: false,
+      showInput: false,
+      showBtn: false,
+      showQrcode: true,
+      showScanBtn: false,
     };
   },
   methods: {
-    async onDetect(promise) {
+    onDecode(result) {
+      this.result = result;
+      if (this.result) {
+        this.dePositWrap(true);
+      }
+    },
+    async onInit(promise) {
       try {
-        const { content } = await promise;
-
-        this.result = content;
-        this.error = null;
+        await promise;
+        this.showScan();
       } catch (error) {
-        if (error.name === "DropImageFetchError") {
-          this.error = "Sorry, you can't load cross-origin images :/";
-        } else if (error.name === "DropImageDecodeError") {
-          this.error = "Ok, that's not an image. That can't be decoded.";
+        if (error.name === "NotAllowedError") {
+          this.dePositWrap(true);
         } else {
-          this.error = "Ups, what kind of error is this?! " + error.message;
+          this.dePositWrap(false);
         }
       }
     },
-
-    logErrors(promise) {
-      promise.catch(console.error);
+    showScan() {
+      // this.error = null;
+      this.result = null;
+      this.showInput = false;
+      this.showQrcode = true;
+      this.showBtn = true;
+      this.showScanBtn = true;
     },
-
-    onDragOver(isDraggingOver) {
-      this.dragover = isDraggingOver;
+    dePositWrap(boolean) {
+      this.showQrcode = false;
+      this.showBtn = false;
+      this.showInput = true;
+      this.showScanBtn = boolean;
     },
+    paintOutline(detectedCodes, ctx) {
+      for (const detectedCode of detectedCodes) {
+        const [firstPoint, ...otherPoints] = detectedCode.cornerPoints;
+        ctx.strokeStyle = "maroon";
+        ctx.beginPath();
+        ctx.moveTo(firstPoint.x, firstPoint.y);
+        for (const { x, y } of otherPoints) {
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(firstPoint.x, firstPoint.y);
+        ctx.closePath();
+        ctx.stroke();
+      }
+    },
+  },
+  created() {
+    // (promise) => {
+    //   console.log(promise);
+    //   try {
+    //     promise;
+    //     this.showInput = false;
+    //   } catch (error) {
+    //     if (error.name) {
+    //       this.error = error.name;
+    //     }
+    //   }
+    // };
   },
 };
 </script>
 <style lang="scss" scoped>
-.dePosit {
-  .dePositWrap {
-    padding: 0;
-    div.row {
-      margin: 0;
-      label {
-        padding: 5px 0;
-      }
-    }
-  }
-  .drop-area {
-    height: 300px;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-    padding: 10px;
-
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  .dragover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-
-  .drop-error {
-    color: red;
-    font-weight: bold;
-  }
-}
+@import "@/assets/scss/deposit.scss";
 </style>

@@ -1,0 +1,98 @@
+$whiteT:rgba(255, 255, 255, 0.7);
+
+.dePosit {
+  .dePositWrap {
+    padding: 0;
+
+    div.row {
+      margin: 0;
+
+      label {
+        padding: 5px 0;
+      }
+
+      input {
+        height: 1.8rem;
+      }
+
+      button.scan {
+        margin: 0 10px;
+        padding: 5px 10px;
+      }
+    }
+  }
+
+  .qrcodeWrap {
+    padding: 0;
+
+    .qrcodeSquare {
+      top: 50%;
+      left: 50%;
+      width: 70%;
+      height: 80%;
+      transform: translate(-50%, -50%);
+      position: relative;
+
+      &::after,
+      &::before {
+        position: absolute;
+        content: "";
+        width: 20%;
+        height: 20%;
+        border: 5px solid;
+        border-radius: 0.5rem;
+      }
+
+      &::before {
+        top: 0;
+        left: 0;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        border-top-color: $whiteT;
+        border-left-color: $whiteT;
+      }
+
+      &::after {
+        bottom: 0;
+        right: 0;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-bottom-color: $whiteT;
+        border-right-color: $whiteT;
+      }
+
+      span {
+        position: absolute;
+        content: "";
+        width: 20%;
+        height: 20%;
+        border: 5px solid;
+        border-radius: 0.5rem;
+
+        &.topRight {
+          top: 0;
+          right: 0;
+          border-bottom-color: transparent;
+          border-right-color: $whiteT;
+          border-top-color: $whiteT;
+          border-left-color: transparent;
+        }
+
+        &.leftBottom {
+          bottom: 0;
+          left: 0;
+          border-bottom-color: $whiteT;
+          border-right-color: transparent;
+          border-top-color: transparent;
+          border-left-color: $whiteT;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width:575px) {
+  .btns {
+    text-align: center;
+  }
+}
