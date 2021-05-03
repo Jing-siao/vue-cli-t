@@ -9,15 +9,15 @@
           掃描
         </button>
       </div>
+      <p class="warning">{{ error }}</p>
       <div class="row">
         <button class="first">確認</button>
       </div>
     </div>
     <div
-      :class="{ qrcodeWrap: showScanBtn }"
+      :class="{ qrcodeWrap: isQrcodeWrap }"
       class="col-12 col-sm-8 col-md-7 col-lg-6"
     >
-      <p>{{ error }}</p>
       <qrcode-stream
         @decode="onDecode"
         @init="onInit"
@@ -53,6 +53,7 @@ export default {
       showBtn: false,
       showQrcode: true,
       showScanBtn: false,
+      isQrcodeWrap: false,
     };
   },
   methods: {
@@ -68,6 +69,7 @@ export default {
         this.showScan();
       } catch (error) {
         if (error.name === "NotAllowedError") {
+          this.error = "未允許使用相機權限，請至設定更改";
           this.dePositWrap(true);
         } else {
           this.dePositWrap(false);
@@ -81,12 +83,16 @@ export default {
       this.showQrcode = true;
       this.showBtn = true;
       this.showScanBtn = true;
+      window.setTimeout(() => {
+        this.isQrcodeWrap = true;
+      }, 650);
     },
     dePositWrap(boolean) {
       this.showQrcode = false;
       this.showBtn = false;
       this.showInput = true;
       this.showScanBtn = boolean;
+      this.isQrcodeWrap = false;
     },
     paintOutline(detectedCodes, ctx) {
       for (const detectedCode of detectedCodes) {
