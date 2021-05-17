@@ -3,7 +3,7 @@
     <div id="footer" class="container" v-cloak>
       <ul class="row">
         <li v-for="item in footer" class="col-md col-sm-5" :key="item.title">
-          <router-link :to="item.link">{{ item.title }}</router-link>
+          <router-link :to="{ name: item.link }">{{ item.title }}</router-link>
         </li>
       </ul>
 
@@ -23,28 +23,28 @@ export default {
       footer: [
         {
           title: "活動辦法",
-          link: "activity",
+          link: "Activity",
         },
         {
           title: "兌換專區",
-          link: "bonus",
+          link: "Bonus",
         },
         {
           title: "常見問題",
-          link: "question",
+          link: "Question",
         },
         {
           title: "會員專區",
-          link: "member",
+          link: "Member",
         },
-        {
-          title: "卡友專區",
-          link: "javascript:;",
-        },
-        {
-          title: "交通優惠",
-          link: "javascript:;",
-        },
+        // {
+        //   title: "卡友專區",
+        //   link: "javascript:;",
+        // },
+        // {
+        //   title: "交通優惠",
+        //   link: "javascript:;",
+        // },
       ],
       copyright: "All Rights Reserved.",
       company: "國眾國際商業銀行",

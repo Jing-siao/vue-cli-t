@@ -137,14 +137,14 @@ export default {
           title: "常見問題",
           link: "Question",
         },
-        {
-          title: "交通優惠",
-          link: "Error",
-        },
-        {
-          title: "卡友專區",
-          link: "Error",
-        },
+        // {
+        //   title: "交通優惠",
+        //   link: "Error",
+        // },
+        // {
+        //   title: "卡友專區",
+        //   link: "Error",
+        // },
       ],
       memberList: {
         title: "會員中心",
