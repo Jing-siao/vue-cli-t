@@ -24,21 +24,35 @@ export default {
         .post(exchangeApi, gift)
         .then((response) => {
           let message = "";
-          if (response.data.message == "兌換成功") {
-            this.$router.push(`/exchangeSuccess/${giftGuid}`);
-            // message = `兌換成功<p>欲察看紀錄詳情，請至會員中心兌換紀錄查看</p>`;
-            // this.ifShowBtn(false, message)
+          let kind = response.data.kind
+          if (kind) {
+            message = `兌換成功<p>${response.data.name}一份</p>`;
+            this.ifShowBtn(false, message);
+            if (kind == "E05") {
+              let url = "https://technews.tw/"
+              window.open(url, '_blank')
+              // this.handleWindow()
+            } else if (kind == "E02") {
+              // let url = response.data.url
+              let url = "https://technews.tw/"
+              window.open(url, '_blank')
+            }
+            setTimeout(() => {
+              this.$router.push(`/member/exchangeRecord`);
+            }, 3000);
           } else {
             message = `兌換失敗<p>${response.data.message}</p>`;
             this.ifShowBtn(false, message)
           }
-          // this.$nextTick(function () {
-          // });
         })
         .catch((err) => {
-          console.log(err);
           let message = err.response.data.message;
-          alert(message);
+          this.oneLine = true
+          message == "" ?
+            message = "兌換失敗" :
+            message = `${message}`;
+          console.log(err.response.data);
+          this.ifShowBtn(false, message)
         });
     },
     ifShowBtn(boolean, message) {
@@ -50,7 +64,15 @@ export default {
         this.$emit("msg", message)
       }
     },
-
+    handleWindow() {
+      //開啟新視窗的功能
+      let route = this.$router.resolve({
+        name: 'ExchangeSuccess',
+      })
+      //儲存參數數的功能
+      // sessionStorage.setItem("guid", guid);
+      window.open(route.href, '_blank')
+    },
 
   },
 

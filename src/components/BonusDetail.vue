@@ -38,6 +38,7 @@
       :propMsg="msg"
       :popOut="showPop"
       :showBtns="showBtn"
+      :popClass="oneLine"
       @close="closePop"
       @submit="submitExchange"
     ></PopOut>
@@ -54,6 +55,7 @@ export default {
       titles: ["兌換點數", "商品說明"],
       showPop: false,
       showBtn: false,
+      oneLine: false,
       msg: "",
     };
   },
@@ -82,6 +84,7 @@ export default {
     closePop() {
       this.showPop = false;
       this.showBtn = false;
+      this.oneLine = false;
     },
     submitExchange(val) {
       if (val === "yes") {

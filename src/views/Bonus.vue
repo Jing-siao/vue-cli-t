@@ -15,7 +15,6 @@
             :data="item"
             :thisPage="pagination.currentPage"
             @pageService="countPageData"
-            @msg="popMsg"
           />
         </div>
         <h5 class="noCard" v-else>暫無贈品</h5>
@@ -119,14 +118,8 @@ export default {
     },
     pages() {
       //先解構
-      let {
-        totalResult,
-        per_page,
-        pageTotal,
-        currentPage,
-        minPage,
-        maxPage,
-      } = this.pagination;
+      let { totalResult, per_page, pageTotal, currentPage, minPage, maxPage } =
+        this.pagination;
       totalResult = this.filterData.length;
       per_page = 12;
       //無條件進位算總頁數
@@ -172,14 +165,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-    },
-    popMsg(text) {
-      this.msg = text;
-      this.msg !== `兌換成功<p>欲察看紀錄詳情，請至會員中心兌換紀錄查看</p>`
-        ? (this.showBtn = false)
-        : (this.showBtn = true);
-
-      this.showPop = true;
     },
     closePop() {
       this.showPop = false;

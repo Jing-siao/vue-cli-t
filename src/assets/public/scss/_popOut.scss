@@ -19,7 +19,7 @@
     transform: translate(-50%, -50%);
     height: auto;
     min-height: 100px;
-    padding: 15px;
+    padding: 15px 25px;
     display: block;
     justify-content: center;
     align-items: center;
@@ -46,6 +46,10 @@
       color: black;
       vertical-align: middle;
       text-align: center;
+    }
+
+    p.popMsg.oneLine {
+      line-height: 60px;
     }
 
     div {

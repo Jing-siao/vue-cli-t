@@ -65,7 +65,6 @@ export default {
   },
   methods: {
     getDetail(val) {
-      this.showDetail = true;
       this.exchangeRecord = val;
       let { type, strDate, endDate } = this.exchangeRecord;
       this.axios
@@ -75,6 +74,7 @@ export default {
         .then((response) => {
           this.detail = response.data.detail;
           this.getTypeName();
+          this.showDetail = true;
         })
         .catch((err) => {
           console.log(err);
