@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="point">
-      <h4>點數查詢</h4>
+      <h4>點數專區</h4>
       <ul>
         <li v-for="list in memberPointMenu" :key="list.title">
           <router-link :to="{ name: list.link }">

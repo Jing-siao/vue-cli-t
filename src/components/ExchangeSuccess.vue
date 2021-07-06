@@ -15,7 +15,8 @@
             />
           </div>
           <div class="wrap">
-            <h4>標題標題標題標題標題標題標題標題標題標題標題標題</h4>
+            <h4>{{ name }}</h4>
+            <p>有效期限:{{ expDt }}</p>
             <div class="barCodeWrap">
               <barcode
                 class="barCode"
@@ -27,6 +28,7 @@
                 :fontSize="barcodeFontSize"
                 :margin="barcodeMargin"
               ></barcode>
+
               <!-- <img src="../assets/img/barCode.png" alt="" /> -->
               <!-- <input v-model="barcodeValue" /><br /> -->
             </div>
@@ -63,14 +65,15 @@ export default {
   },
   data() {
     return {
-      barcodeValue: "987654321987654",
+      name: "",
+      barcodeValue: "",
       saveBtn: true,
       barcodeHeight: 45,
       barCodewidth: 1.6,
       barcodeTextMargin: 1,
       barcodeFontSize: 14,
       barcodeMargin: 5,
-
+      expDt: "",
       window: {
         width: 0,
       },
@@ -109,6 +112,10 @@ export default {
   created() {
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
+    this.name = sessionStorage.getItem("ptypeName");
+    this.barcodeValue = sessionStorage.getItem("serial");
+    let expDt = sessionStorage.getItem("expDt");
+    expDt ? (this.expDt = expDt) : (this.expDt = "無期限");
   },
 
   beforeDestroy() {

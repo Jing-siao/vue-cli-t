@@ -36,6 +36,14 @@ export default {
           title: "兌換紀錄",
           link: "Member-ExchangeRecord",
         },
+        {
+          title: "點數轉換",
+          link: "Member-SwitchPoint",
+        },
+        {
+          title: "點數贈送",
+          link: "Member-SentPoint",
+        },
       ],
     };
   },

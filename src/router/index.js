@@ -152,6 +152,22 @@ const routes = [
           requiresAuth: true
         },
       },
+      {
+        path: 'switchPoint',
+        name: 'Member-SwitchPoint',
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/SwitchPoint.vue'),
+        meta: {
+          requiresAuth: true
+        },
+      },
+      {
+        path: 'sentPoint',
+        name: 'Member-SentPoint',
+        component: () => import(/* webpackChunkName: "Member" */'../views/member/SentPoint.vue'),
+        meta: {
+          requiresAuth: true
+        },
+      },
     ]
 
   },

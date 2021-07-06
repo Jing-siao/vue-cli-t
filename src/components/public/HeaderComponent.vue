@@ -40,7 +40,7 @@
               <div class="list">
                 <div class="point">
                   <p id="toggleSearch" @click.stop="dropSearch">
-                    點數查詢
+                    點數專區
                     <i class="fas fa-angle-down"></i>
                   </p>
 

@@ -26,15 +26,27 @@ export default {
           let message = "";
           let kind = response.data.kind
           if (kind) {
-            message = `兌換成功<p>${response.data.name}一份</p>`;
-            this.ifShowBtn(false, message);
+            //儲存參數數的功能
+            sessionStorage.setItem("ptype", response.data.name);
+            sessionStorage.setItem("expDt", response.data.expDt);
+            //倒數跳轉
+            let num = 3
+            let timeInterval = window.setInterval(() => {
+              num = num - 1;
+              message = `兌換成功<p>${num}秒後自動跳轉兌換紀錄頁</p>`;
+              if (num < 1) {
+                window.clearInterval(timeInterval);
+              }
+              this.ifShowBtn(false, message);
+            }, 1000);
             if (kind == "E05") {
-              let url = "https://technews.tw/"
-              window.open(url, '_blank')
-              // this.handleWindow()
+              sessionStorage.setItem("ptypeId", response.data.ptypeId);
+              sessionStorage.setItem("ptypeName", response.data.ptypeName);
+              sessionStorage.setItem("serial", response.data.serial);
+              this.handleWindow();
             } else if (kind == "E02") {
               // let url = response.data.url
-              let url = "https://technews.tw/"
+              let url = "https://www.google.com.tw/"
               window.open(url, '_blank')
             }
             setTimeout(() => {
@@ -69,8 +81,6 @@ export default {
       let route = this.$router.resolve({
         name: 'ExchangeSuccess',
       })
-      //儲存參數數的功能
-      // sessionStorage.setItem("guid", guid);
       window.open(route.href, '_blank')
     },
 
