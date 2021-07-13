@@ -1,114 +1,97 @@
 <template>
-  <div class="memberExchangeRecord" v-cloak>
-    <SearchComponent @pointForm="getDetail" />
-    <div class="exchangeRecordTable">
-      <table class="formTable" v-if="showDetail">
-        <thead>
-          <tr class="row">
-            <th class="col-md" v-for="th in tableTh" :key="th">{{ th }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <template v-if="detail.length > 0">
-            <tr
-              class="row hasData"
-              v-for="(item, index) in detail"
-              :key="index"
-            >
-              <td :data-th="tableTh[0]" class="col-md">{{ item.date }}</td>
-              <td :data-th="tableTh[1]" class="col-md">{{ typeName }}</td>
-              <td :data-th="tableTh[2]" class="col-md">{{ item.itemName }}</td>
-              <td :data-th="tableTh[3]" class="col-md">{{ item.cnt }}</td>
-              <td :data-th="tableTh[4]" class="col-md">
-                <a :href="item.url" target="_blank">{{ item.serial }}</a>
-              </td>
-              <template v-if="item.note">
-                <td :data-th="tableTh[5]" class="col-md">{{ item.note }}</td>
-              </template>
-              <template v-else>
-                <td :data-th="tableTh[5]" class="col-md noNote">無</td>
-              </template>
-            </tr>
-          </template>
-          <template v-else>
-            <tr>
-              <td colspan="5" class="noData">暫無資料</td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-    </div>
+  <div class="memberSentPoint" v-cloak>
+    <form class="row">
+      <div class="fromBlock col-md-5">
+        <div class="bg">
+          <h5>我的點數</h5>
+          <div>
+            <p>點數類型</p>
+            <select v-model="type">
+              <option
+                v-for="type in select"
+                :value="type.typeId"
+                :key="type.guid"
+              >
+                {{ type.typeName }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <p>有效點數</p>
+            <p>{{ fromPoint.point }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="switchBlock col-md-2">
+        <i class="fas fa-angle-double-right"></i>
+      </div>
+      <div class="toBlock col-md-5">
+        <div class="bg">
+          <h5>贈送的點數</h5>
+          <div>
+            <p>贈送點數</p>
+            <input type="number" name="" id="" v-model="toPoint.point" />
+          </div>
+          <div>
+            <p>贈送對象</p>
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="對方的email"
+              v-model="toPoint.email"
+            />
+          </div>
+          <div>
+            <p>手機末三碼</p>
+            <input type="number" name="" id="" v-model="toPoint.phone" />
+          </div>
+        </div>
+      </div>
+      <button class="first col-sm-3 col-md-2">確認贈送</button>
+    </form>
   </div>
 </template>
 <script>
-import SearchComponent from "@/components/memberContent/SearchComponent.vue";
 export default {
-  components: { SearchComponent },
   data() {
     return {
+      type: "",
+      fromPoint: {
+        type: "",
+        point: 500,
+        num: 0,
+      },
+      toPoint: {
+        pointNum: 0,
+        email: "",
+        phone: "",
+      },
       select: [],
-      exchangeRecord: {},
-      typeName: "",
-      tableTh: ["日期", "點數類型", "商品名稱", "兌換數量", "兌換序號", "備註"],
-      detail: [],
-      showDetail: false,
     };
   },
-  methods: {
-    getDetail(val) {
-      let { type, strDate, endDate } = this.exchangeRecord;
-      this.exchangeRecord = val;
-      this.axios
-        .get(
-          `${process.env.VUE_APP_API}/cust/excRecord/${type}?strDate=${strDate}&endDate=${endDate}`
-        )
-        .then((response) => {
-          this.detail = response.data.detail;
-          this.getTypeName();
-          this.showDetail = true;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    getTypeName() {
-      this.select.filter((type) => {
-        if (type.typeId == this.exchangeRecord.type) {
-          this.typeName = type.typeName;
-        }
-      });
+  methods: {},
+  computed: {},
+  watch: {
+    type(newVal) {
+      if (newVal == this.select[0].typeId) {
+        this.toPoint.typeName = this.select[1].typeName;
+        this.toPoint.type = this.select[1].type;
+      } else {
+        this.toPoint.typeName = this.select[0].typeName;
+        this.toPoint.type = this.select[0].type;
+      }
     },
   },
-  computed: {},
-
   created() {
     this.axios.get(`${process.env.VUE_APP_API}/bonus/type`).then((response) => {
       this.select = response.data.detail;
+      this.type = this.select[0].typeId;
     });
   },
-  mounted() {
-    let ptype = sessionStorage.getItem("ptype");
-    let ptypeId = sessionStorage.getItem("ptypeId");
-    let today = new Date().toISOString().split("T")[0];
-    if (ptype) {
-      this.axios
-        .get(
-          `${process.env.VUE_APP_API}/cust/excRecord/${ptype}?strDate=${today}&endDate=${today}`
-        )
-        .then((response) => {
-          this.detail = response.data.detail;
-          this.typeName = ptypeId;
-          // this.getTypeName();
-          this.showDetail = true;
-          sessionStorage.removeItem("ptype");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  },
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>
-@import "@/assets/scss/exchangeRecord.scss";
+@import "@/assets/scss/sentPoint.scss";
 </style>
