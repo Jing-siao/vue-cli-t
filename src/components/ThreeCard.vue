@@ -28,19 +28,19 @@ export default {
       card: [
         {
           title: "好禮一",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          src: "https://picsum.photos/600/301",
           link: "javascript:;",
           giftTitle: "Dyson 手持無線吸塵器",
         },
         {
           title: "好禮二",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          src: "https://picsum.photos/600/302",
           link: "javascript:;",
           giftTitle: "小米手環 5",
         },
         {
           title: "好禮三",
-          src: "http://fakeimg.pl/600x300/aaa/ccc/",
+          src: "https://picsum.photos/600/303",
           link: "javascript:;",
           giftTitle: "夏普 6公升衣物乾燥除濕機DW-H6HT-W",
         },
