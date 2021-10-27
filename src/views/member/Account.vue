@@ -15,7 +15,7 @@
             <p>身份證字號</p>
           </td>
           <td class="col-8 col-sm-9">
-            <p class="original">{{ account.custid }}</p>
+            <p class="original">{{ hideCustid }}</p>
           </td>
         </tr>
         <tr class="row">
@@ -110,6 +110,7 @@ export default {
         addr1: "",
         addr2: "",
       },
+      hideCustid: "",
       cityIdx: 0,
       areaIdx: 0,
       oldCityIdx: "",
@@ -175,7 +176,8 @@ export default {
       this.account.zip = this.userZip;
       this.account.email = this.newEmail;
       this.account.mobile = this.newMobile;
-      var emailRule = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+      var emailRule =
+        /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
       var mobileRule = /^09[0-9]{8}$/;
       if (!mobileRule.test(this.newMobile)) {
         this.mobileWarning = true;
@@ -188,6 +190,7 @@ export default {
         } else {
           this.emailWarning = false;
           if (this.newAddr1 && this.newEmail && this.newMobile) {
+            console.log(this.account);
             this.submitUserInfo();
             this.clearUserInfo();
             // this.getUserInfo();
@@ -198,11 +201,6 @@ export default {
         }
       }
     },
-    // checkMobile() {
-    //   if (!/^09[0-9]{8}$/.test(this.newMobile)) {
-    //     alert("手機號碼格式錯誤");
-    //   }
-    // },
     cancelHandler() {
       this.showBtn = false;
       this.hideBtn = true;
@@ -224,6 +222,7 @@ export default {
           this.account.brthDt = response.data.brthDt;
           this.account.email = response.data.email;
           this.account.addr2 = response.data.addr2;
+          this.account.custid = response.data.custid;
           //    name: "余文樂",
           // custid: "A123456789",
           // loginid: "lok666",
@@ -237,6 +236,7 @@ export default {
           // addr1: "這裡是聯絡地址",
           // addr2: "這裡是戶籍地址",
           // 去身分證識別化 整個資料顯示50%若除不盡則多顯示1位
+
           let str = response.data.custid;
           // 顯示幾個
           const showLen = Math.round(str.length / 2);
@@ -244,7 +244,7 @@ export default {
           const markLen = str.length - showLen;
           // 從哪開始隱
           const showStart = Math.round((str.length - showLen) / 2);
-          this.account.custid = str.replace(
+          this.hideCustid = str.replace(
             str.substr(showStart, markLen),
             "*".repeat(markLen)
           );

@@ -6,7 +6,7 @@
   >
     <!-- { name: 'BonusDetail', params: { guid: data.guid } } -->
     <div class="imgWrap col-sm-12">
-      <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
+      <img src="https://picsum.photos/600/304" alt="" />
     </div>
     <div class="wrap">
       <h5>{{ data.name }}</h5>

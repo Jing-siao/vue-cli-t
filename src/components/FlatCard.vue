@@ -3,7 +3,7 @@
     <template v-if="news.length > 0">
       <div class="news row" v-for="(item, index) in news" :key="item.title">
         <div class="imgWrap col-md-5 col-lg-4 col-12">
-          <img src="http://fakeimg.pl/600x300/aaa/ccc/" alt="" />
+          <img src="https://picsum.photos/600/300" alt="" />
           <!-- :src="item.src" -->
         </div>
 
